@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Common_AppTheme"
+    tools:context="com.zsf.test.DemoMainActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_20_dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_get_url_params"
+                android:textColor="@color/C_444444"
+                android:padding="@dimen/dimen_10_dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_loader"
+                android:text="loader"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_diff_recycler_view"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:text="DiffUtil for RecycleView" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_ARouter"
+                android:text="@string/m_test_ARouter"
+                android:layout_marginTop="@dimen/dimen_10_dp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_Memory"
+                android:text="@string/m_test_Memory_Optimize_page"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_EndCall"
+                android:text="@string/m_test_Phone_EndCall"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_mac"
+                android:text="@string/m_test_mac"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_test"
+                android:text="@string/m_test"
+                android:layout_marginTop="@dimen/dimen_10_dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

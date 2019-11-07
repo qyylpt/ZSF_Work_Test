@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ZSF_Work_Test</string>
+    <string name="module_test">TEST模块</string>
+    <string name="module_device_manager">设备管理(激活)</string>
+    <string name="module_auto_start">自动启动透明Activity</string>
+    <string name="module_keep_alive">保活方法测试</string>
+    <string name="module_orc">图文识别</string>
+</resources>

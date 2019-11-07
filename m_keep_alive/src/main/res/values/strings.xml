@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">m_keep_alive</string>
+    <string name="m_keep_alive_KeepAliveActivity_label">Keep Alive</string>
+
+    <!-- JobScheduler -->
+    <string name="m_keep_alive_JobSchedulerActivity_label">JobSchedulerActivity</string>
+    <string name="m_keep_alive_button_JobScheduler_label">JobScheduler</string>
+    <string name="m_keep_alive_button_do_JobScheduler_label">JobScheduler Demo</string>
+    <string name="m_keep_alive_button_JobScheduler_demo">JobScheduler Demo</string>
+    <string name="m_keep_alive_editText_delay_time">设置delay时间</string>
+    <string name="m_keep_alive_editText_Deadline_time">设置最长的截止时间</string>
+    <string name="m_keep_alive_editText_Duration_time">对应setPeriodic周期(不能以上两项同时设置)</string>
+    <string name="m_keep_alive_radioButton_wifi">设置builder中的是否有Wifi连接</string>
+    <string name="m_keep_alive_radioButton_net_any">设置builder中的是否有网络即可</string>
+    <string name="m_keep_alive_checkBox_charging">设置builder中的是否需要充电</string>
+    <string name="m_keep_alive_checkBox_requiresIdle">设置builder中的否设备空闲</string>
+    <string name="m_keep_alive_button_start_job">开始 JobScheduler 任务</string>
+    <string name="m_keep_alive_button_stop_job">结束 JobScheduler 任务</string>
+    <string name="m_keep_alive_string_cancel_all_JobScheduler">取消所有JobScheduler任务</string>
+</resources>

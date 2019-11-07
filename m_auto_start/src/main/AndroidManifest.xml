@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zsf.m_auto_start" >
+    <application>
+        <activity android:name=".TransparentActivity"/>
+        <service android:name=".StartActivityService" />
+    </application>
+</manifest>

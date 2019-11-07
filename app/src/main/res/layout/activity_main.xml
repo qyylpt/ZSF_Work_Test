@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zsf.main.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/C_444444">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_test"
+                android:layout_marginTop="10dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_test"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_device_manager"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_device_manager"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_auto_start"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_auto_start"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_keep_alive"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_keep_alive"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_orc"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_orc"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

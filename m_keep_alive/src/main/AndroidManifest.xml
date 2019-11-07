@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zsf.m_keep_alive" >
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <application>
+        <activity android:name=".KeepAliveMainActivity"
+            android:label="@string/m_keep_alive_KeepAliveActivity_label"/>
+        <activity android:name=".branch.JobSchedulerActivity"/>
+        <service android:name=".branch.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".branch.SettingJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+    </application>
+</manifest>

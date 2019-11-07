@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    buildToolsVersion rootProject.ext.versions.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
+            }
+        }
+    }
+
+    /**
+     * 根据config.gradle中环境标记生成相应的JAVA常亮，用于在代码中切换环境
+     * 提供全局环境标价 isBate ： true测试环境、false正式环境
+     */
+    buildTypes {
+        if (rootProject.ext.isBate){
+            debug {
+                buildConfigField "boolean", "isBate", "true"
+            }
+            release {
+                buildConfigField "boolean", "isBate", "true"
+            }
+        } else {
+            debug{
+                buildConfigField "boolean", "isBate", "false"
+            }
+            release {
+                buildConfigField "boolean", "isBate", "false"
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["constraintlayout"]
+
+    // ARouter
+    api rootProject.ext.dependencies["arouter-api"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+
+    // 下拉刷新框架
+    api rootProject.ext.dependencies["smartRefreshLayout"]
+    api rootProject.ext.dependencies["smartRefreshHeader"]
+    api rootProject.ext.dependencies["legacy-support-v4"]
+
+    // recycler view
+    api rootProject.ext.dependencies["recyclerview"]
+
+    // gson
+    api rootProject.ext.dependencies["gson"]
+
+    // 提供Android所需各种util库
+    api rootProject.ext.dependencies["utilcodex"]
+
+    // android p反射限制解除
+    api rootProject.ext.dependencies["reflection"]
+
+    // 图片识别
+    api rootProject.ext.dependencies["tess_two"]
+
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test:runner:1.2.0'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

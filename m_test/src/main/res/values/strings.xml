@@ -1,0 +1,36 @@
+<resources>
+    <!-- loader -->
+    <string name="m_test_loader">Loader</string>
+    <!-- DiffUtil -->
+    <string name="m_test_DiffUtil">DiffUtil</string>
+    <!-- ARouter -->
+    <string name="m_test_ARouter">ARouter</string>
+    <string name="m_test_ARouter_go_activity">ARouter跳转activity</string>
+    <string name="m_test_ARouter_go_fragment">ARouter跳转Fragment</string>
+    <string name="m_test_open_ARouter_type">url</string>
+    <string name="m_test_ARouter_service">ARouter服务</string>
+    <string name="m_test_ARouter_interceptor">ARouter拦截器</string>
+    <string name="m_test_ARouter_interceptor_login">ARouter登录页面</string>
+    <string name="m_test_ARouter_need_login_page">ARouter需要登录页面</string>
+    <string name="m_test_DiffUtil_page">DiffUtil页面</string>
+    <string name="m_test_Memory_Optimize_page">内存优化</string>
+    <string name="m_test_Phone_EndCall">挂断电话</string>
+    <string name="m_test_mac">获取MAC</string>
+    <string name="m_test">测试</string>
+    <string name="m_test_Memory_Optimize_add_object">添加对象</string>
+    <string name="m_test_Memory_Optimize_delete_object">删除对象</string>
+    <string name="m_test_login_success">登录成功</string>
+    <string name="m_test_ARouter_lost">ARouter路由丢失</string>
+    <string name="m_test_ARouter_degrade_service_init">ARouter降级策略init(只在ARouter首次导航时候执行)</string>
+    <string name="m_test_ARouter_degrade_service_button">ARouter路由丢失</string>
+    <string name="m_test_ARouter_IProvider_service_init">ARouter暴露服务init(只在ARouter首次导航初始化时候执行)</string>
+    <string name="m_test_ARouter_IProvider_service_default">ARouter暴露服务执行,无name标注(默认service)</string>
+    <string name="m_test_ARouter_IProvider_service_name">ARouter暴露服务执行,使用name标注</string>
+    <string name="m_test_ARouter_IProvider_service_by_type">ARouter暴露服务,使用依赖查找方式by_type</string>
+    <string name="m_test_ARouter_IProvider_service_by_name">ARouter暴露服务,使用依赖查找方式by_name</string>
+    <string name="m_test_ARouter_Interceptor_init">拦截器的初始化，会在sdk初始化的时候调用该方法，仅会调用一次</string>
+    <string name="m_test_ARouter_Pretreatment_service">ARouter跳转前预处理</string>
+    <string name="m_test_ARouter_Pretreatment_service_init">ARouter跳转前预处理初始化</string>
+    <string name="m_test_ARouter_Pretreatment_service_button">ARouter预处理机制</string>
+    <string name="m_test_ARouter_Pretreatment_sign">预处理</string>
+</resources>

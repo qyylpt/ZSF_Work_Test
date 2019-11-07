@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".branch.arouter.view.ArouterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_20_dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_get_url_params"
+                android:textColor="@color/C_444444"
+                android:padding="@dimen/dimen_10_dp"
+                android:visibility="gone"
+                />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_ARouter"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/m_test_ARouter_go_activity"
+                android:id="@+id/button_ARouter_go_activity"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/m_test_ARouter_go_fragment"
+                android:id="@+id/button_ARouter_go_fragment"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_ARouter_service"
+                android:text="@string/m_test_ARouter_service"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_ARouter_interceptor"
+                android:text="@string/m_test_ARouter_interceptor"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_ARouter_pretreatment_service"
+                android:text="@string/m_test_ARouter_Pretreatment_service_button"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_ARouter_Degrade_service"
+                android:text="@string/m_test_ARouter_degrade_service_button"
+                android:layout_marginTop="@dimen/dimen_10_dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

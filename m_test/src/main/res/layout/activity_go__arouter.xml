@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".branch.arouter.view.GoArouterActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/m_test_ARouter_go_activity"
+        android:textSize="@dimen/dimen_40_sp"
+        android:gravity="center"
+        android:id="@+id/back_ARouter_Activity"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

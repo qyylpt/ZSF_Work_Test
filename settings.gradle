@@ -1,0 +1,2 @@
+include ':app', ':common', ':m_test', ':m_device_manager', ':m_keep_alive', ':m_auto_start', ':m_orc'
+include ':opencv4.1.1Libs'

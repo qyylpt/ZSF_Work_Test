@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zsf.m_keep_alive">
+
+    <!-- JobScheduler 设备重启,是否执行任务 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:theme="@style/Common_AppTheme"
+        android:name="com.zsf.application.BaseCommonApplication"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".branch.JobSchedulerActivity"
+            android:label="@string/m_keep_alive_button_JobScheduler_label"/>
+        <service android:name=".branch.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".branch.SettingJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <activity
+            android:name=".KeepAliveMainActivity"
+            android:theme="@style/Transparent_AppTheme"
+            android:launchMode="singleTask"
+            android:label="@string/m_keep_alive_KeepAliveActivity_label">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

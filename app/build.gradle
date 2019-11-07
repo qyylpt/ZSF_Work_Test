@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    buildToolsVersion rootProject.ext.versions.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+        applicationId rootProject.ext.versions.applicationId
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //ARouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
+            }
+        }
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility rootProject.ext.versions.javaSDKVersion
+        sourceCompatibility rootProject.ext.versions.javaSDKVersion
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // 依赖基础库通用库
+    implementation project(path: ':common')
+
+    // ARouter 解释器 （必须在所需要的module中单独添加）
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    // 这里如果不是测试环境则组装其他功能模块
+    if (!isBate.toBoolean()) {
+        // 日常学习测试
+        implementation project(path: ':m_test')
+        // 设备管理器 锁屏
+        implementation project(path: ':m_device_manager')
+        // 启动透明Activity (用于截屏)
+        implementation project(path: ':m_auto_start')
+        // 保活手段
+        implementation project(path: ':m_keep_alive')
+        // 图文识别
+        implementation project(path: ':m_orc')
+    }
+
+
+}

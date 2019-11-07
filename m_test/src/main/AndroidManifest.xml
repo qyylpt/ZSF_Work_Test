@@ -1,0 +1,41 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zsf.test">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        tools:ignore="GoogleAppIndexingWarning" >
+        <activity android:name=".DemoMainActivity">
+            <!--注册scheme-->
+            <intent-filter>
+                <!--必有项-->
+                <action android:name="android.intent.action.VIEW"/>
+                <!--表示该页面可以被隐式调用，必须加上该项-->
+                <category android:name="android.intent.category.DEFAULT"/>
+                <!--BROWSABLE指定该Activity能被浏览器安全调用-->
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!--协议部分-->
+                <!--声明自定义scheme，类似于http, https-->
+                <data android:scheme="arouter"
+                    android:host="zsf"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".branch.loader.LoaderMainActivity"
+            android:label="@string/m_test_loader"/>
+        <activity android:name=".branch.arouter.view.ArouterActivity"
+            android:label="@string/m_test_ARouter" />
+        <activity android:name=".branch.arouter.view.GoArouterActivity"
+            android:label="@string/m_test_ARouter_go_activity" />
+        <activity android:name=".branch.arouter.view.LoginArouterActivity"
+            android:label="@string/m_test_ARouter_interceptor_login"/>
+        <activity android:name=".branch.arouter.view.NeedLoginActivity"
+            android:label="@string/m_test_ARouter_need_login_page" />
+        <activity android:name=".branch.diffutil.DiffUtilActivity"
+            android:label="@string/m_test_DiffUtil_page"/>
+        <activity android:name=".branch.memory.MemoryOptimizeActivity"
+            android:label="@string/m_test_Memory_Optimize_page"/>
+    </application>
+
+</manifest>
