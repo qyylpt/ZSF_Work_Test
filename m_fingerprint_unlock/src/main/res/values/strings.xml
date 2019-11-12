@@ -1,0 +1,29 @@
+<resources>
+    <!-- 指纹 -->
+    <string name="fingerprint_set_page_title">点击图标进行指纹解锁</string>
+    <string name="fingerprint_set_page_content">把手指放在指纹采集位置使用指纹解锁</string>
+    <string name="fingerprint_dialog_device_no_info">未找到指纹信息，请在手机系统中设置指纹</string>
+    <string name="fingerprint_dialog_go_setting">去设置</string>
+    <string name="fingerprint_dialog_open">请验证指纹以开启指纹锁</string>
+    <string name="fingerprint_dialog_setting_check">验证</string>
+    <string name="fingerprint_dialog_check_net">当前无可用网络</string>
+    <string name="fingerprint_dialog_close">关闭</string>
+    <string name="fingerprint_dialog_checking">请验证解锁指纹</string>
+    <string name="fingerprint_invalid">未找到指纹信息，请在手机系统中重新设置指纹</string>
+    <string name="fingerprint_check_cancel">取消</string>
+    <string name="fingerprint_check_fail_five">指纹验证失败次数过多，请稍后再试</string>
+    <string name="fingerprint_unlock_fail_five">指纹验证失败次数过多，请稍后再试</string>
+    <string name="fingerprint_auth_key_invalid">指纹信息过期，请联系管理员</string>
+    <string name="fingerprint_check_fail">指纹验证失败，请重试</string>
+    <string name="fingerprint_dialog_retry">重试</string>
+    <string name="fingerprint_dialog_error_finger">该指纹信息不匹配，请使用正确的手指解锁，点击重试</string>
+    <string name="fingerprint_auth_fail_five">指纹失败5次，请联系管理员</string>
+    <string name="fingerprint_error">尝试次数过多。指纹传感器已停用，重启设备尝试恢复指纹解锁功能。</string>
+    <string name="fingerprint_init">正在初始化指纹锁</string>
+    <string name="fingerprint_wait">请稍后...</string>
+    <string name="fingerprint_delete">手机系统指纹已删除，请联系管理员擦除指纹</string>
+    <string name="fingerprint_open_num_lock">请设置屏幕密码锁</string>
+    <string name="fingerprint_invalid_set_new">应用指纹已失效,请设置新的应用指纹</string>
+
+    <string name="no_support_fingerprint">设备不支持指纹锁</string>
+</resources>

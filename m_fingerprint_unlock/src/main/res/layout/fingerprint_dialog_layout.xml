@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/fingerprint_dialog_width"
+    android:layout_height="@dimen/fingerprint_dialog_height"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/fingerprint_dialog"
+    android:background="@drawable/fingerprint_dialog_shape">
+    <TextView
+        android:layout_width="@dimen/fingerprint_dialog_text_width"
+        android:layout_height="@dimen/fingerprint_dialog_text_height"
+        android:id="@+id/fingerprint_dialog_content_text"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textSize="@dimen/fingerprint_dialog_content_text_size"
+        android:textColor="@color/fingerprint_dialog_content_color"
+        android:text="指纹验证失败，您还可以尝试5次"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/fingerprint_dialog_view_line_color" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fingerprint_dialog_button_height"
+        android:id="@+id/fingerprint_dialog_button"
+        android:textColor="@color/fingerprint_dialog_button_color"
+        android:text="继续"
+        android:textSize="@dimen/fingerprint_dialog_button_text_size"
+        android:gravity="center"
+        />
+</LinearLayout>

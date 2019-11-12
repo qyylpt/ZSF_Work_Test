@@ -5,6 +5,11 @@ apply from: "config.gradle"
 
 buildscript {
     repositories {
+        maven {
+            url "https://dl.bintray.com/tencent-soter/maven/"
+        }
+        // 阿里云解决一些库无法拉取问题
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
         jcenter()
         
@@ -19,6 +24,11 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url "https://dl.bintray.com/tencent-soter/maven/"
+        }
+        // 阿里云解决一些库无法拉取问题
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         google()
         jcenter()
         

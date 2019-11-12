@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/fingerprint_dialog_background_color">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fingerprint_set_page_title"
+        android:textColor="@color/fingerprint_set_page_title_color"
+        android:textSize="@dimen/fingerprint_page_title_size"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fingerprint_page_content_title_margin_top"
+        android:text="@string/fingerprint_set_page_content"
+        android:textColor="@color/fingerprint_set_page_content_color"
+        android:textSize="@dimen/fingerprint_page_content_size"/>
+
+    <Button
+        android:id="@+id/emm_unlock_fingerprint"
+        android:layout_width="@dimen/fingerprint_icon_width"
+        android:layout_height="@dimen/fingerprint_icon_height"
+        android:layout_marginTop="@dimen/fingerprint_page_icon_content_margin_top"
+        android:background="@drawable/fingerprint_open" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fingerprint_result" />
+
+</LinearLayout>

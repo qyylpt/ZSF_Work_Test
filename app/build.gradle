@@ -60,6 +60,8 @@ dependencies {
         implementation project(path: ':m_keep_alive')
         // 图文识别
         implementation project(path: ':m_orc')
+        // 指纹解锁
+        implementation project(path: ':m_fingerprint_unlock')
     }
 
 

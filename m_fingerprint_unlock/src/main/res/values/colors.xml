@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 指纹 -->
+    <color name="fingerprint_set_page_title_color">#333333</color>
+    <color name="fingerprint_set_page_content_color">#999999</color>
+    <color name="fingerprint_dialog_content_color">#000000</color>
+    <color name="fingerprint_dialog_view_line_color">#4A3C3C43</color>
+    <color name="fingerprint_dialog_background_color">#F2F2F2</color>
+    <color name="fingerprint_dialog_button_color">#F5A623</color>
+</resources>

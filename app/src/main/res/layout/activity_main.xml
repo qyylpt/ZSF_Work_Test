@@ -51,6 +51,11 @@
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 android:background="@color/C_A6ACAF"
                 android:id="@+id/go_m_orc"/>
+            <Button
+                android:layout_width="81dp"
+                android:layout_height="81dp"
+                android:background="@drawable/fingerprint_open"
+                />
 
 
         </LinearLayout>
