@@ -1,8 +1,7 @@
-package com.zsf.fingerprint.utils;
+package com.zsf.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import androidx.annotation.NonNull;
 
 /**
  * @author zsf
@@ -15,7 +14,7 @@ public class BiometricDataUtils {
      */
     private static final String SOTER_CACHE_SP = "soter_disk_cache_sp";
     private static final String KEY_IS_FINGERPRINT = "isFingerprintOpened";
-    private static final String KEY_IS_FACE = "isFaceIdOpened";
+
 
     /**
      * 保存指纹ID
@@ -26,9 +25,12 @@ public class BiometricDataUtils {
     /**
      * 保存指纹解锁阈值
      */
-    private static final String KEY_UNLOACK_COUNT = "key_desk_unlock_count";
+    private static final String UNLOCK_CACHE_SP = "unlock_cache_sp";
+    private static final String KEY_UNLOCK_COUNT = "key_desk_unlock_info";
+    private static final String KEY_DELAY_ALLOW_UNLOCK_TIME = "delay_allow_unlock_time";
 
-    public static int DEFAULT_UNLOCK_COUNT = 5;
+    private static int DEFAULT_UNLOCK_COUNT = 5;
+    private static long DELAY_LOCK_TIME = 60000;
 
     private static BiometricDataUtils sInstance;
 
@@ -47,21 +49,26 @@ public class BiometricDataUtils {
     }
 
     /**
-     * 设置解锁失败次数控制
-     * @param count
+     * 获取默认失败次数控制
+     * @return
      */
-    public void setDefaultUnlockFialCount(int count){
-        DEFAULT_UNLOCK_COUNT = count;
+    public int getUnlockCount(){
+        return DEFAULT_UNLOCK_COUNT;
+    }
+
+    public long getDefaultDelayUnlockTime(){
+        return DELAY_LOCK_TIME;
     }
 
     /**
      *  初始化指纹功能开启标记
      * @param context
      */
-    public void init(@NonNull Context context){
+    public void init(Context context){
         SharedPreferences emmDataPreference = context.getSharedPreferences(SOTER_CACHE_SP, Context.MODE_PRIVATE);
-        SharedPreferences unLockDataPreference = context.getSharedPreferences(KEY_UNLOACK_COUNT, Context.MODE_PRIVATE);
-        unLockDataPreference.edit().putInt(KEY_UNLOACK_COUNT, DEFAULT_UNLOCK_COUNT).apply();
+        SharedPreferences unLockDataPreference = context.getSharedPreferences(UNLOCK_CACHE_SP, Context.MODE_PRIVATE);
+        unLockDataPreference.edit().putInt(KEY_UNLOCK_COUNT, DEFAULT_UNLOCK_COUNT).apply();
+        unLockDataPreference.edit().putInt(KEY_DELAY_ALLOW_UNLOCK_TIME, 0).apply();
     }
 
     /**
@@ -109,8 +116,8 @@ public class BiometricDataUtils {
      * @return
      */
     public int getUnlockCount(Context context){
-        SharedPreferences emmDataPreference = context.getSharedPreferences(KEY_UNLOACK_COUNT, Context.MODE_PRIVATE);
-        return emmDataPreference.getInt(KEY_UNLOACK_COUNT, 0);
+        SharedPreferences emmDataPreference = context.getSharedPreferences(UNLOCK_CACHE_SP, Context.MODE_PRIVATE);
+        return emmDataPreference.getInt(KEY_UNLOCK_COUNT, 0);
     }
 
     /**
@@ -119,8 +126,8 @@ public class BiometricDataUtils {
      * @return
      */
     public void setUnlockCount(Context context, int count){
-        SharedPreferences emmDataPreference = context.getSharedPreferences(KEY_UNLOACK_COUNT, Context.MODE_PRIVATE);
-        emmDataPreference.edit().putInt(KEY_UNLOACK_COUNT, count).apply();
+        SharedPreferences emmDataPreference = context.getSharedPreferences(UNLOCK_CACHE_SP, Context.MODE_PRIVATE);
+        emmDataPreference.edit().putInt(KEY_UNLOCK_COUNT, count).apply();
     }
 
     /**
@@ -128,8 +135,28 @@ public class BiometricDataUtils {
      * @param context
      */
     public void resetUnlockCount(Context context){
-        SharedPreferences emmDataPreference = context.getSharedPreferences(KEY_UNLOACK_COUNT, Context.MODE_PRIVATE);
-        emmDataPreference.edit().putInt(KEY_UNLOACK_COUNT, DEFAULT_UNLOCK_COUNT).apply();
+        SharedPreferences emmDataPreference = context.getSharedPreferences(UNLOCK_CACHE_SP, Context.MODE_PRIVATE);
+        emmDataPreference.edit().putInt(KEY_UNLOCK_COUNT, DEFAULT_UNLOCK_COUNT).apply();
+        emmDataPreference.edit().putInt(KEY_DELAY_ALLOW_UNLOCK_TIME, 0).apply();
+    }
+
+    /**
+     * 设置触发解锁失败阈值时间
+     * @param context
+     * @param time
+     */
+    public void setUnlcokDelayTime(Context context, long time){
+        SharedPreferences emmDataPreference = context.getSharedPreferences(UNLOCK_CACHE_SP, Context.MODE_PRIVATE);
+        emmDataPreference.edit().putLong(KEY_DELAY_ALLOW_UNLOCK_TIME, time);
+    }
+
+    /**
+     * 获取触发解锁失败阈值时间
+     * @param context
+     */
+    public long getUnlcokDelayTime(Context context){
+        SharedPreferences emmDataPreference = context.getSharedPreferences(UNLOCK_CACHE_SP, Context.MODE_PRIVATE);
+        return emmDataPreference.getLong(KEY_DELAY_ALLOW_UNLOCK_TIME, 0);
     }
 
     /**
@@ -142,7 +169,6 @@ public class BiometricDataUtils {
         // 重置生物识别功能是否打开
         SharedPreferences emmDataPreference = context.getSharedPreferences(SOTER_CACHE_SP, Context.MODE_PRIVATE);
         emmDataPreference.edit().putBoolean(KEY_IS_FINGERPRINT, false).commit();
-        emmDataPreference.edit().putBoolean(KEY_IS_FACE, false).commit();
         // 重置当前失败次数
         resetUnlockCount(context);
         // 重置当前保存的指纹id

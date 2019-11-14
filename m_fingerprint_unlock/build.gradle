@@ -48,8 +48,6 @@ android {
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
-            jniLibs.srcDirs = ['libs']
-            res.srcDirs = ['src/main/res', 'src/main/res/drawable-xhdpi']
         }
     }
 

@@ -1,4 +1,4 @@
-package com.zsf.fingerprint.utils;
+package com.zsf.utils;
 
 import com.tencent.soter.wrapper.wrap_core.SoterProcessErrCode;
 

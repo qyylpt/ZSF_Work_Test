@@ -1,7 +1,6 @@
-package com.zsf.fingerprint.fragment;
+package com.zsf.wrapper.fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,18 +12,19 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
+
 import com.tencent.soter.wrapper.wrap_biometric.SoterBiometricStateCallback;
 import com.tencent.soter.wrapper.wrap_callback.SoterProcessAuthenticationResult;
 import com.tencent.soter.wrapper.wrap_callback.SoterProcessCallback;
 import com.tencent.soter.wrapper.wrap_callback.SoterProcessKeyPreparationResult;
-import com.zsf.fingerprint.FingerprintActivity;
 import com.zsf.fingerprint.R;
-import com.zsf.fingerprint.utils.BiometricDataUtils;
-import com.zsf.fingerprint.utils.BiometricErrorCode;
-import com.zsf.fingerprint.utils.BiometricUtils;
+import com.zsf.utils.BiometricDataUtils;
+import com.zsf.utils.BiometricErrorCode;
+import com.zsf.utils.BiometricUtils;
+import com.zsf.wrapper.AuthFingerprintCallBack;
+import com.zsf.wrapper.AuthFingerprintResult;
 
 /**
  * @author zsf
@@ -38,17 +38,16 @@ public class FingerprintSettingFragment extends Fragment implements View.OnClick
     private View viewDialog;
     private TextView dialogTextViewContent;
     private TextView dialogTextViewButton;
+
     /**
-     * 0:正常 1:设备无指纹 2:无网络 3:取消指纹校验
+     * 0:正常 1:设备无指纹 2:取消验证（仅关闭dialog） 3:取消指纹校验
      */
     private int settingType = 0;
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fingerprint_setting, container, false);
-        initData();
         initView(view);
         return view;
     }
@@ -139,15 +138,15 @@ public class FingerprintSettingFragment extends Fragment implements View.OnClick
      * @param result
      */
     @Override
-    public void onResult(@NonNull SoterProcessAuthenticationResult result) {
+    public void onResult(SoterProcessAuthenticationResult result) {
         if (result.isSuccess()){
             if (BiometricDataUtils.getInstance().getFingerprintId(getContext()) == null){
                 BiometricDataUtils.getInstance().setIsSoterOpened(getContext(), true);
                 BiometricDataUtils.getInstance().setFingerprintId(getContext(), result.getExtData().getFid());
             }
             if (result.getExtData().getFid().equals(BiometricDataUtils.getInstance().getFingerprintId(getContext()))){
+                ((AuthFingerprintCallBack)getActivity()).onResult(new AuthFingerprintResult(1, result.errCode, result.errMsg));
                 alertDialog.dismiss();
-                ((FingerprintActivity)getActivity()).showFragment(FingerprintActivity.UNLOCK_FINGERPRINT);
             }
         } else {
             Log.d(TAG, "error_code = " + result.getErrCode() + "; info = " + result.getErrMsg());

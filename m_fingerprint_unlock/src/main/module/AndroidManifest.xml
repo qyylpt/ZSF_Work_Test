@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <application
         android:theme="@style/Fingerprint_AppTheme"
-        android:name=".fragment.FingerprintApplication"
+        android:name=".ClientApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".FingerprintActivity">
             <intent-filter>
