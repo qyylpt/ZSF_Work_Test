@@ -3,7 +3,6 @@ package com.zsf.fingerprint.utils;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.util.Log;
-import androidx.annotation.NonNull;
 import com.tencent.soter.core.SoterCore;
 import com.tencent.soter.core.model.ConstantsSoter;
 import com.tencent.soter.wrapper.SoterWrapperApi;
@@ -16,7 +15,6 @@ import com.tencent.soter.wrapper.wrap_callback.SoterProcessNoExtResult;
 import com.tencent.soter.wrapper.wrap_core.SoterProcessErrCode;
 import com.tencent.soter.wrapper.wrap_task.AuthenticationParam;
 import com.tencent.soter.wrapper.wrap_task.InitializeParam;
-import com.zsf.global.GlobalData;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -39,9 +37,8 @@ public class BiometricUtils {
      * 指纹功能初始化,建议在Application onCreate中进行初始化操作
      * @param context 应用上下文
      * @param callback 初始化回调.
-     * @param count 解锁失败限制次数
      */
-    public static void initFingerprintSupport(Context context, SoterProcessCallback<SoterProcessNoExtResult> callback, int count){
+    public static void initFingerprintSupport(Context context, SoterProcessCallback<SoterProcessNoExtResult> callback){
         BiometricDataUtils.getInstance().init(context);
         InitializeParam param = new InitializeParam.InitializeParamBuilder()
                 .setScenes(SCENE_EMM_FINGERPRINT)
@@ -58,7 +55,7 @@ public class BiometricUtils {
         SoterWrapperApi.prepareAuthKey(new SoterProcessCallback<SoterProcessKeyPreparationResult>(){
 
             @Override
-            public void onResult(@NonNull SoterProcessKeyPreparationResult result) {
+            public void onResult(SoterProcessKeyPreparationResult result) {
                 if (result.errCode == SoterProcessErrCode.ERR_OK){
                     iOnAuthKeyPreparedCallBack.onResult(result, true);
                 } else {
@@ -106,14 +103,6 @@ public class BiometricUtils {
         }
     }
 
-    /**
-     * 擦除指纹设置信息
-     * @param context
-     */
-    public static void wipeFingerprintData(Context context){
-        BiometricDataUtils.getInstance().setIsSoterOpened(context, false);
-        BiometricDataUtils.getInstance().setFingerprintId(context, null);
-    }
 
     /**
      * 系统是否存在指纹信息,在非强管控情况下可以获取正确的信息
@@ -159,7 +148,6 @@ public class BiometricUtils {
         }
         return false;
     }
-
 
 
     /**

@@ -46,10 +46,12 @@ android {
                 java.srcDirs = ['src/main/java', 'src/main/module/java']
                 res.srcDirs = ['src/main/res', 'src/main/module/res']
             } else {
+                java.srcDirs = ['src/main/java', 'src/main/module/java']
+                res.srcDirs = ['src/main/res', 'src/main/module/res']
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
             jniLibs.srcDirs = ['libs']
-            res.srcDirs = ['src/main/res', 'src/main/res/drawable-xhdpi']
+            res.srcDirs = ['src/main/res', 'src/main/res/drawable-xhdpi', 'src/main/module/res']
         }
     }
 

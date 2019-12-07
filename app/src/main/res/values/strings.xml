@@ -5,4 +5,5 @@
     <string name="module_auto_start">自动启动透明Activity</string>
     <string name="module_keep_alive">保活方法测试</string>
     <string name="module_orc">图文识别</string>
+    <string name="module_fingerprint">指纹解锁</string>
 </resources>

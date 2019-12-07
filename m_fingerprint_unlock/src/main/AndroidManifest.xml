@@ -2,6 +2,6 @@
     package="com.zsf.fingerprint" >
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <application>
-        <activity android:name=".FingerprintActivity"></activity>
+        <activity android:name=".m_fingerprint_unlock.FingerprintActivity"/>
     </application>
 </manifest>

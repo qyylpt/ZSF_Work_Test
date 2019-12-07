@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <application
         android:theme="@style/Fingerprint_AppTheme"
-        android:name=".fragment.FingerprintApplication"
+        android:name=".m_fingerprint_unlock.FingerprintApplication"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FingerprintActivity">
+        <activity android:name=".m_fingerprint_unlock.FingerprintActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -29,6 +29,8 @@ public class MainActivity extends BaseActivity {
     private Button goMKeepAlive;
     // 图文识别
     private Button goMOrc;
+    // 指纹解锁
+    private Button goMFingerprintUnlock;
 
     private TextView textView;
     @Override
@@ -55,6 +57,8 @@ public class MainActivity extends BaseActivity {
         goMKeepAlive.setOnClickListener(this);
         goMOrc = findViewById(R.id.go_m_orc);
         goMOrc.setOnClickListener(this);
+        goMFingerprintUnlock = findViewById(R.id.go_m_fingerprint_unlock);
+        goMFingerprintUnlock.setOnClickListener(this);
     }
 
     @Override
@@ -85,6 +89,10 @@ public class MainActivity extends BaseActivity {
             }
             ARouter.getInstance()
                     .build("/m_orc/ORCMainActivity")
+                    .navigation();
+        } else if (view.getId() == R.id.go_m_fingerprint_unlock){
+            ARouter.getInstance()
+                    .build("/m_fingerprint_unlock/FingerprintActivity")
                     .navigation();
         }
     }

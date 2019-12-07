@@ -1,7 +1,6 @@
-package com.zsf.fingerprint.fragment;
+package com.zsf.fingerprint.wrapper.fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,21 +12,19 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 
 import com.tencent.soter.wrapper.wrap_biometric.SoterBiometricStateCallback;
 import com.tencent.soter.wrapper.wrap_callback.SoterProcessAuthenticationResult;
 import com.tencent.soter.wrapper.wrap_callback.SoterProcessCallback;
 import com.tencent.soter.wrapper.wrap_callback.SoterProcessKeyPreparationResult;
-import com.tencent.soter.wrapper.wrap_core.SoterProcessErrCode;
-import com.zsf.fingerprint.FingerprintActivity;
 import com.zsf.fingerprint.R;
 import com.zsf.fingerprint.utils.BiometricDataUtils;
 import com.zsf.fingerprint.utils.BiometricErrorCode;
 import com.zsf.fingerprint.utils.BiometricUtils;
-import com.zsf.global.GlobalData;
+import com.zsf.fingerprint.wrapper.AuthFingerprintCallBack;
+import com.zsf.fingerprint.wrapper.AuthFingerprintResult;
 
 /**
  * @author zsf
@@ -42,16 +39,13 @@ public class FingerprintUnlockFragment extends Fragment implements View.OnClickL
     private TextView dialogTextViewContent;
     private TextView dialogTextViewButton;
     /**
-     * 0:正常 1:设备无指纹 2:无网络 3:取消指纹校验
+     * 0:正常 1:设备无指纹 2:取消验证（仅关闭dialog） 3:取消指纹校验
      */
     private int settingType = 0;
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fingerprint_open, container, false);
-        initData();
         initView(view);
         return view;
     }
@@ -81,7 +75,7 @@ public class FingerprintUnlockFragment extends Fragment implements View.OnClickL
     private void initView(View view) {
         imageViewUnlockFingerprint = (Button) view.findViewById(R.id.emm_unlock_fingerprint);
         imageViewUnlockFingerprint.setOnClickListener(this);
-        LayoutInflater inflater = LayoutInflater.from(GlobalData.getContext());
+        LayoutInflater inflater = LayoutInflater.from(getContext());
         viewDialog = inflater.inflate(R.layout.fingerprint_dialog_layout, null);
         alertDialog = new AlertDialog.Builder(getActivity())
                 .setCancelable(false)
@@ -183,12 +177,12 @@ public class FingerprintUnlockFragment extends Fragment implements View.OnClickL
 
 
     @Override
-    public void onResult(@NonNull SoterProcessAuthenticationResult result) {
+    public void onResult(SoterProcessAuthenticationResult result) {
         if (result.isSuccess()){
             settingType = 0;
-            BiometricDataUtils.getInstance().resetUnlockCount(GlobalData.getContext());
+            BiometricDataUtils.getInstance().resetUnlockCount(getContext());
             if (result.getExtData().getFid().equals(BiometricDataUtils.getInstance().getFingerprintId(getContext()))){
-                ((FingerprintActivity)getActivity()).showFragment(FingerprintActivity.CONTENT_FINGERPRINT);
+                ((AuthFingerprintCallBack)getActivity()).onResult(new AuthFingerprintResult(2, result.errCode, result.errMsg));
             } else {
                 dialogTextViewContent.setText(getContext().getResources().getString(R.string.fingerprint_dialog_error_finger));
                 dialogTextViewButton.setText(getContext().getResources().getString(R.string.fingerprint_dialog_retry));
@@ -204,11 +198,11 @@ public class FingerprintUnlockFragment extends Fragment implements View.OnClickL
             } else if (result.errCode == BiometricErrorCode.ERR_USER_CANCELLED){
 
             } else if (result.errCode == BiometricErrorCode.ERR_BIOMETRIC_AUTHENTICATION_FAILED) {
-                BiometricDataUtils.getInstance().setUnlockCount(getContext(), 5);
+                BiometricDataUtils.getInstance().resetUnlockCount(getContext());
                 dialogTextViewContent.setText(getContext().getResources().getString(R.string.fingerprint_error));
                 dialogTextViewButton.setText(getContext().getResources().getString(R.string.fingerprint_dialog_close));
             } else if (result.errCode == BiometricErrorCode.ERR_FINGERPRINT_LOCKED){
-                BiometricDataUtils.getInstance().setUnlockCount(getContext(), 5);
+                BiometricDataUtils.getInstance().resetUnlockCount(getContext());
                 dialogTextViewContent.setText(getContext().getResources().getString(R.string.fingerprint_unlock_fail_five));
                 dialogTextViewButton.setText(getContext().getResources().getString(R.string.fingerprint_dialog_close));
             } else {
@@ -233,15 +227,13 @@ public class FingerprintUnlockFragment extends Fragment implements View.OnClickL
             dialogTextViewButton.setText(getContext().getResources().getString(R.string.fingerprint_dialog_close));
             BiometricUtils.asyncCancelBiometricAuthentication();
             if (BiometricDataUtils.getInstance().getUnlockCount(getContext()) < 0){
+                if ((System.currentTimeMillis() - BiometricDataUtils.getInstance().getUnlcokDelayTime(getContext())) >= BiometricDataUtils.getInstance().getDefaultDelayUnlockTime()){
+                    BiometricDataUtils.getInstance().resetUnlockCount(getContext());
+                }
                 return;
+            } else if (BiometricDataUtils.getInstance().getUnlockCount(getContext()) == 0){
+                BiometricDataUtils.getInstance().setUnlcokDelayTime(getContext(), System.currentTimeMillis());
             }
-            ((FingerprintActivity)getActivity()).startTimer();
-//            Scheduler.getDefault().dispatchDelayAsync(new Runnable() {
-//                @Override
-//                public void run() {
-//                    BiometricDataUtils.getInstance().setUnlockCount(getContext(),5);
-//                }
-//            }, 60000);
         } else {
             dialogTextViewContent.setText("指纹验证失败，您还可以尝试" + BiometricDataUtils.getInstance().getUnlockCount(getContext()) + "次");
         }
