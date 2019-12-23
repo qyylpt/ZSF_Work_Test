@@ -1,0 +1,9 @@
+<resources>
+    <string name="m_jetpack_text_create_database">创建数据库</string>
+    <string name="m_jetpack_text_insert_database">插入数据</string>
+    <string name="m_jetpack_text_query_database">查询数据</string>
+    <string name="m_jetpack_text_upgrade_database">数据库版本更新</string>
+    <string name="m_jetpack_text_modify_database">更新数据</string>
+    <string name="m_jetpack_text_database_delete">删除数据</string>
+    <string name="m_jetpack_text_delete_database">删除数据库</string>
+</resources>

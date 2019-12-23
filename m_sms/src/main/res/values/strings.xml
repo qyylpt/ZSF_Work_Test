@@ -1,0 +1,4 @@
+<resources>
+    <string name="m_sms_text_get_sms">通过设备数据库获取短信</string>
+    <string name="m_sms_text_hint_info">收到新的短信会自动通过解析通知栏获取短信息，重新加载列表信息。（只显示通知栏截获信息，不包含数据库原始数据）</string>
+</resources>

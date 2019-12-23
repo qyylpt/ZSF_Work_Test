@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10_dp"
+        android:text="发件人：1069123855001"
+        android:id="@+id/m_sms_textView_sms_send_address"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时    间：2019 12 12"
+        android:paddingLeft="@dimen/dimen_10_dp"
+        android:id="@+id/m_sms_textView_sms_send_time"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10_dp"
+        android:text="【京东】尊敬的PLUS会员，您的账户在2019年12月02日至12月08日期间，已到账PLUS购物回馈京豆16个，访问“PLUS会员专区-头部卡片-已返京豆”，点击 3.cn/lJnfBSJ 查看明细"
+        android:id="@+id/m_sms_textView_sms_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10_dp"
+        android:text="【京东】尊敬的PLUS会员，您的账户在2019年12月02日至12月08日期间，已到账PLUS购物回馈京豆16个，访问“PLUS会员专区-头部卡片-已返京豆”，点击 3.cn/lJnfBSJ 查看明细"
+        android:id="@+id/m_sms_textView_sms_status"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/C_A6ACAF"
+        android:layout_margin="@dimen/dimen_10_dp"
+        />
+</LinearLayout>

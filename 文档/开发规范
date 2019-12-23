@@ -1,0 +1,8 @@
+1. string
+    格式：模块 + 类型 + 信息
+    示例：m_test(模块) + text(文字描述) + create_database(具体信息标识)
+          <string name="m_test_text_create_database">创建数据库</string>
+2. id
+    格式：模块 + 控件类型 + 信息
+    示例：m_test(模块) + button(控件类型) + create_database(具体信息标识)
+          android:id="@+id/m_test_button_create_database"

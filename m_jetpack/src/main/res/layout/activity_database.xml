@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DatabaseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_60_dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetpack_button_create_database"
+            android:text="@string/m_jetpack_text_create_database" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetopack_button_insert_database"
+            android:text="@string/m_jetpack_text_insert_database"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetpack_button_upgrade_database"
+            android:text="@string/m_jetpack_text_upgrade_database"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetpack_button_modify_database"
+            android:text="@string/m_jetpack_text_modify_database"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetpack_button_delete_database"
+            android:text="@string/m_jetpack_text_database_delete"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetpack_button_query_database"
+            android:text="@string/m_jetpack_text_query_database"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10_dp"
+            android:id="@+id/m_jetpack_button_database_delete"
+            android:text="@string/m_jetpack_text_delete_database"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
