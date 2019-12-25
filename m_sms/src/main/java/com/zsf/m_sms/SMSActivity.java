@@ -163,11 +163,7 @@ public class SMSActivity extends BaseActivity implements OnRefreshListener {
         smsList.clear();
         if (cursor != null){
             while (cursor.moveToNext()){
-                if (cursor.getString(cursor.getColumnIndex(Telephony.Sms.PERSON)) != null){
-                    smsList.add(new SMS("发件人：" + cursor.getString(cursor.getColumnIndex(Telephony.Sms.PERSON)),"时    间：" + timeStamp2Date(cursor.getString(cursor.getColumnIndex(Telephony.Sms.DATE)), "yyyy-MM-dd HH:mm:ss"), cursor.getString(cursor.getColumnIndex(Telephony.Sms.BODY)), ""));
-                } else {
-                    smsList.add(new SMS("发件人：" + cursor.getString(cursor.getColumnIndex(Telephony.Sms.ADDRESS)),"时    间：" + timeStamp2Date(cursor.getString(cursor.getColumnIndex(Telephony.Sms.DATE)), "yyyy-MM-dd HH:mm:ss"), cursor.getString(cursor.getColumnIndex(Telephony.Sms.BODY)), ""));
-                }
+                smsList.add(new SMS("发件人：" + cursor.getString(cursor.getColumnIndex(Telephony.Sms.ADDRESS)),"时    间：" + timeStamp2Date(cursor.getString(cursor.getColumnIndex(Telephony.Sms.DATE)), "yyyy-MM-dd HH:mm:ss"), cursor.getString(cursor.getColumnIndex(Telephony.Sms.BODY)), ""));
                 ZsfLog.d(SMSActivity.class, "id : " + cursor.getString(cursor.getColumnIndex(Telephony.Sms._ID)) + ";  address : " + cursor.getString(cursor.getColumnIndex(Telephony.Sms.ADDRESS)) + ";\n DATE : " +  timeStamp2Date(cursor.getString(cursor.getColumnIndex(Telephony.Sms.DATE)), "yyyy-MM-dd HH:mm:ss") + ";\n BODY : " + cursor.getString(cursor.getColumnIndex(Telephony.Sms.BODY)));
             }
             cursor.close();
@@ -181,7 +177,7 @@ public class SMSActivity extends BaseActivity implements OnRefreshListener {
         if (view.getId() == R.id.m_sms_button_get_sms){
             loadSms(10000);
             isClick = true;
-            getContactNumber("张三");
+//            getContactNumber("张三");
         }
     }
 

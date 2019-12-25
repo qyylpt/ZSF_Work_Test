@@ -76,6 +76,9 @@ dependencies {
     // 图片识别
     api rootProject.ext.dependencies["tess_two"]
 
+    // 权限申请
+    api rootProject.ext.dependencies["AndPermission"]
+
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'androidx.test:runner:1.2.0'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -32,7 +32,10 @@ public class SMSNotificationService extends NotificationListenerService {
      * 四条信息上报标记：false:未上报 true:已上报
      */
     private boolean xiaomiIsReort = false;
-    private boolean honorSign = false;
+    /**
+     * 适配同一条信息，亮屏、锁屏切换信息过滤
+     */
+    private boolean hwSign = true;
     public SMSNotificationService() {
         ZsfLog.d(SMSNotificationService.class, "初始化");
     }
@@ -57,6 +60,8 @@ public class SMSNotificationService extends NotificationListenerService {
         if (romSMSPackageAdaptive(statusBarNotification)){
             return;
         }
+        Bundle bundle = statusBarNotification.getNotification().extras;
+        ZsfLog.d(SMSNotificationService.class, "getGroupKey:" + statusBarNotification.getGroupKey() + "; getKey: " + statusBarNotification.getKey() + "; getTag" + statusBarNotification.getTag() + "; getId" + statusBarNotification.getId() + "\n" + "bundle = " + bundle.toString());
         Notification notification = statusBarNotification.getNotification();
         if (notification == null){
             return;
@@ -76,8 +81,6 @@ public class SMSNotificationService extends NotificationListenerService {
     public void getNotificationInfo(StatusBarNotification statusBarNotification){
 
         Bundle bundle = statusBarNotification.getNotification().extras;
-        ZsfLog.d(SMSNotificationService.class, "getGroupKey:" + statusBarNotification.getGroupKey() + "; getKey: " + statusBarNotification.getKey() + "; getTag" + statusBarNotification.getTag() + "; getId" + statusBarNotification.getId());
-        ZsfLog.d(SMSNotificationService.class, "bundle = " + bundle.toString());
         // 通知title
         Object titleObject = bundle.get(Notification.EXTRA_TITLE);
         if (titleObject == null){
@@ -105,8 +108,6 @@ public class SMSNotificationService extends NotificationListenerService {
         // 需要根据 不同机型 适配 内容截取
         ZsfLog.d(SMSNotificationService.class, " 包名 = " + statusBarNotification.getPackageName() + "; 标题: = " + bundle.getString(Notification.EXTRA_TITLE, "") + "; 内容 = " + content);
 
-        // 设置过滤标记
-        honorSign = true;
     }
 
     /**
@@ -175,12 +176,18 @@ public class SMSNotificationService extends NotificationListenerService {
         if (RomUtils.isHuawei()){
             String groupKey = statusBarNotification.getGroupKey();
             String[] groupKeyArray = groupKey.split("\\|");
-            if (groupKeyArray.length <= 3 && !honorSign && !isScreenOn){
+            if (!isScreenOn){
+                if (hwSign){
+                    hwSign = false;
+                    return true; // 屏蔽锁屏延时信息过滤
+                }
+                hwSign = false;
                 return false;
-            } else if (groupKeyArray.length <= 3 && honorSign){
-                honorSign = false;
+            } else if (groupKeyArray.length <= 3 && isScreenOn){
+                hwSign = false;
                 return true;
             } else if (groupKeyArray.length > 3){
+                hwSign = true;
                 return false;
             }
         }

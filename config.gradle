@@ -3,7 +3,7 @@
  */
 ext {
     // 当前运行环境 isBate： false 正式环境; true 测试环境
-    isBate = false
+    isBate = true
 
     // 版本信息控制
     versions = [
@@ -44,7 +44,10 @@ ext {
             reflection             : "1.2.0",
 
             // 图片识别
-            tess_two               : "9.0.0"
+            tess_two               : "9.0.0",
+
+            // 权限申请
+            AndPermission          : "2.0.3"
 
 
     ]
@@ -80,7 +83,10 @@ ext {
             "reflection"         : "me.weishu:free_reflection:${versions["reflection"]}",
 
             // 图片识别
-            "tess_two"           : "com.rmtheis:tess-two:${versions["tess_two"]}"
+            "tess_two"           : "com.rmtheis:tess-two:${versions["tess_two"]}",
+
+            // 权限
+            "AndPermission"      : "com.yanzhenjie:permission:${versions["AndPermission"]}"
 
     ]
 

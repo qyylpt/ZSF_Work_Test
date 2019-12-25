@@ -8,6 +8,22 @@
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/m_auto_start" />
+            <option value="$PROJECT_DIR$/m_device_manager" />
+            <option value="$PROJECT_DIR$/m_fingerprint_unlock" />
+            <option value="$PROJECT_DIR$/m_jetpack" />
+            <option value="$PROJECT_DIR$/m_keep_alive" />
+            <option value="$PROJECT_DIR$/m_orc" />
+            <option value="$PROJECT_DIR$/m_sms" />
+            <option value="$PROJECT_DIR$/m_test" />
+            <option value="$PROJECT_DIR$/opencv4.1.1Libs" />
+          </set>
+        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
