@@ -36,6 +36,10 @@
             android:label="@string/m_test_DiffUtil_page"/>
         <activity android:name=".branch.memory.MemoryOptimizeActivity"
             android:label="@string/m_test_Memory_Optimize_page"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
-
+    <!--used to restart app-->
+    <instrumentation
+        android:name=".branch.test.MyInstrumentation"
+        android:targetPackage="${applicationId}" />
 </manifest>

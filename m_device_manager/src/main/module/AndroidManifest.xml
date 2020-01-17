@@ -5,7 +5,9 @@
 
     <application tools:ignore="GoogleAppIndexingWarning"
         android:name="com.zsf.application.BaseCommonApplication"
-        android:theme="@style/Common_AppTheme">
+        android:testOnly="true"
+        android:icon="@mipmap/icon"
+        android:theme="@style/AppThemeTranslucent">
         <activity android:name=".DeviceManagerActivity"
             android:label="@string/m_device_manager_lock_activity_name">
             <intent-filter>

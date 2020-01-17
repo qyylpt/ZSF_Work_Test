@@ -6,7 +6,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -33,9 +37,25 @@ public class DeviceManagerActivity extends BaseActivity {
 
     @Override
     public void initView(Activity activity) {
-        setContentView(R.layout.activity_device_manager);
-        buttonLockScreen = findViewById(R.id.button_local_screen);
-        buttonLockScreen.setOnClickListener(this);
+//        setContentView(R.layout.activity_device_manager);
+//        buttonLockScreen = findViewById(R.id.button_local_screen);
+//        buttonLockScreen.setOnClickListener(this);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,  WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+        /*
+         * 将对话框的大小按屏幕大小的百分比设置
+         */
+        Window window = this.getWindow();
+        WindowManager m = window.getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
+        p.height = 0; // 高度设置为0
+        p.width = 0;//宽0
+        p.gravity = Gravity.CENTER;
+        window.setAttributes(p);
+        lockScreen();
     }
 
     @Override

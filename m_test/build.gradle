@@ -1,9 +1,14 @@
 if (rootProject.ext.isBate) {
     apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-kapt'
 } else {
     apply plugin: 'com.android.library'
 }
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+repositories {
+    mavenCentral()
+}
 android {
     compileSdkVersion rootProject.ext.versions.compileSdkVersion
     buildToolsVersion rootProject.ext.versions.buildToolsVersion
@@ -13,7 +18,7 @@ android {
             applicationId "com.zsf.m_test"
         }
         minSdkVersion rootProject.ext.versions.minSdkVersion
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode rootProject.ext.versions.versionCode
         versionName rootProject.ext.versions.versionName
 
@@ -24,11 +29,19 @@ android {
          * AROUTER_GENERATE_DOC: "enable"：生成路由文档
          */
         javaCompileOptions {
+            // java
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
                 includeCompileClasspath = true
             }
         }
+        kapt {
+            // kotlin
+            arguments {
+                arg("moduleName", project.getName())
+            }
+        }
+
     }
 
     buildTypes {
@@ -60,8 +73,12 @@ dependencies {
     implementation project(path: ':common')
 
     // ARouter 解释器 （必须在所需要的module中单独添加）
-    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"] // java
+    kapt rootProject.ext.dependencies["arouter-compiler"] // kotlin
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+

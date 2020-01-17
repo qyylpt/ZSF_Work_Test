@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zsf.test">
 
-
-    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS"/>
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="test.DemoApplication"
         android:allowBackup="true"
@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Common_AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".branch.kotlin.KotlinActivity"></activity>
         <activity android:name=".DemoMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,8 +60,14 @@
         <activity
             android:name=".branch.diffutil.DiffUtilActivity"
             android:label="@string/m_test_DiffUtil_page" />
-        <activity android:name=".branch.memory.MemoryOptimizeActivity"
-            android:label="@string/m_test_Memory_Optimize_page"/>
+        <activity
+            android:name=".branch.memory.MemoryOptimizeActivity"
+            android:label="@string/m_test_Memory_Optimize_page" />
     </application>
+    <!--used to restart app-->
+    <instrumentation
+        android:name="com.zsf.test.branch.test.MyInstrumentation"
+        android:targetPackage="${applicationId}" />
+
 
 </manifest>

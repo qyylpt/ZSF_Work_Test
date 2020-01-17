@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.zsf.global.GlobalData;
 import com.zsf.test.branch.phone.PhoneUtils;
+import com.zsf.test.branch.test.MyInstrumentation;
 import com.zsf.test.branch.test.TestUtils;
 import com.zsf.utils.ToastUtils;
 import com.zsf.utils.ZsfLog;
@@ -121,14 +122,12 @@ public class DemoMainActivity extends BaseActivity {
                 PhoneUtils.endCall(DemoMainActivity.this);
             }
         } else if (i == R.id.button_mac){
-            if (PackageManager.PERMISSION_GRANTED != checkSelfPermission(Manifest.permission.ACCESS_WIFI_STATE)) {
-                requestPermissions(perms, PERMS_REQUEST_CODE);
-            } else {
-                ZsfLog.d(DemoMainActivity.class, "mac = " + DeviceUtils.getMacAddress());
-                ToastUtils.showToast(GlobalData.getContext(), getMacAddr());
-            }
+            ARouter.getInstance()
+                    .build("/branch/kotlin/KotlinActivity")
+                    .navigation();
         } else if (i == R.id.button_test){
-            TestUtils.setBluetooth(true);
+//            TestUtils.setBluetooth(true);
+            MyInstrumentation.restartApp(DemoMainActivity.this);
         }
     }
 

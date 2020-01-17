@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_mac"
-                android:text="@string/m_test_mac"
+                android:text="@string/m_test_kotlin"
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 />
             <Button

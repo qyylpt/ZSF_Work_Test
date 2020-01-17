@@ -7,6 +7,8 @@
         android:theme="@style/Common_AppTheme"
         android:icon="@drawable/ic_launcher_foreground"
         android:name="com.zsf.application.BaseCommonApplication"
+        android:appComponentFactory=""
+        tools:replace="android:appComponentFactory"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.DatabaseActivity">
             <intent-filter>

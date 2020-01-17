@@ -15,7 +15,7 @@
     <string name="m_test_DiffUtil_page">DiffUtil页面</string>
     <string name="m_test_Memory_Optimize_page">内存优化</string>
     <string name="m_test_Phone_EndCall">挂断电话</string>
-    <string name="m_test_mac">获取MAC</string>
+    <string name="m_test_kotlin">Kotlin</string>
     <string name="m_test">测试</string>
     <string name="m_test_Memory_Optimize_add_object">添加对象</string>
     <string name="m_test_Memory_Optimize_delete_object">删除对象</string>
@@ -33,4 +33,18 @@
     <string name="m_test_ARouter_Pretreatment_service_init">ARouter跳转前预处理初始化</string>
     <string name="m_test_ARouter_Pretreatment_service_button">ARouter预处理机制</string>
     <string name="m_test_ARouter_Pretreatment_sign">预处理</string>
+    <!-- kotlin -->
+    <string name="m_test_kotlin_textView_result">Kotlin 执行结果</string>
+    <string name="m_test_kotlin_button_sum_two">两数相加函数</string>
+    <string name="m_test_kotlin_button_sum_more">多数相加函数</string>
+    <string name="m_test_kotlin_button_label">标签</string>
+    <string name="m_test_kotlin_button_constructor">主 and 次构造函数</string>
+    <string name="m_test_kotlin_button_abstract">抽象类</string>
+    <string name="m_test_kotlin_button_nest_class">嵌套类</string>
+    <string name="m_test_kotlin_button_inner_class">内部类</string>
+    <string name="m_test_kotlin_button_NoNameInner_class">匿名内部类</string>
+    <string name="m_test_kotlin_button_setter">setter方法需要使用field</string>
+    <string name="m_test_kotlin_button_extend">继承 构造方法</string>
+    <string name="m_test_kotlin_button_decorate">类的扩展（属性、方法）</string>
+    <string name="m_test_kotlin_button_data">数据类 密封类</string>
 </resources>
