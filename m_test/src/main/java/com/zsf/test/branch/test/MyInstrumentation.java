@@ -43,7 +43,7 @@ public class MyInstrumentation extends Instrumentation {
 //        Bundle arguments = new Bundle();
 //        arguments.putString("class", "com.zsf.m_test");
 //        context.startInstrumentation(componentName, null, arguments);
-        context.getInstrumentation().callActivityOnRestart(myActivity);
+//        context.getInstrumentation().callActivityOnRestart(myActivity);
 
     }
 }
