@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">读卡器</string>
+    <string name="servicedesc">莫妮卡描述</string>
+    <string name="aiddescription">AID 描述</string>
+
+
+    <string name="service_name">Newabel nfc service</string>
+    <string name="card_aid">Newabel nfc aid</string>
+</resources>
