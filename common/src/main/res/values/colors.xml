@@ -8,4 +8,6 @@
     <color name="C_FFFFFF">#FFFFFF</color>
     <color name="C_0f0">#0f0</color>
     <color name="transparent">#00000000</color>
+    <color name="C_F5F5F5">#F5F5F5</color>
+    <color name="C_DCDCDC">#DCDCDC</color>
 </resources>

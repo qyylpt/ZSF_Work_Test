@@ -1,0 +1,15 @@
+<resources>
+    <string name="m_ipc_text_app_name">跨进程通信</string>
+    <string name="m_ipc_text_basis_data">跨进程 - 基础数据传递</string>
+    <string name="m_ipc_text_basis_data_bind">绑定服务</string>
+    <string name="m_ipc_text_basis_data_unbind">解绑服务</string>
+    <string name="m_ipc_text_basis_data_add">加法</string>
+    <string name="m_ipc_text_basis_data_log">打印</string>
+
+    <string name="m_ipc_text_complex_data_add">复杂 - 加法</string>
+    <string name="m_ipc_text_complex_data_back_object">复杂 - 返回对象</string>
+    <string name="m_ipc_text_complex_data_about_list">复杂 - list</string>
+    <string name="m_ipc_text_complex_data_about_map">复杂 - map</string>
+    <string name="m_ipc_text_complex_data_about_object_inout">复杂 - 对象inout</string>
+
+</resources>
