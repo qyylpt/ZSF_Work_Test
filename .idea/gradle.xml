@@ -8,18 +8,21 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
-            <option value="$PROJECT_DIR$/m_auto_start" />
-            <option value="$PROJECT_DIR$/m_device_manager" />
-            <option value="$PROJECT_DIR$/m_fingerprint_unlock" />
-            <option value="$PROJECT_DIR$/m_ipc" />
-            <option value="$PROJECT_DIR$/m_jetpack" />
-            <option value="$PROJECT_DIR$/m_keep_alive" />
-            <option value="$PROJECT_DIR$/m_nfc" />
-            <option value="$PROJECT_DIR$/m_orc" />
-            <option value="$PROJECT_DIR$/m_sms" />
-            <option value="$PROJECT_DIR$/m_test" />
+            <option value="$PROJECT_DIR$/main_app" />
+            <option value="$PROJECT_DIR$/main_app/app" />
+            <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module/m_auto_start" />
+            <option value="$PROJECT_DIR$/module/m_device_manager" />
+            <option value="$PROJECT_DIR$/module/m_fingerprint_unlock" />
+            <option value="$PROJECT_DIR$/module/m_ipc" />
+            <option value="$PROJECT_DIR$/module/m_jetpack" />
+            <option value="$PROJECT_DIR$/module/m_keep_alive" />
+            <option value="$PROJECT_DIR$/module/m_orc" />
+            <option value="$PROJECT_DIR$/module/m_sms" />
+            <option value="$PROJECT_DIR$/test_app" />
+            <option value="$PROJECT_DIR$/test_app/m_nfc" />
+            <option value="$PROJECT_DIR$/test_app/m_test" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

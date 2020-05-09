@@ -1,5 +1,7 @@
-include ':app', ':m_nfc', ':m_test'
+include ':main_app:app'
 
-include ':common', ':m_device_manager', ':m_keep_alive', ':m_auto_start', ':m_orc', ':m_fingerprint_unlock',':m_sms',':m_jetpack', ':m_ipc'
+include ':test_app:m_test', ':test_app:m_nfc'
+
+include ':common', ':module:m_device_manager', ':module:m_keep_alive', ':module:m_auto_start', ':module:m_orc', ':module:m_fingerprint_unlock',':module:m_sms',':module:m_jetpack', ':module:m_ipc'
 
 

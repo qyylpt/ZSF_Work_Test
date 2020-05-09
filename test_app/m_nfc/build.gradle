@@ -4,7 +4,7 @@ apply plugin: 'com.android.application'
  * 切换当前应用状态, false: 读卡器 true:模拟卡
  */
 ext{
-    isServer = false
+    isServer = true
 }
 android {
     compileSdkVersion 29
