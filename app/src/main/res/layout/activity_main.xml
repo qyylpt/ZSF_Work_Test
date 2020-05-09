@@ -18,13 +18,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/module_test"
-                android:layout_marginTop="10dp"
-                android:background="@color/C_A6ACAF"
-                android:id="@+id/go_m_test"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/module_device_manager"
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 android:background="@color/C_A6ACAF"
@@ -58,7 +51,27 @@
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 android:background="@color/C_A6ACAF"
                 android:id="@+id/go_m_fingerprint_unlock"/>
-
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_ipc"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_ipc"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_jetpack"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_jetpack"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_sms"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_sms"/>
 
         </LinearLayout>
 

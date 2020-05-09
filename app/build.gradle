@@ -34,6 +34,7 @@ android {
         targetCompatibility rootProject.ext.versions.javaSDKVersion
         sourceCompatibility rootProject.ext.versions.javaSDKVersion
     }
+
 }
 
 dependencies {
@@ -51,7 +52,7 @@ dependencies {
     // 这里如果不是测试环境则组装其他功能模块
     if (!isBate.toBoolean()) {
         // 日常学习测试
-        implementation project(path: ':m_test')
+//        implementation project(path: ':m_test')
         // 设备管理器 锁屏
         implementation project(path: ':m_device_manager')
         // 启动透明Activity (用于截屏)
@@ -62,6 +63,12 @@ dependencies {
         implementation project(path: ':m_orc')
         // 指纹解锁
         implementation project(path: ':m_fingerprint_unlock')
+        // 短信
+        implementation project(path: ':m_sms')
+        // ipc
+        implementation project(path: ':m_ipc')
+        // jetpack
+        implementation project(path: ':m_jetpack')
     }
 
 

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.m_nfc.R;
 import com.zsf.utils.ZsfLog;
 
@@ -23,7 +24,7 @@ import java.util.Arrays;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
+@Route(path = "/m_nfc/SimulationReadActivity")
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class SimulationReadActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {
 

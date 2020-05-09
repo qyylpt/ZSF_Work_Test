@@ -2,15 +2,19 @@
     package="com.zsf.m_ipc" >
 
     <application>
+
         <activity android:name=".IPCActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask">
+        </activity>
+
         <service android:name=".BasisDataService"
             android:process=":remote">
             <intent-filter>
                 <action android:name="com.zsf.m_ipc_BasisDataService"></action>
             </intent-filter>
         </service>
-        <service android:name=".BasisDataService"
+
+        <service android:name=".ComplexDataService"
             android:process=":remote">
             <intent-filter>
                 <action android:name="com.zsf.m_ipc_ComplexDataService"></action>

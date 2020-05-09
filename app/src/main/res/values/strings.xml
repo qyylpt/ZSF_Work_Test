@@ -6,4 +6,8 @@
     <string name="module_keep_alive">保活方法测试</string>
     <string name="module_orc">图文识别</string>
     <string name="module_fingerprint">指纹解锁</string>
+    <string name="module_ipc">ipc(跨进程通信)</string>
+    <string name="module_jetpack">jetpack</string>
+    <string name="module_nfc">nfc</string>
+    <string name="module_sms">sms</string>
 </resources>

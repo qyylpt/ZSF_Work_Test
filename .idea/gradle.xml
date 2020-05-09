@@ -20,7 +20,6 @@
             <option value="$PROJECT_DIR$/m_orc" />
             <option value="$PROJECT_DIR$/m_sms" />
             <option value="$PROJECT_DIR$/m_test" />
-            <option value="$PROJECT_DIR$/opencv4.1.1Libs" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

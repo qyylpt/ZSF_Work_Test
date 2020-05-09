@@ -12,6 +12,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.m_ipc.data.Result;
 import com.zsf.view.activity.BaseActivity;
 import java.text.SimpleDateFormat;
@@ -20,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Route(path = "/m_ipc/IPCActivity")
 public class IPCActivity extends BaseActivity {
     /**
      * 简单数据
@@ -180,7 +183,6 @@ public class IPCActivity extends BaseActivity {
         if (id == R.id.m_ipc_button_complex_data_clear){
             mIPCTextViewShowResult.setText("");
         }
-s
 
         // 复杂数据: 服务绑定
         if (id == R.id.m_ipc_button_complex_data_bind){
@@ -282,7 +284,12 @@ s
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(serviceConnection);
+       try {
+           unbindService(serviceConnection);
+           unbindService(serviceConnectionComplex);
+       } catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     public void setResultText(String result){
