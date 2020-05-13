@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zsf.m_ipc" >
+
+    <application>
+
+        <activity android:name=".IPCActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Common_AppTheme">
+        </activity>
+
+        <service android:name=".BasisDataService"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.zsf.m_ipc_BasisDataService"></action>
+            </intent-filter>
+        </service>
+
+        <service android:name=".ComplexDataService"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.zsf.m_ipc_ComplexDataService"></action>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

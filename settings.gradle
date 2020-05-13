@@ -1,7 +1,24 @@
+// 主app
 include ':main_app:app'
 
+// 独立功能测试
 include ':test_app:m_test', ':test_app:m_nfc'
 
-include ':common', ':module:m_device_manager', ':module:m_keep_alive', ':module:m_auto_start', ':module:m_orc', ':module:m_fingerprint_unlock',':module:m_sms',':module:m_jetpack', ':module:m_ipc'
+// 基础组件
+include ':common'
 
+// 功能实现模块
+include ':module:m_device_manager', // 设备管理 deviceOwner
+        ':module:m_keep_alive', // 保活手段
+        ':module:m_auto_start', // 仅测试 后台自启动activity
+        ':module:m_orc', // 图文识别
+        ':module:m_fingerprint_unlock', // 指纹识别
+        ':module:m_sms', // 通知栏短信获取
+        ':module:m_jetpack' // jetpack 相关(数据库、)
 
+// 技术实践
+include ':module:IPC:m_ipc', // IPC
+        ':module:IPC:m_ipc_server_test'
+
+// library
+include ':module:IPC:ipc_core'

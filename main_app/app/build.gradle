@@ -66,7 +66,7 @@ dependencies {
         // 短信
         implementation project(path: ':module:m_sms')
         // ipc
-        implementation project(path: ':module:m_ipc')
+        implementation project(path: ':module:IPC:m_ipc')
         // jetpack
         implementation project(path: ':module:m_jetpack')
     }
