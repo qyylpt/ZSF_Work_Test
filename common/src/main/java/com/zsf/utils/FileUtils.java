@@ -68,4 +68,26 @@ public class FileUtils {
         }
     }
 
+    /**
+     * 删除目录及所有文件
+     * @param file
+     */
+    private void removeFile(File file){
+        if(file.isFile()){
+            file.delete();
+            return;
+        }
+        if(file.isDirectory()){
+            File[] childFile = file.listFiles();
+            if(childFile == null || childFile.length == 0){
+                file.delete();
+                return;
+            }
+            for(File f : childFile){
+                removeFile(f);
+            }
+            file.delete();
+        }
+    }
+
 }
