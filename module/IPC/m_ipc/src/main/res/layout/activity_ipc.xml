@@ -258,6 +258,7 @@
         android:layout_height="@dimen/dimen_200_dp"
         android:layout_marginLeft="@dimen/dimen_20_dp"
         android:layout_marginRight="@dimen/dimen_20_dp"
+        android:textSize="@dimen/dimen_10_sp"
         android:id="@+id/m_ipc_textview_show_result"
         app:layout_constraintBottom_toTopOf="@+id/m_ipc_button_complex_data_clear"
         android:background="@color/C_DCDCDC"

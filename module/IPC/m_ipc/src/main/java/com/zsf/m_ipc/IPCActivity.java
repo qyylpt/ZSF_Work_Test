@@ -380,8 +380,18 @@ public class IPCActivity extends BaseActivity {
        }
     }
 
-    public void setResultText(String result){
-        SimpleDateFormat alldate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");//获取日期时间
-        mIPCTextViewShowResult.append("\n" + alldate.format(new Date()) + "   " + result);
+    public void setResultText(final String result){
+        mIPCTextViewShowResult.post(new Runnable() {
+            @Override
+            public void run() {
+                SimpleDateFormat alldate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");//获取日期时间
+                mIPCTextViewShowResult.append("\n" + alldate.format(new Date()) + "   " + result);
+                int scrollAmount = mIPCTextViewShowResult.getLayout().getLineTop(mIPCTextViewShowResult.getLineCount()) - mIPCTextViewShowResult.getHeight();
+                if (scrollAmount > 0)
+                    mIPCTextViewShowResult.scrollTo(0, scrollAmount);
+                else
+                    mIPCTextViewShowResult.scrollTo(0, 0);
+            }
+        });
     }
 }
