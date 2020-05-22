@@ -9,7 +9,7 @@ ext {
     versions = [
             // 母工程信息配置
             applicationId           : "com.example.zsf_work_test",        // 应用包名
-            versionCode             : 1,                                   // 版本号
+            versionCode             : 1,                                  // 版本号
             versionName             : "1.0",                              // 版本名称
             compileSdkVersion       : 29,
             buildToolsVersion       : "29.0.0",
