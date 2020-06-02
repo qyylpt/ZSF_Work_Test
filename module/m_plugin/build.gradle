@@ -3,7 +3,12 @@ if (rootProject.ext.isBate) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'com.zsf.plugin'
+
+// 项目根目录自定义插件 TEST
+apply from: '../../plugin/CustomizePluginGradle/customize.gradle'
+
+// 本地自定义maven插件 （plugin/customize_plugin_one 本地插件工程）
+apply plugin: 'com.zsf.customize_plugin_one'
 
 android {
     compileSdkVersion rootProject.ext.versions.compileSdkVersion
@@ -39,6 +44,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {

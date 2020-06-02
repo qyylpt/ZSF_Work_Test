@@ -1,0 +1,9 @@
+// 自定义插件测试
+
+def customizePlugin(String info){
+    return "我是调用项目根目录下的自定义插件 : info = " + info
+}
+
+println("\n \n =========== 项目根目录自定义插件开始 ============ \n \n")
+println(customizePlugin("我是自定义插件 入参!"))
+println("\n \n =========== 项目根目录自定义插件结束 ============ \n \n ")

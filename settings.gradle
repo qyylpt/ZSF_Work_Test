@@ -2,7 +2,7 @@
 include ':main_app:app'
 
 // 独立功能测试
-include ':test_app:m_test', ':test_app:m_nfc'
+include ':test_app:m_test'
 
 // 基础组件
 include ':common'
@@ -15,7 +15,7 @@ include ':module:m_device_manager', // 设备管理 deviceOwner
         ':module:m_fingerprint_unlock', // 指纹识别
         ':module:m_sms', // 通知栏短信获取
         ':module:m_jetpack', // jetpack 相关(数据库、)
-        ':module:m_plugin'
+        ':module:m_plugin' // 自定义插件测试
 
 // 技术实践
 include ':module:IPC:m_ipc', // IPC
@@ -23,3 +23,8 @@ include ':module:IPC:m_ipc', // IPC
 
 // library
 include ':module:IPC:ipc_core'
+
+// 自定义插件
+include ':plugin:customize_plugin_one'
+
+

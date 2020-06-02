@@ -8,7 +8,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/main_app" />
             <option value="$PROJECT_DIR$/main_app/app" />
@@ -25,8 +24,9 @@
             <option value="$PROJECT_DIR$/module/m_orc" />
             <option value="$PROJECT_DIR$/module/m_plugin" />
             <option value="$PROJECT_DIR$/module/m_sms" />
+            <option value="$PROJECT_DIR$/plugin" />
+            <option value="$PROJECT_DIR$/plugin/customize_plugin_one" />
             <option value="$PROJECT_DIR$/test_app" />
-            <option value="$PROJECT_DIR$/test_app/m_nfc" />
             <option value="$PROJECT_DIR$/test_app/m_test" />
           </set>
         </option>

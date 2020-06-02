@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+group='com.zsf.plugin'
+version='1.0.0'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('/Users/zhangzhang/WorkSpace/Test/ZSF_Work_Test/plugin/CustomPluginOne'))
+        }
+    }
+}
