@@ -2,7 +2,8 @@
 include ':main_app:app'
 
 // 独立功能测试
-include ':test_app:m_test'
+include ':test_app:m_test',
+        ':test_app:m_nfc'
 
 // 基础组件
 include ':common'
@@ -26,5 +27,8 @@ include ':module:IPC:ipc_core'
 
 // 自定义插件
 include ':plugin:customize_plugin_one'
+
+// AOP
+include ':module:AOP:m_aspectj' // AspectJ
 
 
