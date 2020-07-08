@@ -1,3 +1,7 @@
 1.Fragment
   1.1.面对用户大量触发（add/replace或者show/hide都会new 一个新的实例）情况下OOM情况。
   解决方案：ZSF_Work_Test\common\src\main\java\com\zsf\view\fragment
+
+2.在单独编译某一个模块的时候发现有夺哥模块的编译日志
+  https://blog.csdn.net/singwhatiwanna/article/details/78797506
+  这些日志其实是每个模块的配置信息日志

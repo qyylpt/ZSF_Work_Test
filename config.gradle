@@ -47,7 +47,10 @@ ext {
             tess_two               : "9.0.0",
 
             // 权限申请
-            AndPermission          : "2.0.3"
+            AndPermission          : "2.0.3",
+
+            // AspectJ
+            AspectJ                : "1.8.5",
 
 
     ]
@@ -62,32 +65,42 @@ ext {
             "arouter-compiler"      : "com.alibaba:arouter-compiler:${versions["arouter-compiler"]}",
 
             // 黄油刀
-            "butterknife-compiler": "com.jakewharton:butterknife-compiler:${versions["butterknifeVersion"]}",
-            "butterknife"         : "com.jakewharton:butterknife:${versions["butterknifeVersion"]}",
+            "butterknife-compiler"  : "com.jakewharton:butterknife-compiler:${versions["butterknifeVersion"]}",
+            "butterknife"           : "com.jakewharton:butterknife:${versions["butterknifeVersion"]}",
 
             // Android智能下拉刷新框架-SmartRefreshLayout
-            "smartRefreshLayout" : "com.scwang.smartrefresh:SmartRefreshLayout:${versions["SmartRefreshLayout"]}",
-            "smartRefreshHeader" : "com.scwang.smartrefresh:SmartRefreshHeader:${versions["SmartRefreshLayout"]}",
-            "legacy-support-v4"  : "androidx.legacy:legacy-support-v4:${versions["legacy_support_v4"]}",
+            "smartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:${versions["SmartRefreshLayout"]}",
+            "smartRefreshHeader"    : "com.scwang.smartrefresh:SmartRefreshHeader:${versions["SmartRefreshLayout"]}",
+            "legacy-support-v4"     : "androidx.legacy:legacy-support-v4:${versions["legacy_support_v4"]}",
 
             // recycle view
-            "recyclerview"       : "androidx.recyclerview:recyclerview:${versions["RecyclerView"]}",
+            "recyclerview"          : "androidx.recyclerview:recyclerview:${versions["RecyclerView"]}",
 
             //Android各种Util库
-            "utilcodex"          : "com.blankj:utilcodex:${versions["AndroidUtilCode"]}",
+            "utilcodex"             : "com.blankj:utilcodex:${versions["AndroidUtilCode"]}",
 
             // gson库
-            "gson"               : "com.google.code.gson:gson:${versions["gson"]}",
+            "gson"                  : "com.google.code.gson:gson:${versions["gson"]}",
 
             // android p 反射限制 解除
-            "reflection"         : "me.weishu:free_reflection:${versions["reflection"]}",
+            "reflection"            : "me.weishu:free_reflection:${versions["reflection"]}",
 
             // 图片识别
-            "tess_two"           : "com.rmtheis:tess-two:${versions["tess_two"]}",
+            "tess_two"              : "com.rmtheis:tess-two:${versions["tess_two"]}",
 
             // 权限
-            "AndPermission"      : "com.yanzhenjie:permission:${versions["AndPermission"]}"
+            "AndPermission"         : "com.yanzhenjie:permission:${versions["AndPermission"]}",
 
+            // AspectJ
+            "AspectJrt"             : "org.aspectj:aspectjrt:${versions["AspectJ"]}",
+
+    ]
+
+    // classpath
+    _classpath = [
+            // AOP AspectJ
+            "AspectJTools"          : "org.aspectj:aspectjtools:${versions["AspectJ"]}",
+            "AspectJWeaver"         : "org.aspectj:aspectjweaver:${versions["AspectJ"]}"
     ]
 
 }

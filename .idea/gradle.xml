@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/main_app" />
             <option value="$PROJECT_DIR$/main_app/app" />
             <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module/AOP" />
+            <option value="$PROJECT_DIR$/module/AOP/m_aspectj" />
             <option value="$PROJECT_DIR$/module/IPC" />
             <option value="$PROJECT_DIR$/module/IPC/ipc_core" />
             <option value="$PROJECT_DIR$/module/IPC/m_ipc" />
@@ -27,6 +29,7 @@
             <option value="$PROJECT_DIR$/plugin" />
             <option value="$PROJECT_DIR$/plugin/customize_plugin_one" />
             <option value="$PROJECT_DIR$/test_app" />
+            <option value="$PROJECT_DIR$/test_app/m_nfc" />
             <option value="$PROJECT_DIR$/test_app/m_test" />
           </set>
         </option>
