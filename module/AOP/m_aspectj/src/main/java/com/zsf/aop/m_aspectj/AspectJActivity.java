@@ -40,10 +40,15 @@ public class AspectJActivity extends BaseActivity {
         }
     }
 
+<<<<<<< HEAD
     @CustomAnnotation(value = "test", type = 1)
     private void testAspectJ(View v) {
         ZsfLog.d(TAG, "testAspectJ");
 //        String s = null;
 //        s.contains("制造一个异常用于 afterThrowing 捕获");
+=======
+    private void testAspectJ(View v) {
+        ZsfLog.d(TAG, "testAspectJ");
+>>>>>>> 038b10dfdfdffcf55b02cd5c7c4faefb481492e8
     }
 }
