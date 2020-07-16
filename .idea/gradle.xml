@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/module/IPC/m_ipc_server_test" />
             <option value="$PROJECT_DIR$/module/m_auto_start" />
             <option value="$PROJECT_DIR$/module/m_device_manager" />
+            <option value="$PROJECT_DIR$/module/m_device_usb" />
             <option value="$PROJECT_DIR$/module/m_fingerprint_unlock" />
             <option value="$PROJECT_DIR$/module/m_jetpack" />
             <option value="$PROJECT_DIR$/module/m_keep_alive" />
@@ -27,6 +28,8 @@
             <option value="$PROJECT_DIR$/module/m_plugin" />
             <option value="$PROJECT_DIR$/module/m_sms" />
             <option value="$PROJECT_DIR$/plugin" />
+            <option value="$PROJECT_DIR$/plugin/custom_plugin_clear_res" />
+            <option value="$PROJECT_DIR$/plugin/custom_plugin_transform" />
             <option value="$PROJECT_DIR$/plugin/customize_plugin_one" />
             <option value="$PROJECT_DIR$/test_app" />
             <option value="$PROJECT_DIR$/test_app/m_nfc" />

@@ -50,11 +50,7 @@ ext {
             AndPermission          : "2.0.3",
 
             // AspectJ
-<<<<<<< HEAD
             AspectJ                : "1.8.5",
-=======
-            AspectJ                : "1.9.5",
->>>>>>> 038b10dfdfdffcf55b02cd5c7c4faefb481492e8
 
 
     ]

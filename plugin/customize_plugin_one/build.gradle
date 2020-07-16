@@ -17,7 +17,9 @@ version='1.0.0'
 uploadArchives {
     repositories {
         mavenDeployer {
+            // 本地Maven地址
             repository(url: uri('/Users/zhangzhang/WorkSpace/Test/ZSF_Work_Test/plugin/CustomPluginOne'))
         }
     }
 }
+

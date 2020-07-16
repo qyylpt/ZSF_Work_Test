@@ -16,7 +16,8 @@ include ':module:m_device_manager', // 设备管理 deviceOwner
         ':module:m_fingerprint_unlock', // 指纹识别
         ':module:m_sms', // 通知栏短信获取
         ':module:m_jetpack', // jetpack 相关(数据库、)
-        ':module:m_plugin' // 自定义插件测试
+        ':module:m_plugin', // 自定义插件测试
+        ':module:m_device_usb' // 获取手机外部USB设备信息
 
 // 技术实践
 include ':module:IPC:m_ipc', // IPC
@@ -26,7 +27,10 @@ include ':module:IPC:m_ipc', // IPC
 include ':module:IPC:ipc_core'
 
 // 自定义插件
-include ':plugin:customize_plugin_one'
+include ':plugin:customize_plugin_one',
+        ':plugin:custom_plugin_clear_res', // 自定义 清理无用资源文件
+        ':plugin:custom_plugin_transform' // 自定义 transform 插件
+
 
 // AOP
 include ':module:AOP:m_aspectj' // AspectJ

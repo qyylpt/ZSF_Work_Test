@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.zsf.utils.ToastUtils;
 import com.zsf.utils.ZsfLog;
 import com.zsf.view.activity.BaseActivity;
 
@@ -40,15 +41,17 @@ public class AspectJActivity extends BaseActivity {
         }
     }
 
-<<<<<<< HEAD
     @CustomAnnotation(value = "test", type = 1)
     private void testAspectJ(View v) {
+        // 测试静态方法被切入
+        testAspectJ();
         ZsfLog.d(TAG, "testAspectJ");
 //        String s = null;
 //        s.contains("制造一个异常用于 afterThrowing 捕获");
-=======
-    private void testAspectJ(View v) {
-        ZsfLog.d(TAG, "testAspectJ");
->>>>>>> 038b10dfdfdffcf55b02cd5c7c4faefb481492e8
+
+    }
+
+    public static void testAspectJ(){
+        ZsfLog.d(TAG, "testAspectJ -------- static method ");
     }
 }

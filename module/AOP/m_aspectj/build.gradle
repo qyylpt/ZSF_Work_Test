@@ -64,7 +64,6 @@ dependencies {
     implementation rootProject.ext.dependencies["AspectJrt"]
 }
 
-<<<<<<< HEAD
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
@@ -115,6 +114,4 @@ variants.all { variant ->
     }
 }
 
-=======
->>>>>>> 038b10dfdfdffcf55b02cd5c7c4faefb481492e8
 

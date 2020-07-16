@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">m_device_usb</string>
+
+    <!-- module -->
+    <string name="m_device_usb_button_text">获取外置USB设备标识</string>
+    <string name="m_device_usb_button_text_clear">清空</string>
+</resources>
