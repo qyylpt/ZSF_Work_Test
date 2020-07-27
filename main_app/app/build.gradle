@@ -69,6 +69,10 @@ dependencies {
         implementation project(path: ':module:IPC:m_ipc')
         // jetpack
         implementation project(path: ':module:m_jetpack')
+        // OTG usb 设备获取
+        implementation project(path: ':module:m_device_usb')
+        // 悬浮窗
+        implementation project(path: ':module:m_float_window')
     }
 
 

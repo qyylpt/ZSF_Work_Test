@@ -1,0 +1,7 @@
+<resources>
+    <color name="transparent">#00000000</color>
+    <string name="float_window_cancel">取消</string>
+    <string name="float_window_content">可在"手机管家">"权限管理">"悬浮窗"重新开启</string>
+    <string name="float_window_determine">确定</string>
+    <string name="float_window_title">当前无悬浮窗权限</string>
+</resources>

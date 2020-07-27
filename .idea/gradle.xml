@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/module/m_device_manager" />
             <option value="$PROJECT_DIR$/module/m_device_usb" />
             <option value="$PROJECT_DIR$/module/m_fingerprint_unlock" />
+            <option value="$PROJECT_DIR$/module/m_float_window" />
             <option value="$PROJECT_DIR$/module/m_jetpack" />
             <option value="$PROJECT_DIR$/module/m_keep_alive" />
             <option value="$PROJECT_DIR$/module/m_orc" />

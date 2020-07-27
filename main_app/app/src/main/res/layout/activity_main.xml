@@ -72,6 +72,20 @@
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 android:background="@color/C_A6ACAF"
                 android:id="@+id/go_m_sms"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_usb"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_device_usb"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_float_window"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_float_window"/>
 
         </LinearLayout>
 

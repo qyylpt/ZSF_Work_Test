@@ -33,7 +33,10 @@ public class MainActivity extends BaseActivity {
     private Button goMJetpack;
     // sms
     private Button goMSms;
-
+    // otg usb
+    private Button goDeviceUsb;
+    // 悬浮窗
+    private Button goFloatWindow;
     private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,23 +68,28 @@ public class MainActivity extends BaseActivity {
         goMJetpack.setOnClickListener(this);
         goMSms = findViewById(R.id.go_m_sms);
         goMSms.setOnClickListener(this);
+        goDeviceUsb = findViewById(R.id.go_m_device_usb);
+        goDeviceUsb.setOnClickListener(this);
+        goFloatWindow = findViewById(R.id.go_m_float_window);
+        goFloatWindow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.go_m_device_manager){
+        int id = view.getId();
+        if (id == R.id.go_m_device_manager) {
             ARouter.getInstance()
                     .build("/m_device_manager/DeviceManagerActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_auto_start){
+        } else if (id == R.id.go_m_auto_start) {
             ARouter.getInstance()
                     .build("/m_auto_start/TransparentActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_keep_alive){
+        } else if (id == R.id.go_m_keep_alive){
             ARouter.getInstance()
                     .build("/m_keep_alive/KeepAliveMainActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_orc){
+        } else if (id == R.id.go_m_orc) {
             try {
                 textView.setText("111");
             } catch (NullPointerException e){
@@ -92,21 +100,29 @@ public class MainActivity extends BaseActivity {
             ARouter.getInstance()
                     .build("/m_orc/ORCMainActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_fingerprint_unlock){
+        } else if (id == R.id.go_m_fingerprint_unlock) {
             ARouter.getInstance()
                     .build("/m_fingerprint_unlock/FingerprintActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_ipc){
+        } else if (id == R.id.go_m_ipc) {
             ARouter.getInstance()
                     .build("/m_ipc/IPCActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_jetpack){
+        } else if (id == R.id.go_m_jetpack) {
             ARouter.getInstance()
                     .build("/m_jetpack/database/DatabaseActivity")
                     .navigation();
-        } else if (view.getId() == R.id.go_m_sms){
+        } else if (id == R.id.go_m_sms) {
             ARouter.getInstance()
                     .build("/m_sms/SMSActivity")
+                    .navigation();
+        } else if (id == R.id.go_m_device_usb) {
+            ARouter.getInstance()
+                    .build("/m_device_usb/DeviceUsbActivity")
+                    .navigation();
+        } else if (id == R.id.go_m_float_window) {
+            ARouter.getInstance()
+                    .build("/m_float_window/FloatWindowActivity")
                     .navigation();
         }
     }

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         if (rootProject.ext.isBate) {
-            applicationId "com.zsf.m_device_usb"
+            applicationId "com.zsf.m_float_window"
         }
         minSdkVersion rootProject.ext.versions.minSdkVersion
         targetSdkVersion rootProject.ext.versions.targetSdkVersion

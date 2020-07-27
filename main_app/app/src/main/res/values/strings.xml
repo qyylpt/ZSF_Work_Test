@@ -10,4 +10,6 @@
     <string name="module_jetpack">jetpack</string>
     <string name="module_nfc">nfc</string>
     <string name="module_sms">sms</string>
+    <string name="module_usb">OTG USB 设备信息</string>
+    <string name="module_float_window">悬浮窗</string>
 </resources>

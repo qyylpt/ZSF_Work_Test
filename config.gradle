@@ -3,7 +3,7 @@
  */
 ext {
     // 当前运行环境 isBate： false 正式环境; true 测试环境
-    isBate = true
+    isBate = false
 
     // 版本信息控制
     versions = [

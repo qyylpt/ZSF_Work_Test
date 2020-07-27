@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.view.activity.BaseActivity;
 import java.util.HashMap;
 
+@Route(path = "/m_device_usb/DeviceUsbActivity")
 public class DeviceUsbActivity extends BaseActivity implements UsbUtils.UsbAttachedListener {
 
     private Button deviceUsbButton;
