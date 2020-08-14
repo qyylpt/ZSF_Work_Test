@@ -86,6 +86,13 @@
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 android:background="@color/C_A6ACAF"
                 android:id="@+id/go_m_float_window"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/module_algorithm"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="@color/C_A6ACAF"
+                android:id="@+id/go_m_algorithm"/>
 
         </LinearLayout>
 

@@ -1,0 +1,12 @@
+<resources>
+    <string name="m_algorithm_2tree">二叉树</string>
+    <string name="m_algorithm_2tree_before">二叉树前序</string>
+    <string name="m_algorithm_2tree_in">二叉树中序</string>
+    <string name="m_algorithm_2tree_Rear">二叉树后序</string>
+    <string name="m_algorithm_clear">清除</string>
+    <string name="m_algorithm_create_tree">创建二叉树</string>
+    <string name="m_algorithm_2tree_node_count">节点个数</string>
+
+    <string name="m_algorithm_sort">排序</string>
+    <string name="m_algorithm_sort_bubble">冒泡</string>
+</resources>

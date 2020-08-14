@@ -10,4 +10,5 @@
     <color name="transparent">#00000000</color>
     <color name="C_F5F5F5">#F5F5F5</color>
     <color name="C_DCDCDC">#DCDCDC</color>
+    <color name="C_BLACK">#000000</color>
 </resources>
