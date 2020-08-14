@@ -17,27 +17,64 @@ import com.zsf.view.activity.BaseActivity;
  */
 public class MainActivity extends BaseActivity {
 
-    // 设别管理器
+    /**
+     * 设别管理器
+     */
     private Button goMDeviceManager;
-    // 自动启动Activity
+
+    /**
+     * 自动启动Activity
+     */
     private Button goMAutoStart;
-    // 保活
+
+    /**
+     * 保活
+     */
     private Button goMKeepAlive;
-    // 图文识别
+
+    /**
+     * 图文识别
+     */
     private Button goMOrc;
-    // 指纹解锁
+
+    /**
+     * 指纹解锁
+     */
     private Button goMFingerprintUnlock;
-    // ipc
+
+    /**
+     * ipc
+     */
     private Button goMIPC;
-    // jetpack
+
+    /**
+     * jetpack
+     */
     private Button goMJetpack;
-    // sms
+
+    /**
+     * sms
+     */
     private Button goMSms;
-    // otg usb
+
+    /**
+     * otg usb
+     */
     private Button goDeviceUsb;
-    // 悬浮窗
+
+
+    /**
+     * 悬浮窗
+     */
     private Button goFloatWindow;
+
+    /**
+     * 算法
+     */
+    private Button goMAlgorithm;
+
     private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +109,8 @@ public class MainActivity extends BaseActivity {
         goDeviceUsb.setOnClickListener(this);
         goFloatWindow = findViewById(R.id.go_m_float_window);
         goFloatWindow.setOnClickListener(this);
+        goMAlgorithm = findViewById(R.id.go_m_algorithm);
+        goMAlgorithm.setOnClickListener(this);
     }
 
     @Override
@@ -123,6 +162,10 @@ public class MainActivity extends BaseActivity {
         } else if (id == R.id.go_m_float_window) {
             ARouter.getInstance()
                     .build("/m_float_window/FloatWindowActivity")
+                    .navigation();
+        } else if (id == R.id.go_m_algorithm) {
+            ARouter.getInstance()
+                    .build("/m_algorithm/AlgorithmActivity")
                     .navigation();
         }
     }

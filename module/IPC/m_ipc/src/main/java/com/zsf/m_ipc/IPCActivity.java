@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.zsf.m_ipc.IMyComplexDataAidlInterface;
+import com.zsf.m_ipc.IMyBasicDataAidlInterface;
 
 
 @Route(path = "/m_ipc/IPCActivity")
@@ -57,7 +59,7 @@ public class IPCActivity extends BaseActivity {
     private Button mIPCButtonComplexMap;
     private Button mIPCButtonComplexObjectInout;
     private ServiceConnection serviceConnectionComplex;
-    private com.zsf.m_ipc.IMyComplexDataAidlInterface iMyComplexDataAidlInterface;
+    private IMyComplexDataAidlInterface iMyComplexDataAidlInterface;
     Intent intentComplex = new Intent();
 
     /**
@@ -102,7 +104,7 @@ public class IPCActivity extends BaseActivity {
         serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                iMyAidlInterface = com.zsf.m_ipc.IMyBasicDataAidlInterface.Stub.asInterface(service);
+                iMyAidlInterface = IMyBasicDataAidlInterface.Stub.asInterface(service);
                 setResultText("简单数据: 服务绑定成功!");
             }
 
@@ -136,7 +138,7 @@ public class IPCActivity extends BaseActivity {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 setResultText("复杂数据: 服务绑定成功!");
-                iMyComplexDataAidlInterface = com.zsf.m_ipc.IMyComplexDataAidlInterface.Stub.asInterface(service);
+                iMyComplexDataAidlInterface = IMyComplexDataAidlInterface.Stub.asInterface(service);
             }
 
             @Override
@@ -387,10 +389,11 @@ public class IPCActivity extends BaseActivity {
                 SimpleDateFormat alldate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");//获取日期时间
                 mIPCTextViewShowResult.append("\n" + alldate.format(new Date()) + "   " + result);
                 int scrollAmount = mIPCTextViewShowResult.getLayout().getLineTop(mIPCTextViewShowResult.getLineCount()) - mIPCTextViewShowResult.getHeight();
-                if (scrollAmount > 0)
+                if (scrollAmount > 0) {
                     mIPCTextViewShowResult.scrollTo(0, scrollAmount);
-                else
+                } else {
                     mIPCTextViewShowResult.scrollTo(0, 0);
+                }
             }
         });
     }

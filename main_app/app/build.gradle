@@ -73,6 +73,8 @@ dependencies {
         implementation project(path: ':module:m_device_usb')
         // 悬浮窗
         implementation project(path: ':module:m_float_window')
+        // 算法
+        implementation project(path: ':module:m_algorithm')
     }
 
 

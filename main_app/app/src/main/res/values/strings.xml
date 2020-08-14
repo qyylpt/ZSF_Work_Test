@@ -12,4 +12,5 @@
     <string name="module_sms">sms</string>
     <string name="module_usb">OTG USB 设备信息</string>
     <string name="module_float_window">悬浮窗</string>
+    <string name="module_algorithm">算法</string>
 </resources>

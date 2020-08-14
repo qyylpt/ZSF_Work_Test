@@ -24,6 +24,7 @@ public class MyInstrumentation extends Instrumentation {
 
 
     public static void restartApp(Context context){
+        ToastUtils.showToast(context, android.os.Build.MODEL);
 //        try {
 //            Runtime.getRuntime().exec("am instrument -w com.zsf.m_test/com.zsf.test.branch.test.MyInstrumentation");
 //        } catch (IOException e) {

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlgorithmActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_20_dp"
+        android:orientation="vertical"
+        android:id="@+id/m_algorithm_2tree"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/C_BLACK">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_25_dp"
+                android:text="@string/m_algorithm_2tree"
+                android:layout_margin="@dimen/dimen_1_dp"
+                android:background="@color/C_FFFFFF"
+                android:textColor="@color/C_BLACK"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_2tree_before"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_2tree_before"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_2tree_in"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_2tree_in"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_2tree_Rear"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_2tree_Rear"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_create_tree"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_create_2tree"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_2tree_node_count"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_2tree_node_count"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+<!--                <Button-->
+<!--                    android:layout_width="@dimen/dimen_0_dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/dimen_1_dp"-->
+<!--                    android:text="@string/m_algorithm_2tree_in"-->
+<!--                    android:background="@color/C_444444"-->
+<!--                    android:id="@+id/m_algorithm_2tree_in"-->
+<!--                    android:textColor="@color/C_FFFFFF"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <Button-->
+<!--                    android:layout_width="@dimen/dimen_0_dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/dimen_1_dp"-->
+<!--                    android:text="@string/m_algorithm_2tree_Rear"-->
+<!--                    android:background="@color/C_444444"-->
+<!--                    android:id="@+id/m_algorithm_2tree_Rear"-->
+<!--                    android:textColor="@color/C_FFFFFF"-->
+<!--                    android:layout_weight="1" />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_20_dp"
+        android:orientation="vertical"
+        android:id="@+id/Sort"
+        app:layout_constraintTop_toBottomOf="@+id/m_algorithm_2tree">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/C_BLACK">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_25_dp"
+                android:text="@string/m_algorithm_sort"
+                android:layout_margin="@dimen/dimen_1_dp"
+                android:background="@color/C_FFFFFF"
+                android:textColor="@color/C_BLACK"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_sort_bubble"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_bubble"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_sort_fast_pit"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_sort_fast_pit"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_sort_fast_pointer"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_sort_fast_pointer"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_20_dp"
+        android:orientation="vertical"
+        android:id="@+id/arr"
+        app:layout_constraintTop_toBottomOf="@+id/Sort">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/C_BLACK">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_25_dp"
+                android:text="@string/m_algorithm_arr"
+                android:layout_margin="@dimen/dimen_1_dp"
+                android:background="@color/C_FFFFFF"
+                android:textColor="@color/C_BLACK"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_arr_Intersection"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_arr_Intersection"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_arr_public_prefix"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_arr_public_prefix"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_arr_sale_time"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_arr_sale_time"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_200_dp"
+        android:background="@color/C_DCDCDC"
+        android:id="@+id/m_algorithm_text"
+        android:padding="@dimen/dimen_20_dp"
+        android:layout_marginLeft="@dimen/dimen_20_dp"
+        android:layout_marginRight="@dimen/dimen_20_dp"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        app:layout_constraintBottom_toTopOf="@+id/m_algorithm_clear"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_30_dp"
+        android:id="@+id/m_algorithm_clear"
+        android:text="@string/m_algorithm_clear"
+        android:textColor="@color/C_FFFFFF"
+        android:background="@color/C_444444"
+        android:layout_marginLeft="@dimen/dimen_20_dp"
+        android:layout_marginRight="@dimen/dimen_20_dp"
+        android:layout_marginBottom="@dimen/dimen_20_dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
