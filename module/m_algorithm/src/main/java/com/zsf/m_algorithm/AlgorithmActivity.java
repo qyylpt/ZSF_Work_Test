@@ -162,8 +162,8 @@ public class AlgorithmActivity extends BaseActivity {
         algorithmLog.post(new Runnable() {
             @Override
             public void run() {
-                SimpleDateFormat allDate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");//获取日期时间
-                algorithmLog.append("\n" + allDate.format(new Date()) + "   " + result);
+                SimpleDateFormat alldate = new SimpleDateFormat("yy/MM/dd HH:mm:ss");//获取日期时间
+                algorithmLog.append("\n" + alldate.format(new Date()) + "   " + result);
                 int scrollAmount = algorithmLog.getLayout().getLineTop(algorithmLog.getLineCount()) - algorithmLog.getHeight();
                 if (scrollAmount > 0) {
                     algorithmLog.scrollTo(0, scrollAmount + 100);

@@ -42,6 +42,8 @@ public class SortDisplay {
     public String sortBubble() {
         boolean flag = false;
         StringBuilder stringBuilder = new StringBuilder();
+//        sort = new int[]{7, 9, 3, 4, 8, 5, 6, 1, 2};
+        sort = new int[]{1,2,3,4,5,6,7,8,9};
         stringBuilder.append("原始数据: " + Arrays.toString(sort) + "\n");
         for (int i = 0; i < sort.length; i++) {
 
@@ -54,6 +56,7 @@ public class SortDisplay {
                 }
             }
             // 如果原始数据本来就是有序的,flag值将不会改变
+
             if (!flag) {
                 ZsfLog.d(SortDisplay.class, "111");
                 break;
@@ -224,4 +227,5 @@ public class SortDisplay {
         }
         ZsfLog.d(SortDisplay.class, stringBuilder.toString());
     }
+
 }
