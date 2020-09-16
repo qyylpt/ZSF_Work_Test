@@ -15,3 +15,4 @@ ARouter路由： https://github.com/alibaba/ARouter/blob/master/README_CN.md
 全局异常捕获（避免应用闪退）：https://github.com/android-notes/Cockroach
 JobScheduler :https://www.jianshu.com/p/9fb882cae239
 gradle配置参考：https://mp.weixin.qq.com/s?__biz=MzA4NDM2MjAwNw==&mid=2650579285&idx=1&sn=7a01f29f4e3fa3c8e609f51644f92f8d&chksm=87e0572db097de3b1b03fe02c3b6d1df27e3ee9ab48dcd1daefd120efe7d556cff5f23a313fe&xtrack=1&scene=0&subscene=131&clicktime=1554299417&ascene=7&devicetype=android-23&version=270003e9&nettype=ctnet&abtest_cookie=BAABAAoACwASABMABQAmlx4AVpkeAL%2BZHgDUmR4A3JkeAAAA&lang=zh_CN&pass_ticket=dbS7yadptmz%2BiLIQRX52rtoR3TOGMJcPdcTGBwCSGc4%3D&wx_header=1
+滴滴移动开发组件: https://github.com/didi/DoraemonKit/blob/master/README_CN.md

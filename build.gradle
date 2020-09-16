@@ -28,6 +28,8 @@ buildscript {
          * ============================= 本地自定义插件 end ==================================
          */
     }
+
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -48,6 +50,9 @@ buildscript {
         // AspectJ
         classpath rootProject.ext._classpath["AspectJTools"]
         classpath rootProject.ext._classpath['AspectJWeaver']
+
+        // 滴滴移动开发插件
+        classpath rootProject.ext._classpath["doraemonkit-plugin"]
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

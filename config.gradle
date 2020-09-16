@@ -13,7 +13,7 @@ ext {
             versionName             : "1.0",                              // 版本名称
             compileSdkVersion       : 29,
             buildToolsVersion       : "29.0.0",
-            minSdkVersion           : 15,
+            minSdkVersion           : 21,
             targetSdkVersion        : 28,
 
             javaSDKVersion          : 1.7,//javaSDK版本
@@ -51,6 +51,9 @@ ext {
 
             // AspectJ
             AspectJ                : "1.8.5",
+
+            // 滴滴移动研发助手
+            DoKit                  : "3.2.0",
 
 
     ]
@@ -94,13 +97,25 @@ ext {
             // AspectJ
             "AspectJrt"             : "org.aspectj:aspectjrt:${versions["AspectJ"]}",
 
+            // 滴滴移动研发助手
+            "doraemonkit"           : "com.didichuxing.doraemonkit:doraemonkit:${versions["DoKit"]}",
+            "doraemonkit-no-op"     : "com.didichuxing.doraemonkit:doraemonkit-no-op:${versions["DoKit"]}",
+            // 如果有需要支持Weex的需求可以直接添加下面依赖
+            "doraemonkit-weex"      : "com.didichuxing.doraemonkit:doraemonkit-weex:${versions["DoKit"]}",
+            // 如果有需要集成 LeakCanary 的需求可以直接添加下面依赖
+            "doraemonkit-leakcanary": "com.didichuxing.doraemonkit:doraemonkit-leakcanary:${versions["DoKit"]}"
+
     ]
 
     // classpath
     _classpath = [
             // AOP AspectJ
             "AspectJTools"          : "org.aspectj:aspectjtools:${versions["AspectJ"]}",
-            "AspectJWeaver"         : "org.aspectj:aspectjweaver:${versions["AspectJ"]}"
+            "AspectJWeaver"         : "org.aspectj:aspectjweaver:${versions["AspectJ"]}",
+
+            // 流量监控以及其他AOP功能（可选）
+            // AOP包括以下几个功能: 1)百度、腾讯、高德地图的经纬度模拟 2)UrlConnection、Okhttp 抓包以及后续的接口hook功能 3)App 启动耗时统计 4)慢函数 5)大图
+            "doraemonkit-plugin"    : "com.didichuxing.doraemonkit:doraemonkit-plugin:${versions["DoKit"]}",
     ]
 
 }

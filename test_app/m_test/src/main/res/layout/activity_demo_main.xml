@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -64,6 +65,15 @@
                 android:text="@string/m_test"
                 android:layout_marginTop="@dimen/dimen_10_dp" />
 
+            <com.zsf.test.branch.animation.SpinCircleView
+                android:layout_width="@dimen/dimen_300_dp"
+                android:layout_height="@dimen/dimen_300_dp"
+                app:radius="5dp"
+                app:density="10"
+                app:point_color="@color/C_0f0"
+                app:move_point_color="@color/colorAccent"
+                app:move_point_speed="2000"
+                />
 
         </LinearLayout>
     </ScrollView>

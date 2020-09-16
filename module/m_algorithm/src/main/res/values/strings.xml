@@ -17,4 +17,7 @@
     <string name="m_algorithm_arr_Intersection">数组交集</string>
     <string name="m_algorithm_arr_public_prefix">数组公共最长前缀</string>
     <string name="m_algorithm_arr_sale_time">股票最佳买卖时机</string>
+    <string name="m_algorithm_arr_spin">翻转</string>
+    <string name="m_algorithm_arr_in_situ_delete">原地删除</string>
+    <string name="m_algorithm_arr_add_one">加一</string>
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SpinCircleView">
+        <attr name="radius" format="dimension" />
+        <attr name="density" format="integer" />
+        <attr name="point_color" format="color"/>
+        <attr name="move_point_color" format="color"/>
+        <attr name="move_point_speed" format="integer"/>
+    </declare-styleable>
+</resources>

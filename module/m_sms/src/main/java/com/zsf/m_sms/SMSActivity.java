@@ -35,6 +35,8 @@ import com.zsf.global.GlobalData;
 import com.zsf.utils.ToastUtils;
 import com.zsf.utils.ZsfLog;
 import com.zsf.view.activity.BaseActivity;
+
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,27 +129,7 @@ public class SMSActivity extends BaseActivity implements OnRefreshListener {
         // 注册短信接收广播
 //        GlobalData.getContext().registerReceiver(broadcastReceiver, new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION));
         // 注册通知广播
-        LocalBroadcastManager.getInstance(GlobalData.getContext()).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (isClick){
-                    smsList.clear();
-                    isClick = false;
-                }
-                String smsStatus = "";
-                if (getCountsms() > countSms){
-                    smsStatus = "数据库中可以获取到新收到信息, 不需要上报";
-                } else {
-                    smsStatus = "数据库中不可以获取到新收到信息, 需要上报";
-                }
-                setCacheCountSms();
-                Bundle smsBundle = intent.getExtras();
-                SMS sms = (SMS) smsBundle.get("notification_msg");
-                smsList.add(new SMS("发件人：" + sms.getSmsAddress(), "时    间：" + timeStamp2Date(sms.getSmsSendTime(), null), sms.getSmsContent(), smsStatus));
-                smsAdapter.setData(smsList, false);
-                smsAdapter.notifyDataSetChanged();
-            }
-        }, new IntentFilter("notification_sms"));
+        LocalBroadcastManager.getInstance(GlobalData.getContext()).registerReceiver(new LocalBroadcastManagerSMS(this), new IntentFilter("notification_sms"));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewList.setLayoutManager(linearLayoutManager);
         recyclerViewList.setAdapter(smsAdapter);
@@ -305,5 +287,37 @@ public class SMSActivity extends BaseActivity implements OnRefreshListener {
         cursor.close();
         phoneCursor.close();
         return phoneBuffer.toString();
+    }
+
+    private static class LocalBroadcastManagerSMS extends BroadcastReceiver{
+
+        private WeakReference<SMSActivity> smsActivityWeakReference;
+
+        public LocalBroadcastManagerSMS(SMSActivity smsActivity) {
+            smsActivityWeakReference = new WeakReference<>(smsActivity);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SMSActivity smsActivity = smsActivityWeakReference.get();
+            if (smsActivity != null) {
+                if (smsActivity.isClick){
+                    smsActivity.smsList.clear();
+                    smsActivity.isClick = false;
+                }
+                String smsStatus = "";
+                if (smsActivity.getCountsms() > smsActivity.countSms){
+                    smsStatus = "数据库中可以获取到新收到信息, 不需要上报";
+                } else {
+                    smsStatus = "数据库中不可以获取到新收到信息, 需要上报";
+                }
+                smsActivity.setCacheCountSms();
+                Bundle smsBundle = intent.getExtras();
+                SMS sms = (SMS) smsBundle.get("notification_msg");
+                smsActivity.smsList.add(new SMS("发件人：" + sms.getSmsAddress(), "时    间：" + timeStamp2Date(sms.getSmsSendTime(), null), sms.getSmsContent(), smsStatus));
+                smsActivity.smsAdapter.setData(smsActivity.smsList, false);
+                smsActivity.smsAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }

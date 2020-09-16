@@ -1,7 +1,6 @@
 package com.zsf.m_suspended_window;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -22,9 +21,7 @@ import java.lang.reflect.Method;
  * @Author: zsf
  * @Date: 2020-07-21 10:23
  */
-public class WindowController implements View.OnTouchListener, View.OnClickListener {
-
-    private static WindowController windowController;
+public class FloatWindow implements View.OnTouchListener, View.OnClickListener {
 
     private WindowManager windowManager;
 
@@ -43,53 +40,38 @@ public class WindowController implements View.OnTouchListener, View.OnClickListe
      */
     private ClickFloatWindowListener clickFloatWindowListener;
 
-    /**
-     * 悬浮窗显示标记 true : 显示  false : 不显示
-     */
-    private boolean isShow;
-
-    private WindowController(){
-    }
-
-    private static final Singleton<WindowController> SINGLETON = new Singleton<WindowController>() {
-        @Override
-        protected WindowController create() {
-            return new WindowController();
-        }
-    };
-
-    public static WindowController getInstance(){
-        windowController = SINGLETON.get();
-        return windowController;
-    }
-
-    /**
-     * 初始化
-     * @param context 因为这里包含了dialog需要依附于activity
-     * @param clickFloatWindowListener 点击悬浮窗回调
-     * @param isShow true : 显示, false : 不显示
-     */
-    public void init(Context context, ClickFloatWindowListener clickFloatWindowListener, boolean isShow) {
-        this.isShow = isShow;
-        if (!isShow){
-            return;
-        }
+    public FloatWindow(Context context) {
         this.mContext = context;
+    }
+
+    /**
+     * 设置悬浮窗点击事件
+     *
+     * @param clickFloatWindowListener
+     */
+    public void setClickFloatWindowListener(ClickFloatWindowListener clickFloatWindowListener) {
         this.clickFloatWindowListener = clickFloatWindowListener;
+    }
+
+    /**
+     * 自定义悬浮窗内容,默认 {@link DefaultWindowContentView}.
+     *
+     * @param view
+     */
+    public void setWindowContentView(WindowContentView view) {
+        windowContentView = view;
     }
 
     /**
      * 打开悬浮窗
      */
-    @SuppressLint("ClickableViewAccessibility")
-    private void createWindow() {
-        if (!isShow) {
-            return;
-        }
+    public View createWindow() {
         if (!canDrawOverlayViews()) {
-            return;
+            return null;
         }
-        windowContentView = new WindowContentView(mContext);
+        if (windowContentView == null) {
+            windowContentView = new DefaultWindowContentView(mContext);
+        }
         windowContentView.setOnTouchListener(this);
         windowContentView.setOnClickListener(this);
         windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -119,6 +101,7 @@ public class WindowController implements View.OnTouchListener, View.OnClickListe
             //将View添加到屏幕上
             windowManager.addView(windowContentView, layoutParams);
         }
+        return windowContentView;
     }
 
     /**
@@ -134,9 +117,6 @@ public class WindowController implements View.OnTouchListener, View.OnClickListe
      * 销毁悬浮窗
      */
     public void destroyWindow() {
-        if (!isShow){
-            return;
-        }
         if (windowManager != null && windowContentView != null) {
             windowManager.removeView(windowContentView);
             windowContentView = null;
@@ -151,9 +131,6 @@ public class WindowController implements View.OnTouchListener, View.OnClickListe
      * 隐藏悬浮窗
      */
     public void hiddenWindow(){
-        if (!isShow){
-            return;
-        }
         if (windowContentView != null){
             windowContentView.setVisibility(View.GONE);
         }
@@ -163,17 +140,8 @@ public class WindowController implements View.OnTouchListener, View.OnClickListe
      * 显示悬浮窗
      */
     public void showWindow() {
-        if (!isShow){
-            return;
-        }
         if (windowContentView != null) {
             windowContentView.setVisibility(View.VISIBLE);
-        } else {
-            try {
-                createWindow();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -245,7 +213,9 @@ public class WindowController implements View.OnTouchListener, View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        this.clickFloatWindowListener.onClick(v);
+        if (this.clickFloatWindowListener != null) {
+            this.clickFloatWindowListener.onClick(v);
+        }
     }
 
     /**

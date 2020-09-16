@@ -1,6 +1,8 @@
 package com.zsf.m_algorithm.question;
 
 import com.zsf.utils.Singleton;
+
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,6 +29,9 @@ public class AlgorithmQuestion {
 
     /**
      * 查找无序数组交集数据
+     * 提示: 1.把一个数组值为键, 1 为键放入一个map中
+     *      2.遍历另外一个数组如果map包含这个key,将value加1
+     *      3,遍历map中所有value大于 1 的元素,既可以得到所有交集元素及出现次数。
      *
      * @return
      */
@@ -72,6 +77,11 @@ public class AlgorithmQuestion {
     /**
      * 查找有序数组交集
      * 提示: 双指针交换法
+     *      1.选择短的数组为基准数组
+     *      2.遍历两个数组
+     *      3.对比数组元素,如果元素小于另外一个数组元素,指针往后移动一位继续对比
+     *      4.如果数组元素相等,修改标记位元素。
+     *      5.截取 0 - 标记位 元素为有序数组交集
      *
      * @return
      */
@@ -136,5 +146,87 @@ public class AlgorithmQuestion {
         stringBuilder.append("公共前缀 : " + prefix);
         return stringBuilder.toString();
     }
+
+
+    /**
+     * 获取股票最大利益
+     * 提示: 寻找 (符合 k < k + 1 条件) 购买点 k;
+     *      寻找 (符合 k > k + 1 条件) 卖出点 k;
+     *
+     * @return
+     */
+    public String stockBestInterest() {
+        // 初始化数据
+//        int[] arrStock = {7, 2, 4, 4, 3, 7};
+
+        int[] arrStock = {1, 4, 10, 3, 3, 2, 7};
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("原始数据 : " + Arrays.toString(arrStock) + "\n");
+
+        // 买卖初始值
+        int buy = arrStock[0];
+        int sell = 0;
+
+        int maxInterest = 0;
+        stringBuilder.append("初始购买点 : " + buy + "\n");
+        for (int i = 1; i < arrStock.length; i++) {
+            if (arrStock[i] > buy){
+                if (i == arrStock.length -1) {
+                    stringBuilder.append("卖点 : " + arrStock[i] + "\n");
+                    maxInterest += arrStock[i] - buy;
+                    break;
+                }
+                if (arrStock[i] > arrStock[i + 1]) {
+                    maxInterest += arrStock[i] - buy;
+                    stringBuilder.append("卖点 : " + arrStock[i] + "\n");
+                    buy = arrStock[i+1];
+                    stringBuilder.append("购买点 : " + buy + "\n");
+                }
+            } else if (arrStock[i] < buy){
+                buy = arrStock[i];
+                stringBuilder.append("购买点 : " + buy + "\n");
+            }
+        }
+
+        stringBuilder.append("股票最大收益 : " + maxInterest);
+
+        return stringBuilder.toString();
+    }
+
+
+    /**
+     * 数组翻转
+     *
+     * 例如: {1,2,3,4,5,6,7,8}  k = 3 预期结果: {6,7,8,1,2,3,4,5}
+     * 1.翻转整个数组结果: {8,7,6,5,4,3,2,1}
+     * 2.根据K值把数组分为三段 8,7,6 | 5,4,3,2,1 两段,分别翻转。
+     *
+     * @return
+     */
+    public String arrSpin() {
+        // 初始化数据
+        int[] arrSpin = {1, 2, 3, 4, 5, 6, 7, 8};
+        int k = 3;
+        int length = arrSpin.length;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("原始数据 : "  + Arrays.toString(arrSpin) + "k = " + 3 + "\n");
+
+        // 翻转整个数组
+        int index = length / 2;
+        for (int i = 0; i < index; i++) {
+            int tmp = arrSpin[i];
+            arrSpin[i] = arrSpin[length - 1 - i];
+            arrSpin[length - 1 - i] = tmp;
+        }
+        stringBuilder.append("翻转之后 : " + Arrays.toString(arrSpin) + "\n");
+
+
+
+        return stringBuilder.toString();
+
+    }
+
 
 }

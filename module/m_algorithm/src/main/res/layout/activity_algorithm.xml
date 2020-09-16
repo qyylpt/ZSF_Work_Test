@@ -239,6 +239,41 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30_dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_arr_spin"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_arr_spin"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_arr_in_situ_delete"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_arr_in_situ_delete"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+                <Button
+                    android:layout_width="@dimen/dimen_0_dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_1_dp"
+                    android:text="@string/m_algorithm_arr_add_one"
+                    android:background="@color/C_444444"
+                    android:id="@+id/m_algorithm_arr_add_one"
+                    android:textColor="@color/C_FFFFFF"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

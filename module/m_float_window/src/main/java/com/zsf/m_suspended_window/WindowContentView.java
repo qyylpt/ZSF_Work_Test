@@ -2,25 +2,15 @@ package com.zsf.m_suspended_window;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.ImageView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
- * @Author: zsf
- * @Date: 2020-07-21 10:38
+ * @author zsf
+ * @date 2020/9/15 10:55 AM
+ * @use  悬浮窗自定义移动方式
  */
-class WindowContentView extends ConstraintLayout {
-
-    private ImageView imageViewBackgroundLeft;
-
-    private ImageView imageViewBackgroundRight;
-
-    private ImageView imageViewBackgroundMove;
-
-    public ImageView imageViewOpen;
-
+public abstract class WindowContentView extends ConstraintLayout {
 
     public WindowContentView(Context context) {
         super(context);
@@ -37,32 +27,12 @@ class WindowContentView extends ConstraintLayout {
         init(context);
     }
 
-    private void init(final Context context) {
-        LayoutInflater.from(context).inflate(R.layout.window_content_view_layout, this, true);
-        imageViewBackgroundLeft = findViewById(R.id.window_left);
-        imageViewBackgroundRight = findViewById(R.id.window_right);
-        imageViewOpen = findViewById(R.id.window_open);
-        imageViewBackgroundMove = findViewById(R.id.window_move);
-    }
+    public abstract void init(Context context);
 
-    public void showLeft(){
-        imageViewBackgroundRight.setVisibility(GONE);
-        imageViewBackgroundMove.setVisibility(GONE);
-        imageViewBackgroundLeft.setVisibility(VISIBLE);
-    }
+    public abstract void showLeft();
 
-    public void showRight(){
-        imageViewBackgroundLeft.setVisibility(GONE);
-        imageViewBackgroundMove.setVisibility(GONE);
-        imageViewBackgroundRight.setVisibility(VISIBLE);
-    }
+    public abstract void showRight();
 
-    public void doMove(){
-        imageViewBackgroundLeft.setVisibility(GONE);
-        imageViewBackgroundRight.setVisibility(GONE);
-        imageViewBackgroundMove.setVisibility(VISIBLE);
-    }
-
-
+    public abstract void doMove();
 
 }

@@ -79,6 +79,13 @@ dependencies {
     // 权限申请
     api rootProject.ext.dependencies["AndPermission"]
 
+    // 滴滴移动开发助手
+//    debugImplementation rootProject.ext.dependencies["doraemonkit"]
+//    releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]
+//    debugImplementation rootProject.ext.dependencies["doraemonkit-weex"]
+//    debugImplementation rootProject.ext.dependencies["doraemonkit-leakcanary"]
+
+
 //    testImplementation 'junit:junit:4.12'
 //    androidTestImplementation 'androidx.test:runner:1.2.0'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

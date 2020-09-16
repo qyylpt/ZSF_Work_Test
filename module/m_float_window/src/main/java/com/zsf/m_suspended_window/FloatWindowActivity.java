@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.global.GlobalData;
@@ -22,21 +23,24 @@ public class FloatWindowActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
 
-    /**
-     * 屏幕关闭 标记(关闭屏幕设置标记,在恢复onResume时弹出根目录之上元素. 避免在Activity在无效生命周期中更新fragment造成的状态丢失)
-     */
-    private boolean screenOffSign = false;
+
+    private FloatWindow floatWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suspended_window);
-        WindowController.getInstance().init(this, new WindowController.ClickFloatWindowListener() {
+        floatWindow = new FloatWindow(FloatWindowActivity.this);
+        floatWindow.setClickFloatWindowListener(new FloatWindow.ClickFloatWindowListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.showToast(GlobalData.getContext(),"您点击了悬浮窗!!!");
+                Toast.makeText(FloatWindowActivity.this, "onClick", Toast.LENGTH_SHORT).show();
             }
-        },true);
+        });
+        DefaultWindowContentView defaultWindowContentView = new DefaultWindowContentView(FloatWindowActivity.this);
+        floatWindow.setWindowContentView(defaultWindowContentView);
+        floatWindow.createWindow();
+        floatWindow.showWindow();
         if (alertDialog == null) {
             createDialog();
         }
@@ -45,11 +49,10 @@ public class FloatWindowActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!WindowController.getInstance().canDrawOverlayViews()) {
+        if (!floatWindow.canDrawOverlayViews()) {
             alertDialog.show();
         } else {
-
-            WindowController.getInstance().showWindow();
+            floatWindow.showWindow();
         }
 
     }
@@ -57,6 +60,9 @@ public class FloatWindowActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if (floatWindow != null){
+            floatWindow.hiddenWindow();
+        }
     }
 
 
@@ -68,7 +74,9 @@ public class FloatWindowActivity extends AppCompatActivity {
             alertDialog.dismiss();
             alertDialog = null;
         }
-        WindowController.getInstance().hiddenWindow();
+        if (floatWindow != null) {
+            floatWindow.destroyWindow();
+        }
     }
 
     private void createDialog() {
@@ -80,7 +88,7 @@ public class FloatWindowActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.float_window_determine, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            WindowController.getInstance().requestOverlayDrawPermission();
+                            floatWindow.requestOverlayDrawPermission();
                             alertDialog.dismiss();
                         }
                     })

@@ -75,6 +75,21 @@ public class AlgorithmActivity extends BaseActivity {
     private Button algorithmArrSaleTime;
 
     /**
+     * 数组翻转
+     */
+    private Button algorithmArrSpin;
+
+    /**
+     * 原地删除
+     */
+    private Button algorithmArrInSituDelete;
+
+    /**
+     * 加一
+     */
+    private Button algorithmArrAddOne;
+
+    /**
      * 清除按钮
      */
     private Button algorithmClear;
@@ -117,6 +132,12 @@ public class AlgorithmActivity extends BaseActivity {
         algorithmArrPublicPrefix.setOnClickListener(this);
         algorithmArrSaleTime = findViewById(R.id.m_algorithm_arr_sale_time);
         algorithmArrSaleTime.setOnClickListener(this);
+        algorithmArrSpin = findViewById(R.id.m_algorithm_arr_spin);
+        algorithmArrSpin.setOnClickListener(this);
+        algorithmArrInSituDelete = findViewById(R.id.m_algorithm_arr_in_situ_delete);
+        algorithmArrInSituDelete.setOnClickListener(this);
+        algorithmArrAddOne = findViewById(R.id.m_algorithm_arr_add_one);
+        algorithmArrAddOne.setOnClickListener(this);
     }
 
     @Override
@@ -149,6 +170,10 @@ public class AlgorithmActivity extends BaseActivity {
             setResultText("【数组交集】: \n" + AlgorithmQuestion.getInstance().arrIntersection());
         } else if (id == R.id.m_algorithm_arr_public_prefix) {
             setResultText("【数组公共前缀】: \n" + AlgorithmQuestion.getInstance().arrPublicPrefix());
+        } else if (id == R.id.m_algorithm_arr_sale_time) {
+            setResultText("【股票最佳买卖时间及收益】: \n" + AlgorithmQuestion.getInstance().stockBestInterest());
+        } else if (id == R.id.m_algorithm_arr_spin) {
+            setResultText("【旋转数组】: \n" );
         }
     }
 
