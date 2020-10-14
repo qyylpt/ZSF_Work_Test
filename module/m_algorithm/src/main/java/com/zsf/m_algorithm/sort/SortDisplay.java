@@ -38,6 +38,11 @@ public class SortDisplay {
 
     /**
      * 冒泡排序
+     * 1. 嵌套遍历
+     *    外层: 记录遍历次数
+     *    内层: 筛选当前数据长度(sort.length - i -1)范围内最大元素(每次遍历都筛选出了一个最大元素,所以后续遍历依次减去已筛选元素).
+     * 2. flag优化
+     *    通过首次内层循环确认当前数据是否四有序,如果有序直接跳出排序遍历。
      */
     public String sortBubble() {
         boolean flag = false;
