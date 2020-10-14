@@ -63,21 +63,25 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button_test"
                 android:text="@string/m_test"
+                android:background="@drawable/zzy_smb_login_button_selector"
                 android:layout_marginTop="@dimen/dimen_10_dp" />
-
-            <com.zsf.test.branch.animation.SpinCircleView
-                android:layout_width="@dimen/dimen_300_dp"
-                android:layout_height="@dimen/dimen_300_dp"
-                app:radius="5dp"
-                app:density="10"
-                app:point_color="@color/C_0f0"
-                app:move_point_color="@color/colorAccent"
-                app:move_point_speed="2000"
-                />
 
         </LinearLayout>
     </ScrollView>
-
+    <com.zsf.test.branch.animation.SpinCircleView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:radius="5dp"
+        app:density="30"
+        android:layout_margin="@dimen/dimen_10_dp"
+        app:point_color="@color/C_0f0"
+        app:move_point_color="@color/colorAccent"
+        app:move_point_speed="8000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
 
 
