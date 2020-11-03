@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.global.GlobalData;
+import com.zsf.m_suspended_window.sdk.DefaultWindowContentView;
+import com.zsf.m_suspended_window.sdk.FloatWindow;
 import com.zsf.utils.ToastUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,14 +32,14 @@ public class FloatWindowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suspended_window);
-        floatWindow = new FloatWindow(FloatWindowActivity.this);
+        floatWindow = new FloatWindow(this);
         floatWindow.setClickFloatWindowListener(new FloatWindow.ClickFloatWindowListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(FloatWindowActivity.this, "onClick", Toast.LENGTH_SHORT).show();
             }
         });
-        DefaultWindowContentView defaultWindowContentView = new DefaultWindowContentView(FloatWindowActivity.this);
+        DefaultWindowContentView defaultWindowContentView = new DefaultWindowContentView(this);
         floatWindow.setWindowContentView(defaultWindowContentView);
         floatWindow.createWindow();
         floatWindow.showWindow();

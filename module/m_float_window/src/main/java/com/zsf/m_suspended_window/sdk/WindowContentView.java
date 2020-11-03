@@ -1,4 +1,4 @@
-package com.zsf.m_suspended_window;
+package com.zsf.m_suspended_window.sdk;
 
 import android.content.Context;
 import android.util.AttributeSet;

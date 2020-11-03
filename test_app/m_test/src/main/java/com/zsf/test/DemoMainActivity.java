@@ -133,11 +133,10 @@ public class DemoMainActivity extends BaseActivity {
                     .build("/branch/kotlin/KotlinActivity")
                     .navigation();
         } else if (i == R.id.button_test){
-//            TestUtils.setBluetooth(true);
 //            MyInstrumentation.restartApp(DemoMainActivity.this);
-
-//            ToastUtils.showToast(this, checkMIUI());
-            FileUtils.main(null);
+//            FileUtils.main(null);
+//            TestUtils.isAppInstalled(DemoMainActivity.this, "com.heytap.browser1");
+            TestUtils.main(null);
         }
     }
 

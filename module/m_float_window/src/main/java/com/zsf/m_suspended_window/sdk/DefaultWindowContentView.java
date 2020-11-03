@@ -1,11 +1,11 @@
-package com.zsf.m_suspended_window;
+package com.zsf.m_suspended_window.sdk;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import com.zsf.m_suspended_window.R;
 
 /**
  * @Author: zsf
