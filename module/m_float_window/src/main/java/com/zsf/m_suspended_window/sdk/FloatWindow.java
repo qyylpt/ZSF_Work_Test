@@ -1,4 +1,4 @@
-package com.zsf.m_suspended_window;
+package com.zsf.m_suspended_window.sdk;
 
 import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
@@ -15,6 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import com.zsf.m_suspended_window.R;
+
 import java.lang.reflect.Method;
 
 /**
