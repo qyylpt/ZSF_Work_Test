@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,14 +16,20 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.zsf.global.GlobalData;
 import com.zsf.test.branch.phone.PhoneUtils;
+import com.zsf.test.branch.test.FileUtils;
 import com.zsf.test.branch.test.MyInstrumentation;
 import com.zsf.test.branch.test.TestUtils;
 import com.zsf.utils.ToastUtils;
 import com.zsf.utils.ZsfLog;
 import com.zsf.view.activity.BaseActivity;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.NetworkInterface;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -127,7 +134,10 @@ public class DemoMainActivity extends BaseActivity {
                     .navigation();
         } else if (i == R.id.button_test){
 //            TestUtils.setBluetooth(true);
-            MyInstrumentation.restartApp(DemoMainActivity.this);
+//            MyInstrumentation.restartApp(DemoMainActivity.this);
+
+//            ToastUtils.showToast(this, checkMIUI());
+            FileUtils.main(null);
         }
     }
 
@@ -172,5 +182,39 @@ public class DemoMainActivity extends BaseActivity {
         } catch (Exception ex) {
         }
         return "02:00:00:00:00:00";
+    }
+
+    public static String checkMIUI() {
+        String versionCode = "";
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        ZsfLog.d(DemoMainActivity.class,"Build.MANUFACTURER = " + manufacturer + " ,Build.MODEL = " + Build.MODEL);
+        if (!TextUtils.isEmpty(manufacturer) && manufacturer.equals("Xiaomi")) {
+            versionCode = getSystemProperty("ro.product.brand");
+        }
+//        String result1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(Long.parseLong(versionCode) * 1000));
+        return versionCode;
+    }
+    public static String getSystemProperty(String propName) {
+        String line;
+        BufferedReader input = null;
+        try {
+            Process p = Runtime.getRuntime().exec("getprop " + propName);
+            input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
+            line = input.readLine();
+            input.close();
+        } catch (IOException ex) {
+            ZsfLog.d(DemoMainActivity.class, "Unable to read sysprop " + propName + ex);
+            return null;
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    ZsfLog.d(DemoMainActivity.class,"Exception while closing InputStream" + e);
+                }
+            }
+        }
+        return line;
     }
 }
