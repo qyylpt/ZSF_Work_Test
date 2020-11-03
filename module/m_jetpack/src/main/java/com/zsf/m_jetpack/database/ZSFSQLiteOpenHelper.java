@@ -42,6 +42,7 @@ public class ZSFSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * 调用时机：当数据库升级时自动调用（数据库版本变化时）
      * 作用：更新数据库表结构
+     * 注: 每次只能增加一个字段,需要多次执行sql语句
      * @param sqLiteDatabase
      * @param oldVersion  旧版本数据库
      * @param newVersion  新版本数据库

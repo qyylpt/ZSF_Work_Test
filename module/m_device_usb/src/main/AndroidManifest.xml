@@ -6,6 +6,7 @@
     <application tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".DeviceUsbActivity"
             android:launchMode="singleTask"/>
+        <activity android:name=".communication.UsbManagerActivity" android:launchMode="singleTask"/>
     </application>
 
 </manifest>
