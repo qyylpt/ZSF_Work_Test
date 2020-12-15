@@ -4,12 +4,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
+import android.hardware.usb.UsbDeviceConnection;
+import android.hardware.usb.UsbEndpoint;
+import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbRequest;
+import android.os.Build;
 
 import com.zsf.utils.ToastUtils;
 import com.zsf.utils.ZsfLog;
 
+import java.nio.ByteBuffer;
 import java.security.InvalidParameterException;
 
 import static android.hardware.usb.UsbManager.ACTION_USB_ACCESSORY_ATTACHED;
@@ -27,6 +34,8 @@ public class UsbCommunicationManager {
 
     private CommunicationListener communicationListener;
 
+    private UsbManager usbManager;
+
     private UsbCommunicationManager() {}
 
     private UsbCommunicationManager(UsbManagerBuilder usbManagerBuilder) {
@@ -41,6 +50,7 @@ public class UsbCommunicationManager {
             intentFilter.addAction(UsbManager.ACTION_USB_ACCESSORY_DETACHED);
             this.context.registerReceiver(usbDevicesBroadcastReceiver, intentFilter);
         }
+        usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
     }
 
     public void release() {
@@ -64,6 +74,7 @@ public class UsbCommunicationManager {
                         UsbDevice usbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                         if(usbDevice != null){
                             communicationListener.deviceConnect(usbDevice);
+                            new Thread(new UsbEndpointRunnable(usbDevice)).start();
                         } else {
                             ZsfLog.d(UsbCommunicationManager.class, "UsbDevice is null" );
                         }
@@ -89,15 +100,15 @@ public class UsbCommunicationManager {
     public interface CommunicationListener {
         /**
          * 设备连接
-         * @param accessory
+         * @param usbDevice
          */
-        void deviceConnect(UsbDevice accessory);
+        void deviceConnect(UsbDevice usbDevice);
 
         /**
          * 设备断开连接
-         * @param accessory
+         * @param usbDevice
          */
-        void deviceDisconnect(UsbDevice accessory);
+        void deviceDisconnect(UsbDevice usbDevice);
 
     }
 
@@ -128,4 +139,43 @@ public class UsbCommunicationManager {
         }
     }
 
+    private class UsbEndpointRunnable implements Runnable {
+
+        private int inMax;
+        private byte[] bytes;
+        private boolean isInterrupt = false;
+        private UsbDeviceConnection usbDeviceConnection;
+        private UsbEndpoint usbEndpoint;
+        private final int TIMEOUT = 20;
+
+        public UsbEndpointRunnable(UsbDevice usbDevice) {
+            UsbInterface usbInterface = usbDevice.getInterface(0);
+            usbDeviceConnection = usbManager.openDevice(usbDevice);
+            usbDeviceConnection.claimInterface(usbInterface, true);
+            usbEndpoint = usbInterface.getEndpoint(0);
+
+        }
+
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupt) {
+                    if (usbEndpoint.getDirection() == UsbConstants.USB_DIR_IN) {
+                        inMax = usbEndpoint.getMaxPacketSize();
+                        bytes = new byte[inMax];
+                    }
+                    ZsfLog.d(UsbCommunicationManager.class, "inMax : " + inMax + "; bytes = " + bytes.length);
+                    usbDeviceConnection.bulkTransfer(usbEndpoint, bytes, bytes.length, TIMEOUT);
+                    if (bytes.length > 0) {
+                        ZsfLog.d(UsbCommunicationManager.class, "result : " + bytes.toString());
+                    }
+                    Thread.sleep(50);
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

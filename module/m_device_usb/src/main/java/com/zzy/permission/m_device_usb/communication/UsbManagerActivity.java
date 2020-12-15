@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.global.GlobalData;
+import com.zsf.utils.ToastUtils;
 import com.zsf.view.activity.BaseActivity;
 import com.zzy.permission.m_device_usb.R;
 
@@ -51,21 +52,19 @@ public class UsbManagerActivity extends BaseActivity {
         if (usbManagerBuilder == null) {
             usbManagerBuilder = new UsbCommunicationManager.UsbManagerBuilder();
             usbManagerBuilder.setContext(GlobalData.getContext())
-                    .setCommunicationListener(new UsbCommunicationManager.CommunicationListener() {
-                        @Override
-                        public void deviceConnect(UsbDevice usbDevice) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                setResultText("设备连接 \n " + deviceToString(usbDevice) + "\n");
-                            }
-                        }
+                             .setCommunicationListener(new UsbCommunicationManager.CommunicationListener() {
+                                 @Override
+                                 public void deviceConnect(UsbDevice usbDevice) {
+                                     ToastUtils.showToast(GlobalData.getContext(), "设备连接!");
+                                     setResultText("设备连接 \n " + deviceToString(usbDevice) + "\n");
+                                 }
 
-                        @Override
-                        public void deviceDisconnect(UsbDevice usbDevice) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                setResultText("设备断开 \n " + deviceToString(usbDevice) + "\n");
-                            }
-                        }
-                    }).build();
+                                 @Override
+                                 public void deviceDisconnect(UsbDevice usbDevice) {
+                                     ToastUtils.showToast(GlobalData.getContext(), "设备断开连接!");
+                                     setResultText("设备断开 \n " + deviceToString(usbDevice) + "\n");
+                                 }
+                             }).build();
         }
     }
 
@@ -93,7 +92,6 @@ public class UsbManagerActivity extends BaseActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public String deviceToString(UsbDevice usbDevice) {
         StringBuilder builder = new StringBuilder(
                 "\n UsbDevice[mName=" + usbDevice.getDeviceName() +
@@ -104,7 +102,7 @@ public class UsbManagerActivity extends BaseActivity {
                 "\n mProtocol=" + usbDevice.getDeviceProtocol() +
                 "\n mManufacturerName=" + usbDevice.getManufacturerName() +
                 "\n mProductName=" + usbDevice.getProductName() +
-                "\n mVersion=" + usbDevice.getVersion() +
+//                "\n mVersion=" + usbDevice.getVersion() +
                 "\n mSerialNumberReader=" + usbDevice.getSerialNumber() +
                 "\n ================ " +
                 "\n mConfigurations=[");
