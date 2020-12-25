@@ -2,4 +2,19 @@
     <!-- module -->
     <string name="m_device_usb_button_text">获取外置USB设备标识</string>
     <string name="m_device_usb_button_text_clear">清空</string>
+
+    <string name="m_device_usb_text_light_title">灯光控制</string>
+    <string name="m_device_usb_button_light_red">红灯</string>
+    <string name="m_device_usb_button_light_green">绿灯</string>
+    <string name="m_device_usb_button_light_white">白灯</string>
+    <string name="m_device_usb_text_relay_title">继电器控制</string>
+    <string name="m_device_usb_button_relay_open">打开继电器</string>
+    <string name="m_device_usb_button_relay_close">关闭继电器</string>
+    <string name="m_device_usb_text_sound_title">声音控制</string>
+    <string name="m_device_usb_button_sound_open">打开声音</string>
+    <string name="m_device_usb_button_sound_close">关闭声音</string>
+
+    <string name="m_device_usb_text_screen_title">霸屏控制【远景达】</string>
+    <string name="m_device_usb_button_screen_open">打开霸屏</string>
+    <string name="m_device_usb_button_screen_close">关闭霸屏</string>
 </resources>

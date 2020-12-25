@@ -13,6 +13,8 @@
     <dimen name="dimen_120_dp">120dp</dimen>
     <dimen name="dimen_200_dp">200dp</dimen>
     <dimen name="dimen_300_dp">300dp</dimen>
+    <dimen name="dimen_400_dp">400dp</dimen>
+    <dimen name="dimen_500_dp">500dp</dimen>
     <dimen name="dimen_600_dp">600dp</dimen>
     <dimen name="dimen_10_sp">10sp</dimen>
     <dimen name="dimen_15_sp">15sp</dimen>
