@@ -85,10 +85,17 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/m_device_usb_text_relay_open"
         android:layout_marginTop="@dimen/dimen_30_dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/m_device_usb_text_sound_title"
+        android:id="@+id/m_device_usb_edit_sound_title"
+        />
     <Button
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/m_device_usb_text_sound_title"
+        app:layout_constraintTop_toBottomOf="@id/m_device_usb_edit_sound_title"
         android:text="@string/m_device_usb_button_sound_open"
         android:textColor="@color/C_444444"
         app:layout_constraintLeft_toLeftOf="parent"

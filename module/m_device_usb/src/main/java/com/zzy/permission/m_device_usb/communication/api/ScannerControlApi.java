@@ -63,10 +63,19 @@ public class ScannerControlApi {
     /**
      * 播放铃音
      *
-     * @param playerFile 提示音文件
+     * @param playerFileId 提示音文件
      */
-    public void startPlayRing(String playerFile) {
-        mSoundManager.startPlayRing(playerFile);
+    public void startPlayRing(int playerFileId) {
+        mSoundManager.startPlayRing(playerFileId);
+    }
+
+    /**
+     * 自定义播报
+     *
+     * @param playingInfo 提示音文件
+     */
+    public void startPlayRing(String playingInfo) {
+        mSoundManager.startPlayRing(playingInfo);
     }
 
     /**
