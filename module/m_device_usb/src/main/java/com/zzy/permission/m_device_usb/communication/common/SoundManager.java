@@ -4,17 +4,24 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.speech.tts.TextToSpeech;
 
 import androidx.annotation.UiThread;
 
+import com.zsf.utils.ToastUtils;
+import com.zsf.utils.ZsfLog;
+import com.zzy.permission.m_device_usb.R;
+
 import java.io.IOException;
+import java.util.Locale;
+import java.util.Queue;
 
 /**
  * @author : zsf
  * @date   : 2020/10/13 9:52 AM
  * @desc   : 声音管理
  */
-public class SoundManager {
+public class SoundManager implements TextToSpeech.OnInitListener{
 
     private int mCurVolume;
     private AudioManager mAM;
@@ -22,18 +29,25 @@ public class SoundManager {
 
     private final Context mContext;
 
+    private final TextToSpeech textToSpeech;
+
     public SoundManager(Context context) {
         mContext = context;
+        textToSpeech = new TextToSpeech(context, this);
+        // 设置音调，值越大声音越尖（女生），值越小则变成男声,1.0是常规
+        textToSpeech.setPitch(0.2f);
+        //设定语速 ，默认1.0正常语速
+        textToSpeech.setSpeechRate(0.9f);
     }
 
     @UiThread
-    public synchronized void startPlayRing(String playerFile) {
+    public synchronized void startPlayRing(int playerFileId) {
         if (null == mMP) {
-            prepareRingtoneInternal(mContext, playerFile);
+            prepareRingtoneInternal(mContext, String.valueOf(playerFileId));
         } else {
             try {
                 mMP.reset();
-                aftermath(mContext, playerFile);
+                aftermath(mContext, String.valueOf(playerFileId));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -58,6 +72,10 @@ public class SoundManager {
      */
     public void release() {
         stopPlayRing();
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
     }
 
     private void prepareRingtoneInternal(Context context, String playerFile) {
@@ -93,4 +111,23 @@ public class SoundManager {
             }
         });
     }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = textToSpeech.setLanguage(Locale.CHINA);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                ZsfLog.d(SoundManager.class, "设备不支持自定义语音播报!" + "; result = " + result);
+            }
+        }
+    }
+
+    public void startPlayRing(String playingInfo) {
+        textToSpeech.stop();
+        if (textToSpeech != null && !textToSpeech.isSpeaking()) {
+            textToSpeech.speak(playingInfo, TextToSpeech.QUEUE_FLUSH, null, playingInfo + System.currentTimeMillis());
+        }
+    }
+
 }

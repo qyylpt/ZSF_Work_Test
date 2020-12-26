@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -31,6 +33,8 @@ public class UsbManagerActivity extends BaseActivity {
     private TextView mUsbTextViewShowResult;
 
     private ScannerControlApi scannerControlApi;
+
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class UsbManagerActivity extends BaseActivity {
         mUsbDeviceButtonScreenOpen.setOnClickListener(this);
         Button mUsbDeviceButtonScreenClose = findViewById(R.id.m_device_usb_button_screen_close);
         mUsbDeviceButtonScreenClose.setOnClickListener(this);
+        editText = findViewById(R.id.m_device_usb_edit_sound_title);
     }
 
     @Override
@@ -126,7 +131,11 @@ public class UsbManagerActivity extends BaseActivity {
                 scannerControlApi.operateRelay(0);
                 break;
             case R.id.m_device_usb_button_sound_open:
-                scannerControlApi.startPlayRing(String.valueOf(R.raw.sound));
+                if (TextUtils.isEmpty(editText.getText())) {
+                    scannerControlApi.startPlayRing(R.raw.sound);
+                } else {
+                    scannerControlApi.startPlayRing(editText.getText().toString());
+                }
                 break;
             case R.id.m_device_usb_button_sound_close:
                 scannerControlApi.stopPlayRing();
