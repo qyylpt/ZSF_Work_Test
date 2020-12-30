@@ -94,6 +94,7 @@ public class UsbManagerActivity extends BaseActivity {
                             setResultText("【 " + usbDevice.getSerialNumber() + " 】读取到数据:  \n " + scanInfo + "\n");
                             if ("FC8K4247".equals(usbDevice.getSerialNumber())) {
                                 scannerControlApi.startPlayRing(R.raw.success);
+                                scannerControlApi.operateRelay(1);
                             } else {
                                 scannerControlApi.startPlayRing(R.raw.fail);
                             }
