@@ -92,6 +92,11 @@ public class UsbManagerActivity extends BaseActivity {
                         public void scanResult(UsbDevice usbDevice, String scanInfo) {
                             ToastUtils.showToast(GlobalData.getContext(), usbDevice.getSerialNumber() + " : 读取到数据!");
                             setResultText("【 " + usbDevice.getSerialNumber() + " 】读取到数据:  \n " + scanInfo + "\n");
+                            if ("FC8K4247".equals(usbDevice.getSerialNumber())) {
+                                scannerControlApi.startPlayRing(R.raw.success);
+                            } else {
+                                scannerControlApi.startPlayRing(R.raw.fail);
+                            }
                         }
 
                         @Override
