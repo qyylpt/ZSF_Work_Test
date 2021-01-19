@@ -38,8 +38,9 @@ public class LightRelayManagerForYjd extends LightAndRelayManager {
     }
 
     @Override
-    public void operateRelay(int isOpen) {
-        QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_DOOR, isOpen);
+    public void operateRelay(boolean isOpen) {
+        int signal = isOpen ? 1 : 0;
+        QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_DOOR, signal);
         super.operateRelay(isOpen);
     }
 
