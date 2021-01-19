@@ -93,10 +93,11 @@ public class UsbManagerActivity extends BaseActivity {
                             ToastUtils.showToast(GlobalData.getContext(), usbDevice.getSerialNumber() + " : 读取到数据!");
                             setResultText("【 " + usbDevice.getSerialNumber() + " 】读取到数据:  \n " + scanInfo + "\n");
                             if ("FC8K4247".equals(usbDevice.getSerialNumber())) {
-                                scannerControlApi.startPlayRing(R.raw.success);
-                                scannerControlApi.operateRelay(1);
+                                scannerControlApi.startPlayRing("进厂成功");
+                                scannerControlApi.operateRelay(true);
                             } else {
-                                scannerControlApi.startPlayRing(R.raw.fail);
+                                scannerControlApi.startPlayRing("出厂成功");
+                                scannerControlApi.operateRelay(true);
                             }
                         }
 
@@ -131,10 +132,10 @@ public class UsbManagerActivity extends BaseActivity {
                 scannerControlApi.operateLight(4,1);
                 break;
             case R.id.m_device_usb_text_relay_open:
-                scannerControlApi.operateRelay(1);
+                scannerControlApi.operateRelay(true);
                 break;
             case R.id.m_device_usb_text_relay_close:
-                scannerControlApi.operateRelay(0);
+                scannerControlApi.operateRelay(false);
                 break;
             case R.id.m_device_usb_button_sound_open:
                 if (TextUtils.isEmpty(editText.getText())) {

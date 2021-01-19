@@ -42,8 +42,8 @@ public class LightRelayManagerForRzg extends LightAndRelayManager {
     }
 
     @Override
-    public void operateRelay(int isOpen) {
-        setRelay(isOpen == 1);
+    public void operateRelay(boolean isOpen) {
+        setRelay(isOpen);
         super.operateRelay(isOpen);
     }
 

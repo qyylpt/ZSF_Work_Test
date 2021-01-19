@@ -39,7 +39,7 @@ public class LightAndRelayManager {
                 lightAndRelayBuild.scannerListener.closeLight();
             }
             if (msg.what == LightAndRelayConstant.CLOSE_RELAY) {
-                operateRelay(0);
+                operateRelay(false);
                 lightAndRelayBuild.scannerListener.closeRelay();
             }
         }
@@ -49,8 +49,8 @@ public class LightAndRelayManager {
      * 继电器控制(需要子类重写,子类执行之后调用super)
      * @param isOpen 1 : 开启、 0 : 关闭
      */
-    public void operateRelay(int isOpen) {
-        if (scanDeviceHandler != null && isOpen == 1) {
+    public void operateRelay(boolean isOpen) {
+        if (scanDeviceHandler != null && isOpen) {
             scanDeviceHandler.removeMessages(LightAndRelayConstant.CLOSE_RELAY);
             scanDeviceHandler.sendEmptyMessageDelayed(LightAndRelayConstant.CLOSE_RELAY, lightAndRelayBuild.delayCloseRelayTime);
         }
@@ -84,7 +84,7 @@ public class LightAndRelayManager {
             scanDeviceHandler = null;
         }
         resetLight();
-        operateRelay(0);
+        operateRelay(false);
     }
 
     public static class LightAndRelayBuild {

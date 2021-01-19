@@ -56,7 +56,7 @@ public class ScannerControlApi {
      *
      * @param isOpen 1 : 开启、 0 : 关闭
      */
-    public void operateRelay(int isOpen) {
+    public void operateRelay(boolean isOpen) {
         lightAndRelayManager.operateRelay(isOpen);
     }
 
