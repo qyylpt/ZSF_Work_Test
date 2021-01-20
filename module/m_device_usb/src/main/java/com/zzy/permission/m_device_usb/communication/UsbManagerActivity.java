@@ -77,13 +77,13 @@ public class UsbManagerActivity extends BaseActivity {
                         @Override
                         public void deviceConnect(UsbDevice usbDevice) {
                             ToastUtils.showToast(GlobalData.getContext(), usbDevice == null ? "X6S" : usbDevice.getSerialNumber() + " : 设备连接!");
-                            setResultText("设备连接 \n " + (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + "\n");
+                            setResultText("设备连接 \n " + (usbDevice == null ? "X6S" : usbDevice.toString()) + "\n");
                         }
 
                         @Override
                         public void deviceDisconnect(UsbDevice usbDevice) {
                             ToastUtils.showToast(GlobalData.getContext(), usbDevice == null ? "X6S" : usbDevice.getSerialNumber() + " : 设备断开连接!");
-                            setResultText("设备断开 \n " + (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + "\n");
+                            setResultText("设备断开 \n " + (usbDevice == null ? "X6S" : usbDevice.toString()) + "\n");
                         }
 
                         @Override

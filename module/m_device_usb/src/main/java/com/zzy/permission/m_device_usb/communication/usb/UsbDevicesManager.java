@@ -80,11 +80,11 @@ public class UsbDevicesManager {
     }
 
     private void deviceStartRead(UsbDevice usbDevice) {
-        if (usbManager.openDevice(usbDevice) == null || !deviceVendorIds.contains(usbDevice.getVendorId())) {
-            return;
-        }
         if (!usbManager.hasPermission(usbDevice)) {
             usbManager.requestPermission(usbDevice, permissionIntent);
+            return;
+        }
+        if (usbManager.openDevice(usbDevice) == null || !deviceVendorIds.contains(usbDevice.getVendorId())) {
             return;
         }
         scannerListener.deviceConnect(usbDevice);
