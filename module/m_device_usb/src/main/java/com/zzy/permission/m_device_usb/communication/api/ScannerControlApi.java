@@ -2,10 +2,12 @@ package com.zzy.permission.m_device_usb.communication.api;
 
 import android.content.Context;
 
+import com.zzy.permission.m_device_usb.communication.common.DeviceTypeConstant;
 import com.zzy.permission.m_device_usb.communication.common.LightAndRelayManager;
 import com.zzy.permission.m_device_usb.communication.common.ScannerListener;
 import com.zzy.permission.m_device_usb.communication.common.ScreenControl;
 import com.zzy.permission.m_device_usb.communication.common.SoundManager;
+import com.zzy.permission.m_device_usb.communication.serialport.SerialPortManager;
 import com.zzy.permission.m_device_usb.communication.usb.UsbDevicesManager;
 
 import java.security.InvalidParameterException;
@@ -28,8 +30,13 @@ public class ScannerControlApi {
 
     private final ScannerBuild scannerBuild;
 
+    private SerialPortManager serialPortManager;
+
     private ScannerControlApi(ScannerBuild scannerBuild) {
         this.scannerBuild = scannerBuild;
+        if (DeviceTypeConstant.X6S.equals(android.os.Build.MODEL)) {
+            serialPortManager = new SerialPortManager(scannerBuild.scannerListener);
+        }
         usbDevicesManager = new UsbDevicesManager.UsbManagerBuilder(scannerBuild.mContext)
                 .setScannerListener(scannerBuild.scannerListener)
                 .build();
@@ -103,6 +110,10 @@ public class ScannerControlApi {
         }
         if (mSoundManager != null) {
             mSoundManager.release();
+        }
+        if (serialPortManager != null) {
+            serialPortManager.release();
+            serialPortManager = null;
         }
     }
 

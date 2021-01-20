@@ -38,7 +38,7 @@ public class UsbDevicesManager {
 
     private final Context context;
 
-    private final ScannerListener scannerListener;
+    private ScannerListener scannerListener;
 
     private UsbManager usbManager;
 
@@ -72,6 +72,9 @@ public class UsbDevicesManager {
         usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
         HashMap<String,UsbDevice> deviceMap = usbManager.getDeviceList();
         for (UsbDevice usbDevice : deviceMap.values()) {
+            if (DeviceTypeConstant.X6S_EXCLUDE_ONE.equals(usbDevice.getDeviceName()) || DeviceTypeConstant.X6S_EXCLUDE_TWO.equals(usbDevice.getDeviceName())) {
+                continue;
+            }
             deviceStartRead(usbDevice);
         }
     }
@@ -247,6 +250,9 @@ public class UsbDevicesManager {
                     }
                 }
             } catch (Exception e) {
+                ZsfLog.d(UsbDevicesManager.class, "The virtual serial port communication failure may be an X6S device \n " + usbDevice.toString());
+                release();
+                usbEndpointList.remove(this);
                 e.printStackTrace();
             }
         }
@@ -264,7 +270,6 @@ public class UsbDevicesManager {
         }
 
         private void readyDevicesProtocolAisle() throws IllegalArgumentException{
-            usbDeviceConnection.claimInterface(this.usbInterface, true);
             for (int i = 0; i < usbDevice.getInterfaceCount(); i++) {
                 UsbInterface usbInterface = usbDevice.getInterface(i);
                 if (usbInterface == null) {
@@ -275,6 +280,8 @@ public class UsbDevicesManager {
                     this.usbInterface = usbDevice.getInterface(i);
                 }
             }
+            usbDeviceConnection = usbManager.openDevice(this.usbDevice);
+            usbDeviceConnection.claimInterface(this.usbInterface, true);
             for (int i = 0; i < this.usbInterface.getEndpointCount(); i++) {
                 UsbEndpoint usbEndpoint = usbInterface.getEndpoint(i);
                 if (usbEndpoint == null) {
@@ -287,9 +294,6 @@ public class UsbDevicesManager {
                         ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : read");
                     }
                 }
-            }
-            if (usbEndpointRead == null) {
-                throw new IllegalArgumentException(Thread.currentThread().getName() + " : UsbEndpoint : readUsbEndpoint not all endpoints found");
             }
         }
     }
