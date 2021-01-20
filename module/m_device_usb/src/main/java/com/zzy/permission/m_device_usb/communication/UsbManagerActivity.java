@@ -14,12 +14,10 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.global.GlobalData;
 import com.zsf.utils.ToastUtils;
-import com.zsf.utils.ZsfLog;
 import com.zsf.view.activity.BaseActivity;
 import com.zzy.permission.m_device_usb.R;
 import com.zzy.permission.m_device_usb.communication.api.ScannerControlApi;
 import com.zzy.permission.m_device_usb.communication.common.ScannerListener;
-import com.zzy.permission.m_device_usb.communication.usb.UsbDevicesManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,27 +76,33 @@ public class UsbManagerActivity extends BaseActivity {
                     .setScannerListener(new ScannerListener() {
                         @Override
                         public void deviceConnect(UsbDevice usbDevice) {
-                            ToastUtils.showToast(GlobalData.getContext(), usbDevice.getSerialNumber() + " : 设备连接!");
-                            setResultText("设备连接 \n " + deviceToString(usbDevice) + "\n");
+                            ToastUtils.showToast(GlobalData.getContext(), usbDevice == null ? "X6S" : usbDevice.getSerialNumber() + " : 设备连接!");
+                            setResultText("设备连接 \n " + (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + "\n");
                         }
 
                         @Override
                         public void deviceDisconnect(UsbDevice usbDevice) {
-                            ToastUtils.showToast(GlobalData.getContext(), usbDevice.getSerialNumber() + " : 设备断开连接!");
-                            setResultText("设备断开 \n " + deviceToString(usbDevice) + "\n");
+                            ToastUtils.showToast(GlobalData.getContext(), usbDevice == null ? "X6S" : usbDevice.getSerialNumber() + " : 设备断开连接!");
+                            setResultText("设备断开 \n " + (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + "\n");
                         }
 
                         @Override
                         public void scanResult(UsbDevice usbDevice, String scanInfo) {
-                            ToastUtils.showToast(GlobalData.getContext(), usbDevice.getSerialNumber() + " : 读取到数据!");
-                            setResultText("【 " + usbDevice.getSerialNumber() + " 】读取到数据:  \n " + scanInfo + "\n");
-                            if ("FC8K4247".equals(usbDevice.getSerialNumber())) {
-                                scannerControlApi.startPlayRing("进场成功");
-                                scannerControlApi.operateRelay(true);
+                            if (usbDevice != null) {
+                                if ("FC8K4247".equals(usbDevice.getSerialNumber())) {
+                                    scannerControlApi.startPlayRing("进场成功");
+                                    scannerControlApi.operateRelay(true);
+                                } else {
+                                    scannerControlApi.startPlayRing("出厂成功");
+                                    scannerControlApi.operateRelay(true);
+                                }
                             } else {
-                                scannerControlApi.startPlayRing("出厂成功");
+                                scannerControlApi.startPlayRing("x6s扫码成功");
                                 scannerControlApi.operateRelay(true);
                             }
+                            ToastUtils.showToast(GlobalData.getContext(), (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + " : 读取到数据!");
+                            setResultText("【 " + (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + " 】读取到数据:  \n " + scanInfo + "\n");
+
                         }
 
                         @Override

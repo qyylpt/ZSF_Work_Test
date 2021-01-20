@@ -27,6 +27,10 @@ android {
                 includeCompileClasspath = true
             }
         }
+
+        ndk {
+            abiFilters 'x86', 'armeabi'
+        }
     }
 
     buildTypes {

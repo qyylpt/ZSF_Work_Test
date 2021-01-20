@@ -25,4 +25,10 @@ public class DeviceTypeConstant {
      */
     public static final int RD4500R = 1137;
 
+    /**
+     * usb虚拟串口 排除X6S 标示[由于只有一台设备无法确认唯一标示]
+     */
+    public static final String X6S_EXCLUDE_ONE = "/dev/bus/usb/005/002";
+    public static final String X6S_EXCLUDE_TWO = "/dev/bus/usb/001/002";
+
 }
