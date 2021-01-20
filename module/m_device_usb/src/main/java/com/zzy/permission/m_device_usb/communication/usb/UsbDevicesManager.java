@@ -1,5 +1,6 @@
 package com.zzy.permission.m_device_usb.communication.usb;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +46,10 @@ public class UsbDevicesManager {
 
     private final ArrayList<Integer> deviceVendorIds = new ArrayList<>();
 
+    private PendingIntent permissionIntent;
+
+    public static final String ACTION_USB_PERMISSION = "com.zhizhangyi.scan.USB_PERMISSION";
+
     private UsbDevicesManager(UsbManagerBuilder usbManagerBuilder) {
         addSupportDevice();
         this.context = usbManagerBuilder.mContext;
@@ -56,8 +61,10 @@ public class UsbDevicesManager {
             intentFilter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
             intentFilter.addAction(ACTION_USB_ACCESSORY_ATTACHED);
             intentFilter.addAction(UsbManager.ACTION_USB_ACCESSORY_DETACHED);
+            intentFilter.addAction(ACTION_USB_PERMISSION);
             this.context.registerReceiver(usbDevicesBroadcastReceiver, intentFilter);
         }
+        permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0);
         initConnectedDevice();
     }
 
@@ -65,17 +72,21 @@ public class UsbDevicesManager {
         usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
         HashMap<String,UsbDevice> deviceMap = usbManager.getDeviceList();
         for (UsbDevice usbDevice : deviceMap.values()) {
-            if (deviceVendorIds.contains(usbDevice.getVendorId())) {
-                deviceStartRead(usbDevice);
-            }
+            deviceStartRead(usbDevice);
         }
     }
 
     private void deviceStartRead(UsbDevice usbDevice) {
+        if (usbManager.openDevice(usbDevice) == null || !deviceVendorIds.contains(usbDevice.getVendorId())) {
+            return;
+        }
+        if (!usbManager.hasPermission(usbDevice)) {
+            usbManager.requestPermission(usbDevice, permissionIntent);
+            return;
+        }
         scannerListener.deviceConnect(usbDevice);
         UsbEndpointThread usbEndpointThread = new UsbEndpointThread(usbDevice);
-        String threadName = usbDevice.getSerialNumber();
-        usbEndpointThread.setName(threadName != null ? threadName : String.valueOf(usbDevice.getProductId()));
+        usbEndpointThread.setName(usbDevice.getDeviceName());
         usbEndpointList.add(usbEndpointThread);
         usbEndpointThread.start();
     }
@@ -128,13 +139,23 @@ public class UsbDevicesManager {
                             Iterator<UsbEndpointThread> usbEndpointThreadIterator = usbEndpointList.iterator();
                             while (usbEndpointThreadIterator.hasNext()) {
                                 UsbEndpointThread usbEndpointThread = usbEndpointThreadIterator.next();
-                                if (usbEndpointThread.getUsbDevice().getProductId() == usbDevice.getProductId() || usbEndpointThread.getUsbDevice().getSerialNumber().equals(usbDevice.getSerialNumber())) {
+                                if (usbEndpointThread.getUsbDevice().getDeviceName().equals(usbDevice.getDeviceName())) {
                                     usbEndpointThread.release();
                                     usbEndpointThreadIterator.remove();
                                 }
                             }
                         } else {
                             ZsfLog.d(UsbDevicesManager.class, "UsbDevice is null");
+                        }
+                    }
+                    break;
+                case ACTION_USB_PERMISSION :
+                    synchronized (this) {
+                        if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                            deviceStartRead((UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE));
+                            ZsfLog.d(UsbDevicesManager.class, "Permission passed for USB device");
+                        } else {
+                            ZsfLog.d(UsbDevicesManager.class, "Permission denied for USB device");
                         }
                     }
                     break;
@@ -219,7 +240,7 @@ public class UsbDevicesManager {
                                 stringBuilder.append((char) data[i]);
                             }
                             String s = stringBuilder.toString();
-                            ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : 读取到数据 => " + s);
+                            ZsfLog.d(UsbDevicesManager.class, usbDevice.getSerialNumber() == null ? Thread.currentThread().getName() : usbDevice.getSerialNumber() + " : 读取到数据 => " + s);
                             scannerListener.scanResult(usbDevice, s);
                             byteBuffer.clear();
                         }
@@ -231,7 +252,7 @@ public class UsbDevicesManager {
         }
 
         private int readData() throws IOException {
-            if (!usbRequest.queue(mReadBuffer,mReadBuffer.array().length)) {
+            if (!usbRequest.queue(mReadBuffer, mReadBuffer.array().length)) {
                 throw new IOException(Thread.currentThread().getName() + " : Error queueing request.");
             }
             final UsbRequest usbRequestResponse = usbDeviceConnection.requestWait();
@@ -243,24 +264,24 @@ public class UsbDevicesManager {
         }
 
         private void readyDevicesProtocolAisle() throws IllegalArgumentException{
-            usbDeviceConnection = usbManager.openDevice(this.usbDevice);
+            usbDeviceConnection.claimInterface(this.usbInterface, true);
             for (int i = 0; i < usbDevice.getInterfaceCount(); i++) {
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbInterface : " + usbDevice.getInterface(i).toString());
-                if (usbDevice.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA || usbDevice.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_VIDEO || usbDevice.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_VENDOR_SPEC) {
+                UsbInterface usbInterface = usbDevice.getInterface(i);
+                if (usbInterface == null) {
+                    continue;
+                }
+                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbInterface : " + usbInterface.toString());
+                if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA || usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_VIDEO || usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_VENDOR_SPEC) {
                     this.usbInterface = usbDevice.getInterface(i);
                 }
             }
-            if (usbDeviceConnection == null) {
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : UsbDeviceConnection is null");
-                throw new IllegalArgumentException(Thread.currentThread().getName() + " : UsbDeviceConnection : not connect find");
-            } else {
-                usbDeviceConnection.claimInterface(this.usbInterface, true);
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : UsbDeviceConnection claimInterface success");
-            }
             for (int i = 0; i < this.usbInterface.getEndpointCount(); i++) {
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : " + usbInterface.getEndpoint(i).toString());
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : type : " + usbInterface.getEndpoint(i).getType() + "; Direction : " + usbInterface.getEndpoint(i).getDirection());
-                if (usbInterface.getEndpoint(i).getType() == UsbConstants.USB_ENDPOINT_XFER_BULK || usbInterface.getEndpoint(i).getType() == UsbConstants.USB_ENDPOINT_XFER_ISOC) {
+                UsbEndpoint usbEndpoint = usbInterface.getEndpoint(i);
+                if (usbEndpoint == null) {
+                    continue;
+                }
+                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : " + usbEndpoint.toString());
+                if (usbEndpoint.getType() == UsbConstants.USB_ENDPOINT_XFER_BULK || usbEndpoint.getType() == UsbConstants.USB_ENDPOINT_XFER_ISOC) {
                     if (usbInterface.getEndpoint(i).getDirection() == UsbConstants.USB_DIR_IN) {
                         this.usbEndpointRead = usbInterface.getEndpoint(i);
                         ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : read");

@@ -1,6 +1,8 @@
 package com.zzy.permission.m_device_usb.communication.vendor;
 
 import com.q_zheng.QZhengGPIOManager;
+import com.vs.hx.VideoStrongManager;
+import com.zzy.permission.m_device_usb.communication.common.DeviceTypeConstant;
 import com.zzy.permission.m_device_usb.communication.common.LightAndRelayManager;
 
 /**
@@ -31,8 +33,10 @@ public class LightRelayManagerForYjd extends LightAndRelayManager {
             default:
                 break;
         }
-        if (localColor != 0) {
+        if (localColor != 0 && !android.os.Build.MODEL.equals("X6S")) {
             QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(localColor, isOpen);
+        } else {
+            VideoStrongManager.VSSetIOValue(color, 1);
         }
         super.operateLight(color, isOpen);
     }
@@ -40,14 +44,24 @@ public class LightRelayManagerForYjd extends LightAndRelayManager {
     @Override
     public void operateRelay(boolean isOpen) {
         int signal = isOpen ? 1 : 0;
-        QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_DOOR, signal);
+        if (!DeviceTypeConstant.X6S.equals(android.os.Build.MODEL)){
+            QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_DOOR, signal);
+        } else {
+            VideoStrongManager.VSSetIOValue(5, signal);
+        }
         super.operateRelay(isOpen);
     }
 
     @Override
     protected void resetLight() {
-        QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_LED_B, 0);
-        QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_LED_G, 0);
-        QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_LED_R, 0);
+        if (!DeviceTypeConstant.X6S.equals(android.os.Build.MODEL)){
+            QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_LED_B, 0);
+            QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_LED_G, 0);
+            QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_LED_R, 0);
+        } else {
+            VideoStrongManager.VSSetIOValue(0, 0);
+            VideoStrongManager.VSSetIOValue(1, 0);
+            VideoStrongManager.VSSetIOValue(4, 0);
+        }
     }
 }

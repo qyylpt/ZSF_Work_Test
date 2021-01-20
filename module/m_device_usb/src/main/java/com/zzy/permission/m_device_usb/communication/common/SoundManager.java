@@ -128,7 +128,7 @@ public class SoundManager implements TextToSpeech.OnInitListener{
      */
     public void startPlayRing(String playingInfo) {
         textToSpeech.stop();
-        if (textToSpeech != null && !textToSpeech.isSpeaking()) {
+        if (textToSpeech != null) {
             textToSpeech.speak(playingInfo, TextToSpeech.QUEUE_FLUSH, null, playingInfo + System.currentTimeMillis());
         }
     }
