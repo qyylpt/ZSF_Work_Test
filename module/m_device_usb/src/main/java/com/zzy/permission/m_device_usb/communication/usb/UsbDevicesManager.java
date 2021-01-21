@@ -72,9 +72,6 @@ public class UsbDevicesManager {
         usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
         HashMap<String,UsbDevice> deviceMap = usbManager.getDeviceList();
         for (UsbDevice usbDevice : deviceMap.values()) {
-            if (DeviceTypeConstant.X6S_EXCLUDE_ONE.equals(usbDevice.getDeviceName()) || DeviceTypeConstant.X6S_EXCLUDE_TWO.equals(usbDevice.getDeviceName())) {
-                continue;
-            }
             deviceStartRead(usbDevice);
         }
     }
@@ -119,14 +116,13 @@ public class UsbDevicesManager {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            ToastUtils.showToast(context, "action = " + action);
             ZsfLog.d(UsbDevicesManager.class, "action = " + action);
             switch (action) {
                 case UsbManager.ACTION_USB_ACCESSORY_ATTACHED:
                 case UsbManager.ACTION_USB_DEVICE_ATTACHED :
                     synchronized (this) {
                         UsbDevice usbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                        if(usbDevice != null && deviceVendorIds.contains(usbDevice.getVendorId())){
+                        if(usbDevice != null){
                             deviceStartRead(usbDevice);
                         } else {
                             ZsfLog.d(UsbDevicesManager.class, "UsbDevice is null" );
@@ -218,13 +214,14 @@ public class UsbDevicesManager {
 
         public void release() {
             this.interrupt = true;
+            usbRequest.close();
+            usbRequest = null;
             usbDeviceConnection.releaseInterface(usbInterface);
             usbDeviceConnection.close();
             usbDeviceConnection = null;
             usbEndpointRead = null;
             usbDevice = null;
-            usbRequest.close();
-            usbRequest = null;
+            byteBuffer.clear();
         }
 
         @Override
