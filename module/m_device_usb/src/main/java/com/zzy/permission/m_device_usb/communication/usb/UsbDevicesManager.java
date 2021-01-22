@@ -253,7 +253,7 @@ public class UsbDevicesManager {
                     }
                 }
             } catch (Exception e) {
-                ZsfLog.d(UsbDevicesManager.class, "It may be an abnormality caused by X6S equipment or resource recycling \n " + usbDevice != null ? usbDevice.toString() : "UsbDevice has been recycled");
+                ZsfLog.d(UsbDevicesManager.class, "It may be an abnormality caused by X6S equipment or resource recycling \n ");
                 release();
                 usbEndpointList.remove(this);
                 e.printStackTrace();
@@ -293,7 +293,9 @@ public class UsbDevicesManager {
                     if (usbInterface.getEndpoint(i).getDirection() == UsbConstants.USB_DIR_IN) {
                         this.usbEndpointRead = usbInterface.getEndpoint(i);
                         ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : read");
-                        ZsfLog.d(UsbDevicesManager.class, usbDevice != null ? usbDevice.toString() : "UsbDevice is null Please check");
+                        if (usbDevice != null){
+                            ZsfLog.d(UsbDevicesManager.class, usbDevice.toString());
+                        }
                     }
                 }
             }
