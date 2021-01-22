@@ -43,7 +43,7 @@ public class LightRelayManagerForYjd extends LightAndRelayManager {
 
     @Override
     public void operateRelay(boolean isOpen) {
-        int signal = isOpen ? 0 : 1;
+        int signal = isOpen ? 1 : 0;
         if (!DeviceTypeConstant.X6S.equals(android.os.Build.MODEL)){
             QZhengGPIOManager.getInstance(lightAndRelayBuild.context).setValue(QZhengGPIOManager.GPIO_ID_DOOR, signal);
         } else {
