@@ -85,6 +85,7 @@ public class LightAndRelayManager {
         }
         resetLight();
         operateRelay(false);
+        lightAndRelayBuild.scannerListener = null;
     }
 
     public static class LightAndRelayBuild {

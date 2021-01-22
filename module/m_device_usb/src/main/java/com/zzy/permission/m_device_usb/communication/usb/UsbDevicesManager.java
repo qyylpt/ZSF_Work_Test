@@ -108,6 +108,7 @@ public class UsbDevicesManager {
             usbEndpointList.get(i).release();
         }
         usbEndpointList.clear();
+        scannerListener = null;
     }
 
 

@@ -87,6 +87,7 @@ public class SerialPortManager {
             mScanHandler.removeCallbacksAndMessages(null);
             mScanHandler = null;
         }
+        scannerListener = null;
     }
 
     /**
