@@ -90,15 +90,15 @@ public class UsbManagerActivity extends BaseActivity {
                         public void scanResult(UsbDevice usbDevice, String scanInfo) {
                             if (usbDevice != null) {
                                 if ("FC8K4247".equals(usbDevice.getSerialNumber())) {
+                                    scannerControlApi.operateRelay(true);
                                     scannerControlApi.startPlayRing("进场成功");
-                                    scannerControlApi.operateRelay(true);
                                 } else {
-                                    scannerControlApi.startPlayRing("出厂成功");
                                     scannerControlApi.operateRelay(true);
+                                    scannerControlApi.startPlayRing("出厂成功");
                                 }
                             } else {
-                                scannerControlApi.startPlayRing("x6s扫码成功");
                                 scannerControlApi.operateRelay(true);
+                                scannerControlApi.startPlayRing("x6s扫码成功");
                             }
                             ToastUtils.showToast(GlobalData.getContext(), (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + " : 读取到数据!");
                             setResultText("【 " + (usbDevice == null ? "X6S" : usbDevice.getSerialNumber()) + " 】读取到数据:  \n " + scanInfo + "\n");
