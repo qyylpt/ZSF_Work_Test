@@ -70,6 +70,7 @@ public class SerialPortManager {
         try {
             mSerialPort = new SerialPort(new File(YJD_SERIAL_PORT), YJD_BAUD_RATE, 0);
             mInputStream = mSerialPort.getInputStream();
+            ZsfLog.d(SerialPortManager.class, "串口打开成功");
         } catch (IOException e) {
             ZsfLog.d(SerialPortManager.class, "串口打开失败");
             e.printStackTrace();

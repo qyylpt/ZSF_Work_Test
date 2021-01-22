@@ -202,6 +202,7 @@ public class UsbDevicesManager {
         private final ByteBuffer mReadBuffer = ByteBuffer.allocate(BUF_SIZE);
         private final ByteBuffer byteBuffer = ByteBuffer.wrap(mReadBuffer.array());
         private UsbRequest usbRequest;
+        private boolean isFirst = true;
 
         public UsbEndpointThread(UsbDevice usbDevice) {
             this.usbDevice = usbDevice;
@@ -241,7 +242,11 @@ public class UsbDevicesManager {
                             }
                             String s = stringBuilder.toString();
                             ZsfLog.d(UsbDevicesManager.class, usbDevice.getSerialNumber() == null ? Thread.currentThread().getName() : usbDevice.getSerialNumber() + " : 读取到数据 => " + s);
-                            scannerListener.scanResult(usbDevice, s);
+                            if (isFirst) {
+                                isFirst = false;
+                            } else {
+                                scannerListener.scanResult(usbDevice, s);
+                            }
                             byteBuffer.clear();
                         }
                     }
@@ -272,7 +277,6 @@ public class UsbDevicesManager {
                 if (usbInterface == null) {
                     continue;
                 }
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbInterface : " + usbInterface.toString());
                 if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA || usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_VIDEO || usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_VENDOR_SPEC) {
                     this.usbInterface = usbDevice.getInterface(i);
                 }
@@ -284,11 +288,11 @@ public class UsbDevicesManager {
                 if (usbEndpoint == null) {
                     continue;
                 }
-                ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : " + usbEndpoint.toString());
                 if (usbEndpoint.getType() == UsbConstants.USB_ENDPOINT_XFER_BULK || usbEndpoint.getType() == UsbConstants.USB_ENDPOINT_XFER_ISOC) {
                     if (usbInterface.getEndpoint(i).getDirection() == UsbConstants.USB_DIR_IN) {
                         this.usbEndpointRead = usbInterface.getEndpoint(i);
                         ZsfLog.d(UsbDevicesManager.class, Thread.currentThread().getName() + " : usbEndpoint : read");
+                        ZsfLog.d(UsbDevicesManager.class, usbDevice.toString());
                     }
                 }
             }
