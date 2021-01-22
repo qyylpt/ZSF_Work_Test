@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.zsf.utils.ZsfLog;
+import com.zzy.permission.m_device_usb.communication.common.DeviceTypeConstant;
 import com.zzy.permission.m_device_usb.communication.common.ScannerListener;
 
 import java.io.File;
@@ -23,6 +24,8 @@ public class SerialPortManager {
      * 远景达二维码串口
      */
     private final String YJD_SERIAL_PORT= "/dev/ttyS4";
+
+    private final String YJD_SERIAL_PORT_X8 = "/dev/ttyS3";
 
     /**
      * 远景达二维码波特率
@@ -68,7 +71,12 @@ public class SerialPortManager {
 
     private void openSerialPort() {
         try {
-            mSerialPort = new SerialPort(new File(YJD_SERIAL_PORT), YJD_BAUD_RATE, 0);
+            if (DeviceTypeConstant.X8.equals(android.os.Build.MODEL)) {
+                mSerialPort = new SerialPort(new File(YJD_SERIAL_PORT_X8), YJD_BAUD_RATE, 0);
+            }
+            if (DeviceTypeConstant.X6S.equals(android.os.Build.MODEL)) {
+                mSerialPort = new SerialPort(new File(YJD_SERIAL_PORT), YJD_BAUD_RATE, 0);
+            }
             mInputStream = mSerialPort.getInputStream();
             ZsfLog.d(SerialPortManager.class, "串口打开成功");
         } catch (IOException e) {

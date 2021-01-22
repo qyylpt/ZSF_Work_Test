@@ -15,6 +15,8 @@ public class DeviceTypeConstant {
      */
     public static final String X6S = "X6S";
 
+    public static final String X8 = "X8";
+
     /**
      * FM25-U、FM25-EX-U 新大陆
      */

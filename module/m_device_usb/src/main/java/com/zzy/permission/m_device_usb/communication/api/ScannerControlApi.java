@@ -2,6 +2,7 @@ package com.zzy.permission.m_device_usb.communication.api;
 
 import android.content.Context;
 
+import com.zsf.utils.ZsfLog;
 import com.zzy.permission.m_device_usb.communication.common.DeviceTypeConstant;
 import com.zzy.permission.m_device_usb.communication.common.LightAndRelayManager;
 import com.zzy.permission.m_device_usb.communication.common.ScannerListener;
@@ -34,7 +35,7 @@ public class ScannerControlApi {
 
     private ScannerControlApi(ScannerBuild scannerBuild) {
         this.scannerBuild = scannerBuild;
-        if (DeviceTypeConstant.X6S.equals(android.os.Build.MODEL)) {
+        if (DeviceTypeConstant.X6S.equals(android.os.Build.MODEL) || DeviceTypeConstant.X8.equals(android.os.Build.MODEL)) {
             serialPortManager = new SerialPortManager(scannerBuild.scannerListener);
         }
         usbDevicesManager = new UsbDevicesManager.UsbManagerBuilder(scannerBuild.mContext)

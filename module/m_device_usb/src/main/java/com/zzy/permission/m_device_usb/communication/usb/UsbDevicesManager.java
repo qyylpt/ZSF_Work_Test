@@ -72,6 +72,7 @@ public class UsbDevicesManager {
         usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
         HashMap<String,UsbDevice> deviceMap = usbManager.getDeviceList();
         for (UsbDevice usbDevice : deviceMap.values()) {
+            ZsfLog.d(UsbDevicesManager.class, "UsbDevice : " + usbDevice.toString());
             deviceStartRead(usbDevice);
         }
     }
