@@ -25,7 +25,7 @@ import java.util.Date;
 /**
  * @author zhangzhang
  */
-@Route(path = "/m_orc/UsbManagerActivity")
+@Route(path = "/m_device_usb/UsbManagerActivity")
 public class UsbManagerActivity extends BaseActivity {
 
     private TextView mUsbTextViewShowResult;

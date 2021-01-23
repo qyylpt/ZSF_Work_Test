@@ -156,8 +156,11 @@ public class MainActivity extends BaseActivity {
                     .build("/m_sms/SMSActivity")
                     .navigation();
         } else if (id == R.id.go_m_device_usb) {
+//            ARouter.getInstance()
+//                    .build("/m_device_usb/DeviceUsbActivity")
+//                    .navigation();
             ARouter.getInstance()
-                    .build("/m_device_usb/DeviceUsbActivity")
+                    .build("/m_device_usb/UsbManagerActivity")
                     .navigation();
         } else if (id == R.id.go_m_float_window) {
             ARouter.getInstance()
