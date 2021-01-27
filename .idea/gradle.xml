@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/module/IPC/m_ipc_server_test" />
             <option value="$PROJECT_DIR$/module/m_algorithm" />
             <option value="$PROJECT_DIR$/module/m_auto_start" />
+            <option value="$PROJECT_DIR$/module/m_camera" />
             <option value="$PROJECT_DIR$/module/m_device_manager" />
             <option value="$PROJECT_DIR$/module/m_device_usb" />
             <option value="$PROJECT_DIR$/module/m_fingerprint_unlock" />

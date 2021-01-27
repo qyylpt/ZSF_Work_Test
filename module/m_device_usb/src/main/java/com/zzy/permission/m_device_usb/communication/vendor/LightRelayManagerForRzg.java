@@ -58,25 +58,24 @@ public class LightRelayManagerForRzg extends LightAndRelayManager {
     }
 
     public static void setRelay(boolean open) {
-        KctWriteSysFile(open ? "1" : "0", GDQ);
+        kctWriteSysFile(open ? "1" : "0", GDQ);
     }
 
-    public static void KctWriteSysFile(String data, String mFilePath) {
-        FileOutputStream fops;
+    public static void kctWriteSysFile(String data, String mFilePath) {
+        FileOutputStream fops = null;
         try {
             fops = new FileOutputStream(mFilePath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return;
-        } catch (Exception e) {
-            return;
-        }
-        try {
             fops.write(data.getBytes());
             fops.flush();
-            fops.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                fops.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 }

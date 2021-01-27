@@ -125,43 +125,31 @@ public class UsbManagerActivity extends BaseActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.m_device_usb_light_red:
-                scannerControlApi.operateLight(1,1);
-                break;
-            case R.id.m_device_usb_light_green:
-                scannerControlApi.operateLight(0,1);
-                break;
-            case R.id.m_device_usb_text_light_white:
-                scannerControlApi.operateLight(4,1);
-                break;
-            case R.id.m_device_usb_text_relay_open:
-                scannerControlApi.operateRelay(true);
-                break;
-            case R.id.m_device_usb_text_relay_close:
-                scannerControlApi.operateRelay(false);
-                break;
-            case R.id.m_device_usb_button_sound_open:
-                if (TextUtils.isEmpty(editText.getText())) {
-                    scannerControlApi.startPlayRing(R.raw.sound);
-                } else {
-                    scannerControlApi.startPlayRing(editText.getText().toString());
-                }
-                break;
-            case R.id.m_device_usb_button_sound_close:
-                scannerControlApi.stopPlayRing();
-                break;
-            case R.id.m_usb_device_button_complex_data_clear:
-                mUsbTextViewShowResult.setText("");
-                break;
-            case R.id.m_device_usb_button_screen_open:
-                scannerControlApi.showOrHideNavigationStatusBar(false);
-                break;
-            case R.id.m_device_usb_button_screen_close:
-                scannerControlApi.showOrHideNavigationStatusBar(true);
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.m_device_usb_light_red) {
+            scannerControlApi.operateLight(1, 1);
+        } else if (id == R.id.m_device_usb_light_green) {
+            scannerControlApi.operateLight(0, 1);
+        } else if (id == R.id.m_device_usb_text_light_white) {
+            scannerControlApi.operateLight(4, 1);
+        } else if (id == R.id.m_device_usb_text_relay_open) {
+            scannerControlApi.operateRelay(true);
+        } else if (id == R.id.m_device_usb_text_relay_close) {
+            scannerControlApi.operateRelay(false);
+        } else if (id == R.id.m_device_usb_button_sound_open) {
+            if (TextUtils.isEmpty(editText.getText())) {
+                scannerControlApi.startPlayRing(R.raw.sound);
+            } else {
+                scannerControlApi.startPlayRing(editText.getText().toString());
+            }
+        } else if (id == R.id.m_device_usb_button_sound_close) {
+            scannerControlApi.stopPlayRing();
+        } else if (id == R.id.m_usb_device_button_complex_data_clear) {
+            mUsbTextViewShowResult.setText("");
+        } else if (id == R.id.m_device_usb_button_screen_open) {
+            scannerControlApi.showOrHideNavigationStatusBar(false);
+        } else if (id == R.id.m_device_usb_button_screen_close) {
+            scannerControlApi.showOrHideNavigationStatusBar(true);
         }
 
     }
