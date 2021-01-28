@@ -4,7 +4,6 @@
     package="com.zzy.permission.m_device_usb">
     <uses-feature android:name="android.hardware.usb.host" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,14 +15,14 @@
         android:name="com.zsf.application.BaseCommonApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".DeviceUsbActivity">
-
-        </activity>
-        <activity android:name=".communication.UsbManagerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".communication.UsbManagerActivity">
+
         </activity>
     </application>
 

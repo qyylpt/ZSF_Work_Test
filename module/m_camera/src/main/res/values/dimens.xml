@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="m_camera_item_title_size">24sp</dimen>
+    <dimen name="m_camera_text_size_20">20sp</dimen>
+    <dimen name="m_camera_text_size_18">18sp</dimen>
+    <dimen name="m_camera_text_size_16">16sp</dimen>
 </resources>

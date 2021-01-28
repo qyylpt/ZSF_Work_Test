@@ -11,4 +11,5 @@
     <string name="m_camera_longitude_radius">经度半径</string>
     <string name="m_camera_remarks_title">备注</string>
     <string name="m_camera_prompt_text">描述文件详情</string>
+    <string name="m_camera_button_save_text">保存</string>
 </resources>

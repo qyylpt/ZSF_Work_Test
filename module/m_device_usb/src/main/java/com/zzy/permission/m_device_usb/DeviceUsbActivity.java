@@ -1,6 +1,7 @@
 package com.zzy.permission.m_device_usb;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.view.activity.BaseActivity;
+import com.zzy.permission.m_device_usb.communication.UsbManagerActivity;
+
 import java.util.HashMap;
 
 @Route(path = "/m_device_usb/DeviceUsbActivity")
@@ -49,6 +52,7 @@ public class DeviceUsbActivity extends BaseActivity implements UsbUtils.UsbAttac
         }
         if (id == R.id.m_device_usb_button_clear){
             deviceUsbTextView.setText("");
+            startActivity(new Intent(DeviceUsbActivity.this, UsbManagerActivity.class));
         }
     }
 
