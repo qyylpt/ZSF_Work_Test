@@ -12,6 +12,7 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbRequest;
+import android.nfc.Tag;
 
 import com.zsf.utils.ToastUtils;
 import com.zsf.utils.ZsfLog;
@@ -217,6 +218,11 @@ public class UsbDevicesManager {
 
         public void release() {
             this.interrupt = true;
+            usbManager.openDevice(this.usbDevice).claimInterface(this.usbInterface, true);
+            ZsfLog.d(UsbDevicesManager.class, "release");
+        }
+
+        private void reset(){
             usbRequest.close();
             usbRequest = null;
             usbDeviceConnection.releaseInterface(usbInterface);
@@ -225,6 +231,7 @@ public class UsbDevicesManager {
             usbEndpointRead = null;
             usbDevice = null;
             byteBuffer.clear();
+            ZsfLog.d(UsbDevicesManager.class, "reset");
         }
 
         @Override
@@ -255,9 +262,10 @@ public class UsbDevicesManager {
                 }
             } catch (Exception e) {
                 ZsfLog.d(UsbDevicesManager.class, "It may be an abnormality caused by X6S equipment or resource recycling \n ");
-                release();
                 usbEndpointList.remove(this);
                 e.printStackTrace();
+            } finally {
+                reset();
             }
         }
 
@@ -266,6 +274,7 @@ public class UsbDevicesManager {
                 throw new IOException(Thread.currentThread().getName() + " : Error queueing request.");
             }
             final UsbRequest usbRequestResponse = usbDeviceConnection.requestWait();
+            ZsfLog.d(UsbDevicesManager.class, "readData()");
             if (usbRequestResponse == null) {
                 throw new IOException(Thread.currentThread().getName() + " : Null response");
             }
