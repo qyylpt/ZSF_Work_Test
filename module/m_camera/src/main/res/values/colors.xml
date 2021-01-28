@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="m_camera_submit_tag_background">#FFFFFF</color>
+    <color name="m_camera_submit_item_background">#50999999</color>
+    <color name="m_camera_submit_item_text">@color/C_444444</color>
 </resources>

@@ -390,11 +390,6 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
         SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(
                 input, null, options));
         bitmap = (Bitmap) softRef.get();
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-        if (imgByte != null) {
-            imgByte = null;
-        }
         try {
             if (input != null) {
                 input.close();

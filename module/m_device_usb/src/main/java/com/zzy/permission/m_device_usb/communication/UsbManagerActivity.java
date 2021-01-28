@@ -2,8 +2,11 @@ package com.zzy.permission.m_device_usb.communication;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.usb.UsbDevice;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -14,11 +17,13 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.global.GlobalData;
 import com.zsf.utils.ToastUtils;
+import com.zsf.utils.ZsfLog;
 import com.zsf.view.activity.BaseActivity;
 import com.zzy.permission.m_device_usb.R;
 import com.zzy.permission.m_device_usb.communication.api.ScannerControlApi;
 import com.zzy.permission.m_device_usb.communication.common.ScannerListener;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -37,7 +42,23 @@ public class UsbManagerActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ZsfLog.d(UsbManagerActivity.class, "imei = " + getMachineImei(this));
+
     }
+
+    public static String getMachineImei(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String imei = null;
+        if (telephonyManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                imei = telephonyManager.getImei();
+            } else {
+                imei = telephonyManager.getDeviceId();
+            }
+        }
+        return imei;
+    }
+
 
     @Override
     public void initView(Activity activity) {

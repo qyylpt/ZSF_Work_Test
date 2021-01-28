@@ -1,3 +1,14 @@
 <resources>
-
+    <string name="m_camera_determine">确定</string>
+    <string name="m_camera_image_title">照片</string>
+    <string name="m_camera_scenes_select_title">场景</string>
+    <string name="m_camera_scenes_select">请选择场景</string>
+    <string name="m_camera_scenes_label_title">标签</string>
+    <string name="m_camera_scenes_label">请选择标签</string>
+    <string name="m_camera_latitude_longitude_title">经纬度</string>
+    <string name="m_camera_longitude">经度</string>
+    <string name="m_camera_latitude">纬度</string>
+    <string name="m_camera_longitude_radius">经度半径</string>
+    <string name="m_camera_remarks_title">备注</string>
+    <string name="m_camera_prompt_text">描述文件详情</string>
 </resources>
