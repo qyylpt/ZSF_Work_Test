@@ -22,7 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.manager.FragmentStack;
 import com.zsf.m_camera.ui.BaseFragment;
+import com.zsf.m_camera.ui.activity.CameraActivity;
 import com.zsf.m_camera.ui.view.CustomPaintView;
 import com.zsf.utils.ZsfLog;
 
@@ -126,7 +128,7 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                                     bundle.putDouble("longitude", longitude);
                                     bundle.putDouble("latitude", latitude);
                                     bundle.putFloat("radius", radius);
-//                                    startFragment("photoCollectorlibrary", "com.uusafe.photocollectorlibrary.view.PhotoCollectorAddTagFragment", bundle);
+                                    FragmentStack.addFragment(getActivity().getSupportFragmentManager(), SubmitPhotoFragment.class, ((CameraActivity)getActivity()).getFragmentContainer(), bundle);
                                 }
                             });
                         } catch (IOException e) {

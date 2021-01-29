@@ -39,7 +39,7 @@ public class FragmentStack {
 
 
     private static void stackFragment(FragmentManager fragmentManager, Fragment fromFragment, Class<? extends BaseFragment> fragmentClass, int requestCode, int containerId, Bundle args){
-        String tag = args.getString(BUNDLE_KEY_TAG);
+        String tag = fragmentClass.getSimpleName();
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (fragment == null){
