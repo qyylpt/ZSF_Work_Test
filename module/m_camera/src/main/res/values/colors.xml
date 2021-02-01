@@ -6,4 +6,6 @@
     <color name="submit_button_background_color">#4D7BFE</color>
     <color name="m_camera_text_color_000000">#000000</color>
     <color name="m_camera_text_color_333333">#333333</color>
+    <color name="m_camera_common_text">#111111</color>
+    <color name="m_camera_divider_color">#D6D6D6</color>
 </resources>

@@ -107,7 +107,4 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_margin="@dimen/dimen_30_dp"/>
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,35 @@
 package com.zsf.m_camera.ui.fragment;
 
+import android.app.Dialog;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zsf.m_camera.R;
 import com.zsf.m_camera.ui.BaseFragment;
+import com.zsf.utils.ZsfLog;
 
+import java.lang.reflect.Field;
 import java.sql.Time;
 
 /**
@@ -26,18 +37,25 @@ import java.sql.Time;
  * @date : 2021/1/27 2:18 PM
  * @desc :
  */
-public abstract class SubmitFragment extends BaseFragment implements View.OnClickListener {
+public abstract class SubmitFragment extends BaseFragment implements View.OnClickListener, NumberPicker.OnValueChangeListener {
 
     private TextView exit, title, longitude, latitude, radius, selectScenes, submitItemTitle;
     private ImageView icon;
     private EditText content;
     private Button submit;
 
+    private Dialog mDialog;
+    private NumberPicker numberPicker;
+    private TextView dialogSelect, dialogCancel;
+
     private double longitudeNum = 4.9E-324D;
     private double latitudeNum = 4.9E-324D;
     private float radiusNum = 0.0F;
     private String filePath;
     private String time;
+
+    private String selectResult;
+    private final int DEFAULT_SELECT_ITEM = 0;
 
     @Nullable
     @Override
@@ -91,6 +109,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
                 .load(filePath)
                 .apply(options)
                 .into(icon);
+        initSelectScenes();
     }
 
     @Override
@@ -105,11 +124,64 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
             back();
         }
         if (id ==  R.id.m_camera_TextView_scenes_select) {
-
+            mDialog.show();
         }
         if (id == R.id.m_camera_Button_submit) {
 
         }
+        if (id == R.id.m_camera_TextView_cancel) {
+            mDialog.dismiss();
+        }
+        if (id == R.id.m_camera_TextView_determine) {
+            mDialog.dismiss();
+            if (!TextUtils.isEmpty(selectResult)) {
+                selectScenes.setText(selectResult);
+            }
+        }
+    }
+
+    private void initSelectScenes() {
+        mDialog = new Dialog(getActivity(), R.style.BottomDialog);
+        ConstraintLayout root = (ConstraintLayout) LayoutInflater.from(getActivity()).inflate(R.layout.bottom_float_window_layout, null);
+        numberPicker = root.findViewById(R.id.m_camera_NumberPicker_scenes_select);
+        dialogCancel = root.findViewById(R.id.m_camera_TextView_cancel);
+        dialogCancel.setOnClickListener(this);
+        dialogSelect = root.findViewById(R.id.m_camera_TextView_determine);
+        dialogSelect.setOnClickListener(this);
+        String[] data = getNumberPickerData();
+        numberPicker.setDisplayedValues(data);
+        setNumberPickerDividerColor(numberPicker);
+        numberPicker.setMaxValue(data.length - 1);
+        numberPicker.setMinValue(0);
+        numberPicker.setValue(DEFAULT_SELECT_ITEM);
+        numberPicker.setWrapSelectorWheel(true);
+        numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        numberPicker.setOnValueChangedListener(this);
+        selectResult = data[DEFAULT_SELECT_ITEM];
+
+        mDialog.setContentView(root);
+
+        final int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        final int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        root.measure(widthMeasureSpec, heightMeasureSpec);
+        Window dialogWindow = mDialog.getWindow();
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width = getResources().getDisplayMetrics().widthPixels;
+        lp.height = root.getMeasuredHeight();
+        dialogWindow.setAttributes(lp);
+
+    }
+
+    protected String[] getNumberPickerData() {
+        String[] numbers = {"场景 1", "场景 2", "场景 3", "场景 4", "场景 5", "场景 6", "场景 7", "场景 8", "场景 9", "场景 10", "场景 10+"};
+        return numbers;
+    }
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        ZsfLog.d(SubmitFragment.class, "oldVal : " + oldVal + "; newVal : " + newVal);
+        selectResult = getNumberPickerData()[newVal];
     }
 
     /**
@@ -123,4 +195,39 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
      * @return
      */
     public abstract String getSubmitType();
+
+    public void setNumberPickerDividerColor(NumberPicker numberPicker) {
+        NumberPicker picker = numberPicker;
+        Field[] pickerFields = NumberPicker.class.getDeclaredFields();
+        for (Field pf : pickerFields) {
+            if (pf.getName().equals("mSelectionDivider")) {
+                pf.setAccessible(true);
+                try {
+                    //设置分割线的颜色值 透明
+                    pf.set(picker, new ColorDrawable(this.getResources().getColor(R.color.m_camera_divider_color)));
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (Resources.NotFoundException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        // 分割线高度
+        for (Field pf2 : pickerFields) {
+            if (pf2.getName().equals("mSelectionDividerHeight")) {
+                pf2.setAccessible(true);
+                try {
+                    int result = 2;
+                    pf2.set(picker, result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+
+    }
 }

@@ -1,5 +1,8 @@
 <resources>
     <string name="m_camera_determine">确定</string>
+    <string name="m_camera_common_cancel">取消</string>
+    <string name="m_camera_common_select">请选择</string>
+
     <string name="m_camera_image_title">照片</string>
     <string name="m_camera_scenes_select_title">场景</string>
     <string name="m_camera_scenes_select">请选择场景</string>
@@ -17,4 +20,6 @@
     <string name="m_camera_image_title_video">视频</string>
     <string name="m_camera_image_content_type_photo">图片提交</string>
     <string name="m_camera_image_content_type_video">视频提交</string>
+
+
 </resources>
