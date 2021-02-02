@@ -19,9 +19,5 @@ public class MainFragment extends BaseFragment {
         switchStyle(false);
     }
 
-    @Override
-    public BaseFragment getPreviousFragment() {
-        return null;
-    }
 
 }
