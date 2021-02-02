@@ -327,7 +327,12 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
 
     @Override
     public boolean isNeedAddStack() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public void refreshStyle() {
+        switchStyle(true);
     }
 
     class CameraCallback extends CameraView.Callback {

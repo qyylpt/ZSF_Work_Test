@@ -19,4 +19,10 @@ public class SubmitPhotoFragment extends SubmitFragment {
     public String getSubmitType() {
         return getResources().getString(R.string.m_camera_image_title_photo);
     }
+
+    @Override
+    public void refreshStyle() {
+        switchStyle(false);
+    }
+
 }

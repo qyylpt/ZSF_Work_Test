@@ -60,6 +60,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        switchStyle(false);
         Bundle args = getArguments();
         if (args != null) {
             filePath = args.getString("path");

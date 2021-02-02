@@ -80,6 +80,8 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
         return view;
     }
 
+
+
     private void initView(View view) {
         photoPreview = view.findViewById(R.id.m_camera_ImageView_photo_preview);
         addTagView = view.findViewById(R.id.m_camera_CustomPaintView_tag);
@@ -97,6 +99,11 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
     @Override
     public boolean isNeedAddStack() {
         return true;
+    }
+
+    @Override
+    public void refreshStyle() {
+        switchStyle(true);
     }
 
     @Override
@@ -128,7 +135,7 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                                     bundle.putDouble("longitude", longitude);
                                     bundle.putDouble("latitude", latitude);
                                     bundle.putFloat("radius", radius);
-                                    FragmentStack.addFragment(getActivity().getSupportFragmentManager(), SubmitPhotoFragment.class, ((CameraActivity)getActivity()).getFragmentContainer(), bundle);
+                                    FragmentStack.addFragment(getActivity().getSupportFragmentManager(), EditPhotoFragment.this, SubmitPhotoFragment.class, 101, ((CameraActivity)getActivity()).getFragmentContainer(), bundle);
                                 }
                             });
                         } catch (IOException e) {

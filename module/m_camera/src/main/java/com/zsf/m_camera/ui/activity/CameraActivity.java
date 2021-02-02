@@ -1,9 +1,6 @@
 package com.zsf.m_camera.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.m_camera.R;
@@ -17,7 +14,6 @@ import com.zsf.m_camera.ui.fragment.CameraFragment;
 @Route(path = "/m_camera/CameraActivity")
 public class CameraActivity extends BaseCollectionActivity {
 
-    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +24,6 @@ public class CameraActivity extends BaseCollectionActivity {
     }
 
     private void initView() {
-        frameLayout = findViewById(R.id.camera_content);
     }
 
     private void initData() {
@@ -41,4 +36,10 @@ public class CameraActivity extends BaseCollectionActivity {
     public int getFragmentContainer() {
         return R.id.camera_content;
     }
+
+    @Override
+    public void refreshStyle() {
+        switchStyle(true);
+    }
+
 }
