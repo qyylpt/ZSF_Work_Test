@@ -3,4 +3,8 @@
     <dimen name="m_camera_text_size_20">20sp</dimen>
     <dimen name="m_camera_text_size_18">18sp</dimen>
     <dimen name="m_camera_text_size_16">16sp</dimen>
+    <dimen name="m_camera_text_size_14">14sp</dimen>
+
+    <dimen name="m_camera_status_bar_size">24dp</dimen>
+    <dimen name="m_camera_bottom_navigation_height">60dp</dimen>
 </resources>

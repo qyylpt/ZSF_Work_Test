@@ -6,15 +6,15 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="@dimen/m_camera_status_bar_size"
         android:id="@+id/status_bar"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/m_camera_submit_tag_background"/>
+        android:background="@color/m_camera_theme_background"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/m_camera_submit_tag_background"
+        android:background="@color/m_camera_theme_background"
         app:layout_constraintTop_toBottomOf="@+id/status_bar"
         android:id="@+id/m_camera_title_background"/>
 
@@ -50,7 +50,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/m_camera_submit_tag_background">
+            android:background="@color/m_camera_theme_background">
 
             <TextView
                 android:layout_width="match_parent"

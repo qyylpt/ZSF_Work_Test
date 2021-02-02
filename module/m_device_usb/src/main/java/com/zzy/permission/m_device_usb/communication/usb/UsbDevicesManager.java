@@ -73,7 +73,7 @@ public class UsbDevicesManager {
         usbManager = (UsbManager) this.context.getSystemService(Context.USB_SERVICE);
         HashMap<String,UsbDevice> deviceMap = usbManager.getDeviceList();
         for (UsbDevice usbDevice : deviceMap.values()) {
-            ZsfLog.d(UsbDevicesManager.class, "UsbDevice : " + usbDevice.toString());
+            ZsfLog.d(UsbDevicesManager.class, "initConnectedDevice UsbDevice : " + usbDevice.toString());
             deviceStartRead(usbDevice);
         }
     }
@@ -136,16 +136,19 @@ public class UsbDevicesManager {
                 case UsbManager.ACTION_USB_DEVICE_DETACHED :
                     synchronized (this) {
                         UsbDevice usbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                        ZsfLog.d(UsbDevicesManager.class, "USB_DEVICE_DETACHED : " + usbDevice.getSerialNumber());
                         if (usbDevice != null) {
                             scannerListener.deviceDisconnect(usbDevice);
                             Iterator<UsbEndpointThread> usbEndpointThreadIterator = usbEndpointList.iterator();
                             while (usbEndpointThreadIterator.hasNext()) {
                                 UsbEndpointThread usbEndpointThread = usbEndpointThreadIterator.next();
-                                if (usbEndpointThread.getUsbDevice().getDeviceName().equals(usbDevice.getDeviceName())) {
+                                if (!usbEndpointThread.getUsbDevice().getDeviceName().equals(usbDevice.getDeviceName())) {
                                     usbEndpointThread.release();
-                                    usbEndpointThreadIterator.remove();
+
                                 }
+                                usbEndpointThreadIterator.remove();
                             }
+                            initConnectedDevice();
                         } else {
                             ZsfLog.d(UsbDevicesManager.class, "UsbDevice is null");
                         }
@@ -220,10 +223,11 @@ public class UsbDevicesManager {
             this.interrupt = true;
             // 由于睿智谷设备系统问题，如果直接reset()会造成usbDeviceConnection.requestWait()系统内部空指针。解决办法通过重新声明读取通道发送一条空信息，然后跳出while循环之后再回收
             usbManager.openDevice(this.usbDevice).claimInterface(this.usbInterface, true);
-            ZsfLog.d(UsbDevicesManager.class, "release");
+            ZsfLog.d(UsbDevicesManager.class, "release : " + usbDevice.toString());
         }
 
         private void reset(){
+            ZsfLog.d(UsbDevicesManager.class, "reset : " + usbDevice.toString());
             usbRequest.close();
             usbRequest = null;
             usbDeviceConnection.releaseInterface(usbInterface);
@@ -232,7 +236,6 @@ public class UsbDevicesManager {
             usbEndpointRead = null;
             usbDevice = null;
             byteBuffer.clear();
-            ZsfLog.d(UsbDevicesManager.class, "reset");
         }
 
         @Override
@@ -262,6 +265,9 @@ public class UsbDevicesManager {
                     }
                 }
             } catch (Exception e) {
+                if (usbDevice != null) {
+                    ZsfLog.d(UsbDevicesManager.class, "Exception UsbDeviceName : " + usbDevice.getSerialNumber());
+                }
                 ZsfLog.d(UsbDevicesManager.class, "It may be an abnormality caused by X6S equipment or resource recycling \n ");
                 usbEndpointList.remove(this);
                 e.printStackTrace();
