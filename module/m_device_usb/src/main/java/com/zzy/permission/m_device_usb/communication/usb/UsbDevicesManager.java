@@ -142,12 +142,9 @@ public class UsbDevicesManager {
                             Iterator<UsbEndpointThread> usbEndpointThreadIterator = usbEndpointList.iterator();
                             while (usbEndpointThreadIterator.hasNext()) {
                                 UsbEndpointThread usbEndpointThread = usbEndpointThreadIterator.next();
-                                if (!usbEndpointThread.getUsbDevice().getDeviceName().equals(usbDevice.getDeviceName())) {
-                                    usbEndpointThread.release();
-
-                                }
-                                usbEndpointThreadIterator.remove();
+                                usbEndpointThread.release();
                             }
+                            usbEndpointList.clear();
                             initConnectedDevice();
                         } else {
                             ZsfLog.d(UsbDevicesManager.class, "UsbDevice is null");
@@ -221,8 +218,10 @@ public class UsbDevicesManager {
 
         public void release() {
             this.interrupt = true;
-            // 由于睿智谷设备系统问题，如果直接reset()会造成usbDeviceConnection.requestWait()系统内部空指针。解决办法通过重新声明读取通道发送一条空信息，然后跳出while循环之后再回收
-            usbManager.openDevice(this.usbDevice).claimInterface(this.usbInterface, true);
+            if (usbManager != null && usbDevice != null && usbInterface != null ){
+                // 由于睿智谷设备系统问题，如果直接reset()会造成usbDeviceConnection.requestWait()系统内部空指针。解决办法通过重新声明读取通道发送一条空信息，然后跳出while循环之后再回收
+                usbManager.openDevice(this.usbDevice).claimInterface(this.usbInterface, true);
+            }
             ZsfLog.d(UsbDevicesManager.class, "release : " + usbDevice.toString());
         }
 
