@@ -55,6 +55,9 @@ ext {
             // 滴滴移动研发助手
             DoKit                  : "3.2.0",
 
+            // 数据库调试
+            debug_database         : "1.0.6"
+
 
     ]
 
@@ -103,7 +106,10 @@ ext {
             // 如果有需要支持Weex的需求可以直接添加下面依赖
             "doraemonkit-weex"      : "com.didichuxing.doraemonkit:doraemonkit-weex:${versions["DoKit"]}",
             // 如果有需要集成 LeakCanary 的需求可以直接添加下面依赖
-            "doraemonkit-leakcanary": "com.didichuxing.doraemonkit:doraemonkit-leakcanary:${versions["DoKit"]}"
+            "doraemonkit-leakcanary": "com.didichuxing.doraemonkit:doraemonkit-leakcanary:${versions["DoKit"]}",
+
+            // 数据库在线调试
+            "debug_database"        : "com.amitshekhar.android:debug-db:${versions["debug_database"]}"
 
     ]
 

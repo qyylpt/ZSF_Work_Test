@@ -11,6 +11,10 @@
         android:theme="@style/Common_AppTheme" >
 
         <activity android:name=".ui.activity.CameraActivity" android:launchMode="singleTask"/>
+        <provider
+            android:authorities="${applicationId}.CollectionProvider.FileReport"
+            android:name=".data.CollectionProvider"
+            android:exported="true"/>
 
     </application>
 

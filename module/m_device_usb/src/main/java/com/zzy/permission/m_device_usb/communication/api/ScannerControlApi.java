@@ -2,7 +2,6 @@ package com.zzy.permission.m_device_usb.communication.api;
 
 import android.content.Context;
 
-import com.zsf.utils.ZsfLog;
 import com.zzy.permission.m_device_usb.communication.common.DeviceTypeConstant;
 import com.zzy.permission.m_device_usb.communication.common.LightAndRelayManager;
 import com.zzy.permission.m_device_usb.communication.common.ScannerListener;

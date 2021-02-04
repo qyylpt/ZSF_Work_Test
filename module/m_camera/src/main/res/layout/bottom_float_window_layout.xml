@@ -39,7 +39,7 @@
         android:text="@string/m_camera_determine"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:textColor="@color/submit_button_background_color"
+        android:textColor="@color/m_camera_text_color_000000"
         android:layout_marginRight="@dimen/dimen_15_dp"/>
 
     <View

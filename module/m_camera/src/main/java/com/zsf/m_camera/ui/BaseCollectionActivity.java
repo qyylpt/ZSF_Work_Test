@@ -27,6 +27,11 @@ public abstract class BaseCollectionActivity extends AppCompatActivity {
      */
     public abstract void refreshStyle();
 
+    /**
+     * 返回首页
+     */
+    public abstract void goBackFirstPage();
+
     public void switchStyle(boolean enable) {
         Window window = getWindow();
         if (enable) {

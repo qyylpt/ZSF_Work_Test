@@ -4,20 +4,19 @@ import com.zsf.m_camera.R;
 
 /**
  * @author : zsf
- * @date : 2021/1/29 10:36 AM
+ * @date : 2021/2/4 6:31 PM
  * @desc :
  */
-public class SubmitPhotoFragment extends SubmitFragment {
-
+public class SubmitVideoFragment extends SubmitFragment {
 
     @Override
     public String getSubmitTitle() {
-        return getResources().getString(R.string.m_camera_image_content_type_photo);
+        return getResources().getString(R.string.m_camera_image_content_type_video);
     }
 
     @Override
     public String getSubmitType() {
-        return getResources().getString(R.string.m_camera_image_title_photo);
+        return getResources().getString(R.string.m_camera_image_title_video);
     }
 
     @Override
@@ -33,5 +32,4 @@ public class SubmitPhotoFragment extends SubmitFragment {
             mainFragment.refreshStyle();
         }
     }
-
 }

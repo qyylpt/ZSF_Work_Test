@@ -10,4 +10,7 @@ public class ZsfLog {
     public static void d(Class tClass, String msg){
         Log.e(TAG, tClass.getSimpleName() +": " + msg);
     }
+    public static void d(String tClass, String msg){
+        Log.e(tClass, " : " + msg);
+    }
 }

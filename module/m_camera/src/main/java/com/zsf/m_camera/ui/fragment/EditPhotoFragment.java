@@ -206,14 +206,18 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                 file.createNewFile();
             }
         }
+        FileOutputStream out = null;
         try {
-            FileOutputStream out = new FileOutputStream(file);
+            out = new FileOutputStream(file);
             out.write(bs);
             out.flush();
-            out.close();
         }
         catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (out != null) {
+                out.close();
+            }
         }
     }
 
@@ -261,6 +265,15 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
             path.lineTo(j2 + dx, i - dy);
             canvas.drawTextOnPath(watermark, path, 0, 0, paint);
             path.reset();
+        }
+    }
+
+    @Override
+    public void back() {
+        getActivity().getSupportFragmentManager().popBackStack(MainFragment.class.getSimpleName(), 0);
+        MainFragment mainFragment = (MainFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MainFragment.class.getName());
+        if (mainFragment != null) {
+            mainFragment.refreshStyle();
         }
     }
 }

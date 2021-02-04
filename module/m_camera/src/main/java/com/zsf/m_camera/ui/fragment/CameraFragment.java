@@ -1,5 +1,6 @@
 package com.zsf.m_camera.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -45,9 +46,6 @@ import java.util.Date;
  */
 public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, ChronometerManager.RecordListener, Runnable {
 
-    public static final int PHOTO_TYPE = 0;
-    public static final int VIDEO_TYPE = 1;
-
     private SeekBar seekBar;
     private CameraView cameraView;
     private TextView takePhoto, takeVideo, videoControl, takeCancel, cameraFlash, cameraSwitch;
@@ -88,6 +86,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
 
     private Handler backHandler = new Handler(HandlerThreadManager.getLooper());
 
+    @SuppressLint("HandlerLeak")
     private Handler uiHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -122,7 +121,8 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
         // TODO: 2021/1/24 视频 or 照片判断
-        isPhoto = true;
+        Bundle bundle = getArguments();
+        isPhoto = bundle.getBoolean("isPhoto");
         initView(view, isPhoto);
         return view;
             
@@ -209,7 +209,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
             }
             if (telecontroller.isStart()) {
                 telecontroller.stop();
-                // TODO: 2021/1/24 预览影片
+                previewVideo();
                 ZsfLog.d(CameraFragment.class, "预览影片");
                 cameraSwitch.setVisibility(View.VISIBLE);
             } else {
@@ -361,6 +361,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
             bundle.putDouble("longitude", longitude);
             bundle.putDouble("latitude", latitude);
             bundle.putFloat("radius", radius);
+            bundle.putInt("type", 0);
             FragmentStack.addFragment(getActivity().getSupportFragmentManager(), CameraFragment.this, EditPhotoFragment.class, 100,((BaseCollectionActivity)getActivity()).getFragmentContainer(), bundle);
         }
     }
@@ -384,6 +385,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
     @Override
     public void onDestroy() {
         super.onDestroy();
+        uiHandler.removeCallbacksAndMessages(null);
     }
 
     private Bitmap byteToBitmap(byte[] imgByte) {
@@ -416,5 +418,16 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
             return copy;
         }
         return null;
+    }
+
+    private void previewVideo() {
+        Bundle bundle = new Bundle();
+        bundle.putString("path", path);
+        bundle.putString("time", timeTemp);
+        bundle.putDouble("longitude", longitude);
+        bundle.putDouble("latitude", latitude);
+        bundle.putFloat("radius", radius);
+        bundle.putInt("type", 1);
+        FragmentStack.addFragment(getActivity().getSupportFragmentManager(), CameraFragment.this, SubmitVideoFragment.class, 100,((BaseCollectionActivity)getActivity()).getFragmentContainer(), bundle);
     }
 }

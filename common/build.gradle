@@ -79,6 +79,9 @@ dependencies {
     // 权限申请
     api rootProject.ext.dependencies["AndPermission"]
 
+    // 数据库调试
+    debugImplementation rootProject.ext.dependencies["debug_database"]
+
     // 滴滴移动开发助手
 //    debugImplementation rootProject.ext.dependencies["doraemonkit"]
 //    releaseImplementation rootProject.ext.dependencies["doraemonkit-no-op"]

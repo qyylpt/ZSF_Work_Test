@@ -10,4 +10,6 @@
     <color name="m_camera_divider_color">#D6D6D6</color>
     <color name="m_camera_common_text_color">#383838</color>
     <color name="m_camera_theme_flip_color">#F8F8F8</color>
+    <color name="m_camera_item_line">#979797</color>
+    <color name="m_camera_mask_text">#BFBFBF</color>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Build;
 //import com.didichuxing.doraemonkit.DoraemonKit;
 import com.zsf.application.set.CommonApplicationSetting;
 import com.zsf.global.GlobalData;
+import com.zsf.utils.ZsfLog;
 
 import java.lang.reflect.Method;
 
@@ -18,6 +19,7 @@ public class BaseCommonApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ZsfLog.d(BaseCommonApplication.class, "---------");
         GlobalData.setApplication(this);
         CommonApplicationSetting.initCommonApplication(this);
         supportHideApiOpen(this);
