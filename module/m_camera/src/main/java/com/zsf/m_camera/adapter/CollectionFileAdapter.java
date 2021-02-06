@@ -5,10 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zsf.global.GlobalData;
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.adapter.bean.CollectionFileBean;
 import com.zsf.m_camera.adapter.holder.PhotoListHolder;
 import com.zsf.m_camera.adapter.holder.RecentHolder;
@@ -24,7 +26,9 @@ import java.util.zip.Inflater;
  */
 public class CollectionFileAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private List<CollectionFileBean> collectionFileBeans;
+    private final String TAG = "AQCJ_CollectionFileAdapter";
+
+    private List<CollectionFileBean> currentFileBeans;
 
     private BaseFragment fragment;
 
@@ -35,13 +39,16 @@ public class CollectionFileAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
     public CollectionFileAdapter(BaseFragment fragment, List<CollectionFileBean> collectionFileBeans, int adapterType) {
         this.fragment = fragment;
-        this.collectionFileBeans = collectionFileBeans;
+        this.currentFileBeans = collectionFileBeans;
         this.adapterType = adapterType;
         layoutInflater = LayoutInflater.from(GlobalData.getContext());
     }
 
-    public void setAdapter(List<CollectionFileBean> collectionFileBeans) {
-        this.collectionFileBeans = collectionFileBeans;
+    public void updateAdapter(List<CollectionFileBean> collectionFileBeans) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new CollectionDiffCallback(currentFileBeans, collectionFileBeans));
+        this.currentFileBeans.clear();
+        this.currentFileBeans.addAll(collectionFileBeans);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @NonNull
@@ -69,12 +76,22 @@ public class CollectionFileAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-            holder.bindView(collectionFileBeans.get(position), position);
+        holder.bindView(currentFileBeans.get(position), position);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
+        ZLog.d(TAG, payloads.toString());
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads);
+        } else {
+            holder.bindView((CollectionFileBean) payloads.get(0), position);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return collectionFileBeans.size();
+        return currentFileBeans.size();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zsf.m_camera.ui.fragment;
 
 import android.database.Cursor;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zsf.global.GlobalData;
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.adapter.CollectionFileAdapter;
 import com.zsf.m_camera.adapter.bean.CollectionFileBean;
 import com.zsf.m_camera.data.CollectionProvider;
@@ -38,6 +40,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
     private RecyclerView recentView;
     private View mask;
     private LoadCollectionTask loadCollectionTask;
+    private CollectionFileAdapter mainFileManagerAdapter;
 
 
     @Nullable
@@ -74,10 +77,11 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
         doRefresh.setOnClickListener(this);
         recentView = view.findViewById(R.id.m_camera_RecyclerView_recent_list);
         mask = view.findViewById(R.id.m_camera_ConstraintLayout_mask);
+        mask.setOnClickListener(this);
     }
 
     private void initData() {
-        loadCollectionTask = new LoadCollectionTask();
+        loadCollectionTask = new LoadCollectionTask(true);
         loadCollectionTask.execute();
     }
 
@@ -94,6 +98,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
         int id = v.getId();
         if (id == R.id.m_camera_TextView_photo) {
             mask.setVisibility(View.GONE);
@@ -140,10 +145,24 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
         if (id == R.id.m_camera_ImageView_close_mask) {
             mask.setVisibility(View.GONE);
         }
+        if (id == R.id.m_camera_ImageView_refresh) {
+            loadCollectionTask.cancel(true);
+            loadCollectionTask = new LoadCollectionTask(false);
+            loadCollectionTask.execute();
+        }
+        if (id == R.id.m_camera_ConstraintLayout_mask) {
+            mask.setVisibility(View.GONE);
+        }
 
     }
 
     public class LoadCollectionTask extends AsyncTask<Void, Void, List<CollectionFileBean>>{
+
+        public boolean isRefresh = false;
+
+        public LoadCollectionTask(boolean isRefresh) {
+            this.isRefresh = isRefresh;
+        }
 
         @Override
         protected List<CollectionFileBean> doInBackground(Void... voids) {
@@ -171,13 +190,19 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
 
         @Override
         protected void onPostExecute(List<CollectionFileBean> collectionFileBeans) {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GlobalData.getContext());
-            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-            recentView.setLayoutManager(linearLayoutManager);
-            CollectionFileAdapter mainFileManagerAdapter = new CollectionFileAdapter(MainFragment.this, collectionFileBeans, CollectionFileAdapter.AdapterType.ADAPTER_MAIN);
-            recentView.setAdapter(mainFileManagerAdapter);
+            if (isRefresh) {
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GlobalData.getContext());
+                linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                recentView.setLayoutManager(linearLayoutManager);
+                mainFileManagerAdapter = new CollectionFileAdapter(MainFragment.this, collectionFileBeans, CollectionFileAdapter.AdapterType.ADAPTER_MAIN);
+                recentView.setAdapter(mainFileManagerAdapter);
+            } else {
+                mainFileManagerAdapter.updateAdapter(collectionFileBeans);
+                recentView.scrollToPosition(0);
+            }
         }
     }
+
 
     @Override
     public void onDestroy() {
