@@ -96,9 +96,16 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.m_camera_TextView_photo) {
-
+            mask.setVisibility(View.GONE);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isPhoto", true);
+            FragmentStack.addFragment(getActivity().getSupportFragmentManager(), MainFragment.this, MediaListFragment.class, 0, ((BaseCollectionActivity)getActivity()).getFragmentContainer(), bundle);
         }
         if (id == R.id.m_camera_TextView_video) {
+            mask.setVisibility(View.GONE);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isPhoto", false);
+            FragmentStack.addFragment(getActivity().getSupportFragmentManager(), MainFragment.this, MediaListFragment.class, 0, ((BaseCollectionActivity)getActivity()).getFragmentContainer(), bundle);
 
         }
         if (id == R.id.m_camera_TextView_file) {
@@ -183,6 +190,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void back() {
-
+        getActivity().finish();
     }
+
 }

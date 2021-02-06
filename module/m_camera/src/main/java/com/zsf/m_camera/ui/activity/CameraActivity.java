@@ -6,7 +6,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zsf.m_camera.R;
 import com.zsf.m_camera.manager.FragmentStack;
 import com.zsf.m_camera.ui.BaseCollectionActivity;
-import com.zsf.m_camera.ui.fragment.CameraFragment;
 import com.zsf.m_camera.ui.fragment.MainFragment;
 
 import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
@@ -17,13 +16,13 @@ import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 @Route(path = "/m_camera/CameraActivity")
 public class CameraActivity extends BaseCollectionActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         initView();
         initData();
+        switchStyle(false);
     }
 
     private void initView() {
@@ -48,5 +47,4 @@ public class CameraActivity extends BaseCollectionActivity {
     public void goBackFirstPage() {
         getSupportFragmentManager().popBackStackImmediate(MainFragment.class.getName(), POP_BACK_STACK_INCLUSIVE);
     }
-
 }

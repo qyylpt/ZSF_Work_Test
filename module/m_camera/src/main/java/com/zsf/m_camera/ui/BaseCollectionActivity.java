@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public abstract class BaseCollectionActivity extends AppCompatActivity {
 
+    private BaseFragment fragment;
+
     /**
      * 获取activity中fragment容器
      * @return

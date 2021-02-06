@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zsf.global.GlobalData;
 import com.zsf.m_camera.R;
 import com.zsf.m_camera.adapter.bean.CollectionFileBean;
+import com.zsf.m_camera.adapter.holder.PhotoListHolder;
 import com.zsf.m_camera.adapter.holder.RecentHolder;
 import com.zsf.m_camera.ui.BaseFragment;
 
@@ -52,7 +53,8 @@ public class CollectionFileAdapter extends RecyclerView.Adapter<BaseViewHolder> 
                 view = layoutInflater.inflate(R.layout.item_fragment_main, parent, false);
                 return new RecentHolder(fragment, view);
             case AdapterType.ADAPTER_PHOTO :
-                return null;
+                view = layoutInflater.inflate(R.layout.item_fragment_photo_list, parent, false);
+                return new PhotoListHolder(fragment, view);
             case AdapterType.ADAPTER_VIDEO :
                 return null;
             case AdapterType.ADAPTER_FILE :

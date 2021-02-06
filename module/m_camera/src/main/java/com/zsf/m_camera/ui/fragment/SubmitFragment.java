@@ -2,17 +2,21 @@ package com.zsf.m_camera.ui.fragment;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +33,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zsf.global.GlobalData;
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.data.CollectionProvider;
 import com.zsf.m_camera.ui.BaseCollectionActivity;
 import com.zsf.m_camera.ui.BaseFragment;
@@ -44,7 +49,9 @@ import java.sql.Time;
  * @date : 2021/1/27 2:18 PM
  * @desc :
  */
-public abstract class SubmitFragment extends BaseFragment implements View.OnClickListener, NumberPicker.OnValueChangeListener {
+public abstract class SubmitFragment extends BaseFragment implements View.OnClickListener, NumberPicker.OnValueChangeListener, View.OnKeyListener {
+
+    private final String TAG = "SubmitFragment";
 
     private TextView exit, title, longitude, latitude, radius, selectScenes, submitItemTitle;
     private ImageView icon;
@@ -105,6 +112,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
         selectScenes.setOnClickListener(this);
 
         content = view.findViewById(R.id.m_camera_EditText_content);
+        content.setOnKeyListener(this);
 
         submit = view.findViewById(R.id.m_camera_Button_submit);
         submit.setOnClickListener(this);
@@ -153,7 +161,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
             contentValues.put(CollectionProvider.DataContract.FILE_REPORT_LATITUDE, latitudeNum);
             contentValues.put(CollectionProvider.DataContract.FILE_REPORT_RADIUS, radiusNum);
             GlobalData.getContext().getContentResolver().insert(CollectionProvider.collectionUri, contentValues);
-            ((BaseCollectionActivity)getActivity()).goBackFirstPage();
+            back();
         }
         if (id == R.id.m_camera_TextView_cancel) {
             mDialog.dismiss();
@@ -254,5 +262,15 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        ZLog.d(TAG, "keyCode = " + keyCode);
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            //使得根View重新获取焦点，以监听返回键
+            back();
+        }
+        return true;
     }
 }

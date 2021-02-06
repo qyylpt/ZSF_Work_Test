@@ -1,11 +1,15 @@
 package com.zsf.m_camera.ui;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -40,7 +44,6 @@ public abstract class BaseFragment extends Fragment {
             }
         }
     }
-
     public void switchStyle(boolean enable) {
         Window window = getActivity().getWindow();
         if (enable) {
@@ -54,9 +57,19 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        refreshStyle();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         refreshStyle();
+        getFocus();
+    }
+
+    public void getFocus() {
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
         getView().setOnKeyListener(new View.OnKeyListener() {
