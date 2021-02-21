@@ -73,7 +73,7 @@ public class CollectionProvider extends ContentProvider {
             return null;
         }
         final SQLiteDatabase db = collectionSqliteOpenHelper.getWritableDatabase();
-        long id = db.insert(tableName, null, values);
+        long id = db.replace(tableName, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
         ZLog.d(TAG, "insert : values = " + values + "; insert id is " + id);
         return ContentUris.withAppendedId(uri, id);
