@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
+import androidx.core.content.ContextCompat;
+
+import com.zsf.m_camera.R;
+
 /**
  * @author : zsf
  * @date : 2021/2/1 4:18 PM
@@ -57,6 +61,7 @@ public class CustomNumberPicker extends NumberPicker {
 
     public void setNumberPickerView(View view) {
         if (view instanceof EditText) {
+            ((EditText) view).setTextColor(ContextCompat.getColor(getContext(), R.color.m_camera_bottom_selector_text_color));
             ((EditText) view).setTextSize(20f);
         }
     }

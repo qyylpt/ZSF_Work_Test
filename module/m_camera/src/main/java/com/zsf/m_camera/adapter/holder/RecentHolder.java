@@ -46,7 +46,6 @@ public class RecentHolder extends BaseViewHolder implements View.OnClickListener
     public void bindView(CollectionFileBean collectionFileBean, int position) {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(fragment)
                 .load(collectionFileBean.getFilePath())

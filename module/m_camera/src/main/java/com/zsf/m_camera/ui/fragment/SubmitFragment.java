@@ -53,7 +53,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
 
     private final String TAG = "SubmitFragment";
 
-    private TextView exit, title, longitude, latitude, radius, selectScenes, submitItemTitle;
+    private TextView exit, title, longitude, latitude, radius, selectScenes, submitItemTitle, selectLabel;
     private ImageView icon;
     private EditText content;
     private Button submit;
@@ -71,6 +71,8 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
 
     private String selectResult;
     private final int DEFAULT_SELECT_ITEM = 0;
+
+    private int selectIndex = 0;
 
     @Nullable
     @Override
@@ -110,6 +112,8 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
 
         selectScenes = view.findViewById(R.id.m_camera_TextView_scenes_select);
         selectScenes.setOnClickListener(this);
+        selectLabel = view.findViewById(R.id.m_camera_TextView_label_select);
+        selectLabel.setOnClickListener(this);
 
         content = view.findViewById(R.id.m_camera_EditText_content);
         content.setOnKeyListener(this);
@@ -127,7 +131,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
                 .load(filePath)
                 .apply(options)
                 .into(icon);
-        initSelectScenes();
+        initSelector();
     }
 
     @Override
@@ -142,6 +146,18 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
             back();
         }
         if (id ==  R.id.m_camera_TextView_scenes_select) {
+            selectIndex = 0;
+            String[] data = getScenesPickerData();
+            numberPicker.setDisplayedValues(data);
+            numberPicker.setMaxValue(data.length - 1);
+            selectResult = data[DEFAULT_SELECT_ITEM];
+            mDialog.show();
+        }
+        if (id == R.id.m_camera_TextView_label_select) {
+            selectIndex = 1;
+            String[] data = getLabelPickerData();
+            numberPicker.setDisplayedValues(data);
+            selectResult = data[DEFAULT_SELECT_ITEM];
             mDialog.show();
         }
         if (id == R.id.m_camera_Button_submit) {
@@ -169,12 +185,16 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
         if (id == R.id.m_camera_TextView_determine) {
             mDialog.dismiss();
             if (!TextUtils.isEmpty(selectResult)) {
-                selectScenes.setText(selectResult);
+                if (selectIndex == 0) {
+                    selectScenes.setText(selectResult);
+                } else {
+                    selectLabel.setText(selectResult);
+                }
             }
         }
     }
 
-    private void initSelectScenes() {
+    private void initSelector() {
         mDialog = new Dialog(getActivity(), R.style.BottomDialog);
         ConstraintLayout root = (ConstraintLayout) LayoutInflater.from(getActivity()).inflate(R.layout.bottom_float_window_layout, null);
         numberPicker = root.findViewById(R.id.m_camera_NumberPicker_scenes_select);
@@ -182,16 +202,13 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
         dialogCancel.setOnClickListener(this);
         dialogSelect = root.findViewById(R.id.m_camera_TextView_determine);
         dialogSelect.setOnClickListener(this);
-        String[] data = getNumberPickerData();
-        numberPicker.setDisplayedValues(data);
         setNumberPickerDividerColor(numberPicker);
-        numberPicker.setMaxValue(data.length - 1);
+
         numberPicker.setMinValue(0);
         numberPicker.setValue(DEFAULT_SELECT_ITEM);
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         numberPicker.setOnValueChangedListener(this);
-        selectResult = data[DEFAULT_SELECT_ITEM];
 
         mDialog.setContentView(root);
 
@@ -204,22 +221,31 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
         lp.width = getResources().getDisplayMetrics().widthPixels;
         lp.height = root.getMeasuredHeight();
         dialogWindow.setAttributes(lp);
-
     }
 
-    protected String[] getNumberPickerData() {
+    protected String[] getScenesPickerData() {
         String[] numbers = {"场景 1", "场景 2", "场景 3", "场景 4", "场景 5", "场景 6", "场景 7", "场景 8", "场景 9", "场景 10", "场景 10+"};
+        return numbers;
+    }
+
+    protected String[] getLabelPickerData() {
+        String[] numbers = {"标签 1", "标签 2", "标签 3", "标签 4", "标签 5", "标签 6", "标签 7", "标签 8", "标签 9", "标签 10", "标签 10+"};
         return numbers;
     }
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
         ZsfLog.d(SubmitFragment.class, "oldVal : " + oldVal + "; newVal : " + newVal);
-        selectResult = getNumberPickerData()[newVal];
+        if (selectIndex == 0) {
+            selectResult = getScenesPickerData()[newVal];
+        } else {
+            selectResult = getLabelPickerData()[newVal];
+        }
     }
 
     /**
      * 保存主题
+     *
      * @return
      */
     public abstract String getSubmitTitle();

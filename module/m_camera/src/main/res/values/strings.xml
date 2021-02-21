@@ -13,7 +13,7 @@
     <string name="m_camera_scenes_select_title">场景</string>
     <string name="m_camera_scenes_select">请选择场景</string>
     <string name="m_camera_scenes_label_title">标签</string>
-    <string name="m_camera_scenes_label">请选择标签</string>
+    <string name="m_camera_label_select">请选择标签</string>
     <string name="m_camera_latitude_longitude_title">经纬度</string>
     <string name="m_camera_longitude">经度</string>
     <string name="m_camera_latitude">纬度</string>
@@ -29,6 +29,9 @@
 
     <string name="m_camera_text_recent">最近</string>
 
-
-
+    <string name="m_camera_text_filter_sort">筛选</string>
+    <string name="m_camera_text_report_sort">未上传</string>
+    <string name="m_camera_text_time_sort">时间</string>
+    <string name="m_camera_text_size_sort">大小</string>
+    <string name="m_camera_text_over">完成</string>
 </resources>

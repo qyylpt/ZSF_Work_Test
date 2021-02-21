@@ -39,7 +39,6 @@ public class PhotoListHolder  extends BaseViewHolder implements View.OnClickList
     public void bindView(CollectionFileBean collectionFileBean, int position) {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(fragment)
                 .load(collectionFileBean.getFilePath())

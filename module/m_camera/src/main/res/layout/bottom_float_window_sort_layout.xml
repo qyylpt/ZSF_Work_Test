@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_dialog_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/m_camera_text_filter_sort"
+        android:textSize="20sp"
+        android:textColor="@color/m_camera_common_text"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/dimen_15_dp"
+        android:layout_marginLeft="@dimen/dimen_15_dp"
+        android:id="@+id/m_camera_TextView_filter"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        app:layout_constraintTop_toBottomOf="@+id/m_camera_TextView_filter"
+        android:background="@color/m_camera_divider_color"
+        android:layout_margin="@dimen/dimen_15_dp"
+        android:id="@+id/m_camera_divider"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/m_camera_divider"
+        android:text="@string/m_camera_text_report_sort"
+        android:textColor="@color/m_camera_bottom_filter"
+        android:textSize="18sp"
+        android:layout_margin="@dimen/dimen_15_dp"
+        android:id="@+id/m_camera_TextView_report_sort"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/m_camera_TextView_report_sort"
+        android:text="@string/m_camera_text_time_sort"
+        android:textColor="@color/m_camera_bottom_filter"
+        android:textSize="18sp"
+        android:layout_margin="@dimen/dimen_15_dp"
+        android:id="@+id/m_camera_TextView_time_sort"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/m_camera_TextView_time_sort"
+        android:text="@string/m_camera_text_size_sort"
+        android:textColor="@color/m_camera_bottom_filter"
+        android:textSize="18sp"
+        android:layout_margin="@dimen/dimen_15_dp"
+        android:id="@+id/m_camera_TextView_size_sort"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m_camera_bottom_navigation_height"
+        app:layout_constraintTop_toBottomOf="@+id/m_camera_TextView_size_sort"
+        android:text="@string/m_camera_text_over"
+        android:textColor="@color/m_camera_common_background_color"
+        android:layout_marginTop="@dimen/dimen_15_dp"
+        android:gravity="center"
+        android:background="@color/m_camera_bottom_background"
+        android:textSize="22sp"
+        android:id="@+id/m_camera_TextView_sort_over"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
