@@ -411,7 +411,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
                     final String path = FileUtils.getMediaFilePath(timeTemp.replace("_", ""), "", "mp4");
                     VideoProcessor.processor(getContext())
                             .input(tempPath)
-                            .bitrate(bitrate / 20)
+                            .bitrate(bitrate / 30)
                             .output(path)
                             .progressListener(new VideoProgressListener() {
                                 @Override
