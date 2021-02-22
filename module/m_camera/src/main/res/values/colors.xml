@@ -15,4 +15,9 @@
     <color name="m_camera_bottom_filter">#666666</color>
     <color name="m_camera_bottom_background">#F6F6F6</color>
     <color name="m_camera_bottom_selector_text_color">#111111</color>
+
+    <color name="background">#00ffffff</color>
+    <color name="innercircle">#ffffffff</color>
+    <color name="externalcircle">#ffdddddd</color>
+    <color name="progress">#ff68c067</color>
 </resources>

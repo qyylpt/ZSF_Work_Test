@@ -61,4 +61,13 @@
         <attr name="civ_fill_color" format="color" />
         <attr name="civ_circle_background_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="RecordButton">
+        <attr name="recordTime" format="float"/>
+        <attr name="minRecordTime" format="float"/>
+        <attr name="touchDelay" format="float"/>
+        <attr name="innerColor" format="color"/>
+        <attr name="externalColor" format="color"/>
+        <attr name="progressColor" format="color"/>
+    </declare-styleable>
 </resources>

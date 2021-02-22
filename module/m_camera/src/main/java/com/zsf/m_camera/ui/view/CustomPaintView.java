@@ -176,7 +176,9 @@ public class CustomPaintView extends View {
     }
 
     public void save(Bitmap bitmap, Matrix matrix) {
-        if (bitmap == null) return;
+        if (bitmap == null) {
+            return;
+        }
 
         if (paths != null && paths.size() > 0) {
             if (mPaintCanvas != null) {
