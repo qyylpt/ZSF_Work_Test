@@ -226,7 +226,7 @@ public class UsbDevicesManager {
         }
 
         private void reset(){
-            ZsfLog.d(UsbDevicesManager.class, "reset : " + usbDevice.toString());
+            ZsfLog.d(UsbDevicesManager.class, "reset : ");
             usbRequest.close();
             usbRequest = null;
             usbDeviceConnection.releaseInterface(usbInterface);
