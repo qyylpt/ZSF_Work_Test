@@ -1,7 +1,6 @@
 package com.zsf.m_camera.ui.fragment;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -22,8 +21,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.nanchen.compresshelper.CompressHelper;
 import com.zsf.m_camera.R;
-import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.manager.FragmentStack;
 import com.zsf.m_camera.ui.BaseFragment;
 import com.zsf.m_camera.ui.activity.CameraActivity;
@@ -128,18 +127,29 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                         try {
                             Matrix touchMatrix = photoPreview.getImageMatrix();
                             addTagView.save(bitmap, touchMatrix);
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 20,baos);
-                            byte[] bytes = baos.toByteArray();
-                            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            ZLog.d(TAG, "bitmap = " + bitmap.getByteCount()/1024);
                             write(Bitmap2Bytes(bitmap));
+                            final int length = path.length();
+                            final String[] paths = path.split("/");
+                            final int pathsSize = paths.length;
+                            new CompressHelper.Builder(getContext())
+                                    .setMaxWidth(720)  // 默认最大宽度为720
+                                    .setMaxHeight(960) // 默认最大高度为960
+                                    .setQuality(80)    // 默认压缩质量为80
+                                    .setFileName(time) // 设置你需要修改的文件名
+                                    .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
+                                    .setDestinationDirectoryPath(path.substring(0, length - (paths[pathsSize - 1]).length()))
+                                    .build()
+                                    .compressToFile(new File(path));
+                            File file = new File(path);
+                            if (file.exists()) {
+                                file.delete();
+                            }
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
                                     progressView.setVisibility(View.GONE);
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("path", path);
+                                    bundle.putString("path", path.substring(0, length - (paths[pathsSize - 1]).length()) + time + ".jpeg");
                                     bundle.putString("time", time);
                                     bundle.putDouble("longitude", longitude);
                                     bundle.putDouble("latitude", latitude);
@@ -234,6 +244,7 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
         if (bitmap == null) {
             return;
         }
+        // TODO: 2021/2/23 内容动态加载 
         String watermark = "这里是水印！！！！";
         if (TextUtils.isEmpty(watermark)) {
             ZsfLog.d(EditPhotoFragment.class, "watermark is empty!");
@@ -245,34 +256,52 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float scaledDensity = displayMetrics.scaledDensity;
-        paint.setTextSize(8 * scaledDensity);
+        // TODO: 2021/2/23 字体动态加载
+        paint.setTextSize(16 * scaledDensity);
         paint.setAntiAlias(true);
         paint.setFilterBitmap(true);
         paint.setColor(Color.parseColor("#E6E6E6"));
+        // TODO: 2021/2/23 透明度动态加载
         paint.setAlpha(100);
         canvas.setDrawFilter(filter);
         int w = (int) paint.measureText(watermark) + 30;
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        int dy = (int) (w * Math.sin(Math.PI / 180 * 45));
-        int dx = (int) (w * Math.cos(Math.PI / 180 * 45));
         Path path = new Path();
-        int j1 = -dx;
 
-        for (int i = width / 2; i > 0; i -= dy) {
-            j1 += dx;
-            path.moveTo(j1, i);
-            path.lineTo(j1 + dx, i - dy);
-            canvas.drawTextOnPath(watermark, path, 0, 0, paint);
+        // TODO: 2021/2/23 是否全屏
+        boolean isFullScreen = true;
+
+        // TODO: 2021/2/23 角度动态调节
+
+        int intervalX = width / 5;
+        int intervalY = height / 5;
+        StringBuilder builder = new StringBuilder();
+        for (int j = 0; j < 20; j++) {
+            builder.append(watermark);
+        }
+        // 左上
+        for (int i = 1; i <= 5; i++) {
+            if (!isFullScreen && i != 2) {
+                continue;
+            }
+            path.moveTo(0, intervalY * i);
+            path.lineTo(intervalX * i,0);
+            double z = Math.hypot(intervalX * i, intervalY * i);
+            int length = paint.breakText(builder.toString().toCharArray(), 0, builder.length(), (int)z, null);
+            canvas.drawTextOnPath(builder.toString().toCharArray(),0, length + 1, path, 0, 0, paint);
             path.reset();
         }
-
-        int j2 = width / 2 - dx;
-        for (int i = height; i > 0; i -= dy) {
-            j2 += dx;
-            path.moveTo(j2, i);
-            path.lineTo(j2 + dx, i - dy);
-            canvas.drawTextOnPath(watermark, path, 0, 0, paint);
+        // 右下
+        for (int i = 1; i <= 4; i++) {
+            if (!isFullScreen && i != 2) {
+                continue;
+            }
+            path.moveTo(width - intervalX * i, height);
+            path.lineTo(width,height - intervalY * i);
+            double z = Math.hypot(intervalX * i, intervalY * i);
+            int length = paint.breakText(builder.toString().toCharArray(), 0, builder.length(), (int)z, null);
+            canvas.drawTextOnPath(builder.toString().toCharArray(),0, length + 1, path, 0, 0, paint);
             path.reset();
         }
     }

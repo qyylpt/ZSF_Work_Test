@@ -41,6 +41,7 @@ import com.zsf.utils.ZsfLog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
@@ -274,7 +275,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
             }
         } else {
             timeTemp = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
-            tempPath = FileUtils.getMediaFilePath(timeTemp.replace("_", ""), "", "jpg");
+            tempPath = FileUtils.getMediaFilePath("temp_" + timeTemp.replace("_", ""), "", "jpg");
             ZsfLog.d(CameraFragment.class, "24 以上 拍照完成");
             cameraView.takePicture();
         }
@@ -332,7 +333,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
             bitmapPreview = byteToBitmap(data);
             Bundle bundle = new Bundle();
             bundle.putString("path", tempPath);
-            bundle.putString("time", timeTemp);
+            bundle.putString("time", timeTemp.replace("_", ""));
             bundle.putDouble("longitude", longitude);
             bundle.putDouble("latitude", latitude);
             bundle.putFloat("radius", radius);
@@ -367,7 +368,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
         InputStream input = null;
         Bitmap bitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 8;
+        options.inSampleSize = 2;
         input = new ByteArrayInputStream(imgByte);
         SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(
                 input, null, options));
@@ -421,12 +422,16 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
                                     int intProgress = (int) (progress * 100);
                                     if (intProgress==100){
                                         ZLog.d(TAG, "压缩完成!");
+                                        File file = new File(tempPath);
+                                        if (file.exists()) {
+                                            file.delete();
+                                        }
                                         getActivity().runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
                                                 Bundle bundle = new Bundle();
                                                 bundle.putString("path", path);
-                                                bundle.putString("time", timeTemp);
+                                                bundle.putString("time", timeTemp.replace("_", ""));
                                                 bundle.putDouble("longitude", longitude);
                                                 bundle.putDouble("latitude", latitude);
                                                 bundle.putFloat("radius", radius);

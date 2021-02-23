@@ -80,4 +80,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.github.yellowcath:VideoProcessor:2.4.2'
+    implementation 'com.github.nanchen2251:CompressHelper:1.0.5'
 }
