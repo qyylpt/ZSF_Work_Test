@@ -39,7 +39,7 @@
         android:layout_margin="@dimen/dimen_15_dp"
         app:layout_constraintTop_toBottomOf="@+id/m_camera_TextView_save"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:id="@+id/m_camera_ImageView_photo_preview"/>
     <com.zsf.m_camera.ui.view.CustomPaintView
         android:layout_width="match_parent"

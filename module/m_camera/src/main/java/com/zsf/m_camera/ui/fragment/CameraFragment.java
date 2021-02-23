@@ -40,6 +40,7 @@ import com.zsf.m_camera.manager.HandlerThreadManager;
 import com.zsf.utils.ZsfLog;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
@@ -366,7 +367,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
         InputStream input = null;
         Bitmap bitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 3;
+        options.inSampleSize = 8;
         input = new ByteArrayInputStream(imgByte);
         SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(
                 input, null, options));
@@ -384,11 +385,12 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
 
     public Bitmap getBitmapPreview() {
         if (bitmapPreview != null && !bitmapPreview.isRecycled()) {
-            Bitmap copy = bitmapPreview.copy(Bitmap.Config.ARGB_8888, true);
+            Bitmap copy = bitmapPreview.copy(Bitmap.Config.RGB_565, true);
             if (!bitmapPreview.isRecycled()) {
                 bitmapPreview.recycle();
                 bitmapPreview = null;
             }
+            ZLog.d(TAG, "copy = " + copy.getByteCount()/1024);
             return copy;
         }
         return null;
@@ -411,7 +413,7 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
                     final String path = FileUtils.getMediaFilePath(timeTemp.replace("_", ""), "", "mp4");
                     VideoProcessor.processor(getContext())
                             .input(tempPath)
-                            .bitrate(bitrate / 30)
+                            .bitrate(bitrate / 50)
                             .output(path)
                             .progressListener(new VideoProgressListener() {
                                 @Override

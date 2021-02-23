@@ -1,6 +1,7 @@
 package com.zsf.m_camera.ui.fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -22,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.manager.FragmentStack;
 import com.zsf.m_camera.ui.BaseFragment;
 import com.zsf.m_camera.ui.activity.CameraActivity;
@@ -39,6 +41,8 @@ import java.io.IOException;
  * @desc :
  */
 public class EditPhotoFragment extends BaseFragment implements View.OnClickListener, CustomPaintView.OnUndoListener {
+
+    private final String TAG = "AQCJ_EditPhotoFragment";
 
     private ImageView photoPreview;
     private CustomPaintView addTagView;
@@ -124,6 +128,11 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                         try {
                             Matrix touchMatrix = photoPreview.getImageMatrix();
                             addTagView.save(bitmap, touchMatrix);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 20,baos);
+                            byte[] bytes = baos.toByteArray();
+                            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            ZLog.d(TAG, "bitmap = " + bitmap.getByteCount()/1024);
                             write(Bitmap2Bytes(bitmap));
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
@@ -236,7 +245,7 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float scaledDensity = displayMetrics.scaledDensity;
-        paint.setTextSize(18 * scaledDensity);
+        paint.setTextSize(8 * scaledDensity);
         paint.setAntiAlias(true);
         paint.setFilterBitmap(true);
         paint.setColor(Color.parseColor("#E6E6E6"));
