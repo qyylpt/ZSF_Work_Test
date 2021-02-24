@@ -205,14 +205,6 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
             bitmap.recycle();
             bitmap = null;
         }
-        File tempFilePath = new File(tempPath);
-        if (tempFilePath.exists()) {
-            tempFilePath.delete();
-        }
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
-        }
         tempPath = null;
         filePath = null;
         longitude = 4.9E-324D;
@@ -328,6 +320,14 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void back() {
+        File tempFilePath = new File(tempPath);
+        if (tempFilePath.exists()) {
+            tempFilePath.delete();
+        }
+        File file = new File(filePath);
+        if (file.exists()) {
+            file.delete();
+        }
         getActivity().getSupportFragmentManager().popBackStack(MainFragment.class.getSimpleName(), 0);
         MainFragment mainFragment = (MainFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MainFragment.class.getName());
         if (mainFragment != null) {

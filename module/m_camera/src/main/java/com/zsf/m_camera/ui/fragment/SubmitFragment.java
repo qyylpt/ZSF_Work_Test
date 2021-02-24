@@ -51,7 +51,7 @@ import java.sql.Time;
  */
 public abstract class SubmitFragment extends BaseFragment implements View.OnClickListener, NumberPicker.OnValueChangeListener, View.OnKeyListener {
 
-    private final String TAG = "SubmitFragment";
+    private final String TAG = "AQCJ_SubmitFragment";
 
     private TextView exit, title, longitude, latitude, radius, selectScenes, submitItemTitle, selectLabel;
     private ImageView icon;
@@ -73,6 +73,8 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
     private final int DEFAULT_SELECT_ITEM = 0;
 
     private int selectIndex = 0;
+
+    private boolean isSave = false;
 
     @Nullable
     @Override
@@ -161,6 +163,7 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
             mDialog.show();
         }
         if (id == R.id.m_camera_Button_submit) {
+            isSave = true;
             ContentValues contentValues = new ContentValues();
             contentValues.put(CollectionProvider.DataContract.FILE_NAME, time);
             contentValues.put(CollectionProvider.DataContract.FILE_PATH, filePath);
@@ -301,11 +304,14 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
+    public void back() {
+        ZLog.d(TAG, "isSave = " + isSave);
+        if (!isSave) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                file.delete();
+            }
         }
+        super.back();
     }
 }

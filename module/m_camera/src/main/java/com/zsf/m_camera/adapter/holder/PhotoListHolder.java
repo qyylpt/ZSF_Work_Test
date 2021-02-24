@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.adapter.BaseViewHolder;
 import com.zsf.m_camera.adapter.bean.CollectionFileBean;
 
@@ -40,6 +41,7 @@ public class PhotoListHolder  extends BaseViewHolder implements View.OnClickList
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
+        ZLog.d("zsf_test","collectionFileBean.getFilePath() = " + collectionFileBean.getFilePath() );
         Glide.with(fragment)
                 .load(collectionFileBean.getFilePath())
                 .apply(options)
