@@ -299,4 +299,13 @@ public abstract class SubmitFragment extends BaseFragment implements View.OnClic
         }
         return true;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        File file = new File(filePath);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
 }

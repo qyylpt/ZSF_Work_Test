@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 
 import com.nanchen.compresshelper.CompressHelper;
 import com.zsf.m_camera.R;
+import com.zsf.m_camera.ZLog;
 import com.zsf.m_camera.manager.FragmentStack;
 import com.zsf.m_camera.ui.BaseFragment;
 import com.zsf.m_camera.ui.activity.CameraActivity;
@@ -48,8 +49,10 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
     private TextView undoView, photoCancel, photoSelect;
     private View progressView;
     private Bitmap bitmap;
-    private String path;
+    private String tempPath;
+    private String filePath;
     private String time;
+    private String fPath;
 
     private double longitude = 4.9E-324D;
     private double latitude = 4.9E-324D;
@@ -73,12 +76,18 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
         }
         Bundle bundle = getArguments();
         if (bundle != null) {
-            path = bundle.getString("path");
+            tempPath = bundle.getString("path");
             time = bundle.getString("time");
+            int length = tempPath.length();
+            String[] paths = tempPath.split("/");
+            int pathsSize = paths.length;
+            fPath = tempPath.substring(0, length - (paths[pathsSize - 1]).length());
+            filePath = fPath + time + ".jpeg";
+            ZLog.d(TAG, "filePath = " + filePath);
             longitude = bundle.getDouble("longitude");
             latitude = bundle.getDouble("latitude");
             radius = bundle.getFloat("radius");
-            ZsfLog.d(EditPhotoFragment.class, "path = " + path + "; time = " + time + "; longitude = " + longitude + "; latitude = " + latitude + "; radius = " + radius);
+            ZsfLog.d(EditPhotoFragment.class, "path = " + tempPath + "; time = " + time + "; longitude = " + longitude + "; latitude = " + latitude + "; radius = " + radius);
         }
         return view;
     }
@@ -128,19 +137,16 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                             Matrix touchMatrix = photoPreview.getImageMatrix();
                             addTagView.save(bitmap, touchMatrix);
                             write(Bitmap2Bytes(bitmap));
-                            final int length = path.length();
-                            final String[] paths = path.split("/");
-                            final int pathsSize = paths.length;
                             new CompressHelper.Builder(getContext())
                                     .setMaxWidth(720)  // 默认最大宽度为720
                                     .setMaxHeight(960) // 默认最大高度为960
                                     .setQuality(80)    // 默认压缩质量为80
                                     .setFileName(time) // 设置你需要修改的文件名
                                     .setCompressFormat(Bitmap.CompressFormat.JPEG) // 设置默认压缩为jpg格式
-                                    .setDestinationDirectoryPath(path.substring(0, length - (paths[pathsSize - 1]).length()))
+                                    .setDestinationDirectoryPath(fPath)
                                     .build()
-                                    .compressToFile(new File(path));
-                            File file = new File(path);
+                                    .compressToFile(new File(tempPath));
+                            File file = new File(tempPath);
                             if (file.exists()) {
                                 file.delete();
                             }
@@ -149,7 +155,7 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
                                 public void run() {
                                     progressView.setVisibility(View.GONE);
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("path", path.substring(0, length - (paths[pathsSize - 1]).length()) + time + ".jpeg");
+                                    bundle.putString("path", filePath);
                                     bundle.putString("time", time);
                                     bundle.putDouble("longitude", longitude);
                                     bundle.putDouble("latitude", latitude);
@@ -199,10 +205,24 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
             bitmap.recycle();
             bitmap = null;
         }
-        path = null;
+        File tempFilePath = new File(tempPath);
+        if (tempFilePath.exists()) {
+            tempFilePath.delete();
+        }
+        File file = new File(filePath);
+        if (file.exists()) {
+            file.delete();
+        }
+        tempPath = null;
+        filePath = null;
         longitude = 4.9E-324D;
         latitude = 4.9E-324D;
         radius = 0.0F;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     public byte[] Bitmap2Bytes(Bitmap bm) {
@@ -219,7 +239,7 @@ public class EditPhotoFragment extends BaseFragment implements View.OnClickListe
         if (bs == null) {
             return;
         }
-        File file = new File(path);
+        File file = new File(tempPath);
         if (!file.exists()) {
             if (file.getParentFile().mkdirs()) {
                 file.createNewFile();

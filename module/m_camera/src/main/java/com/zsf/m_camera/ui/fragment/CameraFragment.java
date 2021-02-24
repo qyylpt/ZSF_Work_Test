@@ -362,6 +362,10 @@ public class CameraFragment extends BaseFragment implements SeekBar.OnSeekBarCha
     public void onDestroy() {
         super.onDestroy();
         uiHandler.removeCallbacksAndMessages(null);
+        File file = new File(tempPath);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     private Bitmap byteToBitmap(byte[] imgByte) {
